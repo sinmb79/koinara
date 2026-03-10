@@ -8,6 +8,7 @@ This repository is a v1 reference implementation of the minimum viable Koinara p
 
 ## Whitepaper
 
+- Download page: [`docs/whitepaper-downloads.md`](./docs/whitepaper-downloads.md)
 - English: [`docs/whitepaper.md`](./docs/whitepaper.md)
 - Korean: [`docs/whitepaper.ko.md`](./docs/whitepaper.ko.md)
 - English PDF: [`docs/pdf/koinara-whitepaper-en.pdf`](./docs/pdf/koinara-whitepaper-en.pdf)
@@ -50,6 +51,7 @@ Excluded:
 /
   README.md
   docs/
+    whitepaper-downloads.md
     whitepaper-summary.md
     protocol-spec.md
     protocol-glossary.md
@@ -58,6 +60,7 @@ Excluded:
     state-machine.md
     contracts-overview.md
     genesis-rules.md
+    pdf/
   contracts/
     KOINToken.sol
     InferenceJobRegistry.sol
@@ -68,6 +71,8 @@ Excluded:
   script/
     Deploy.s.sol
     DemoFlow.s.sol
+  tools/
+    render_whitepaper_pdfs.py
   test/
     KOINToken.t.sol
     InferenceJobRegistry.t.sol

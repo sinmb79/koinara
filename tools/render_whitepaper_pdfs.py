@@ -7,13 +7,13 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER, TA_LEFT
+from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
+from reportlab.platypus import HRFlowable, PageBreak, Paragraph, SimpleDocTemplate, Spacer
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,6 +29,9 @@ class RenderConfig:
     body_font: str
     bold_font: str
     footer_font: str
+    cover_note: str
+    cover_tagline: str
+    edition_label: str
 
 
 def register_optional_fonts() -> None:
@@ -46,57 +49,114 @@ def register_optional_fonts() -> None:
 def paragraph_styles(config: RenderConfig) -> dict[str, ParagraphStyle]:
     base = getSampleStyleSheet()
     return {
+        "cover_kicker": ParagraphStyle(
+            "CoverKicker",
+            parent=base["BodyText"],
+            fontName=config.bold_font,
+            fontSize=10,
+            leading=14,
+            alignment=TA_CENTER,
+            textColor=colors.HexColor("#6B7280"),
+            spaceAfter=14,
+            tracking=0.8,
+        ),
+        "cover_title": ParagraphStyle(
+            "CoverTitle",
+            parent=base["Title"],
+            fontName=config.bold_font,
+            fontSize=24,
+            leading=32,
+            alignment=TA_CENTER,
+            textColor=colors.HexColor("#111827"),
+            spaceAfter=10,
+        ),
+        "cover_tagline": ParagraphStyle(
+            "CoverTagline",
+            parent=base["BodyText"],
+            fontName=config.body_font,
+            fontSize=13,
+            leading=20,
+            alignment=TA_CENTER,
+            textColor=colors.HexColor("#374151"),
+            spaceAfter=14,
+        ),
+        "cover_meta": ParagraphStyle(
+            "CoverMeta",
+            parent=base["BodyText"],
+            fontName=config.body_font,
+            fontSize=10.5,
+            leading=16,
+            alignment=TA_CENTER,
+            textColor=colors.HexColor("#6B7280"),
+            spaceAfter=8,
+        ),
         "title": ParagraphStyle(
             "WhitepaperTitle",
             parent=base["Title"],
             fontName=config.bold_font,
-            fontSize=22,
+            fontSize=21,
             leading=28,
             alignment=TA_CENTER,
-            textColor=colors.HexColor("#111111"),
-            spaceAfter=8,
+            textColor=colors.HexColor("#111827"),
+            spaceAfter=10,
         ),
         "meta": ParagraphStyle(
             "WhitepaperMeta",
             parent=base["BodyText"],
             fontName=config.body_font,
-            fontSize=10,
+            fontSize=9.8,
             leading=14,
             alignment=TA_CENTER,
-            textColor=colors.HexColor("#666666"),
-            spaceAfter=20,
+            textColor=colors.HexColor("#6B7280"),
+            spaceAfter=18,
         ),
         "h2": ParagraphStyle(
             "WhitepaperH2",
             parent=base["Heading2"],
             fontName=config.bold_font,
             fontSize=15,
-            leading=20,
+            leading=22,
             alignment=TA_LEFT,
-            textColor=colors.HexColor("#111111"),
-            spaceBefore=10,
+            textColor=colors.HexColor("#111827"),
+            spaceBefore=14,
             spaceAfter=8,
         ),
         "h3": ParagraphStyle(
             "WhitepaperH3",
             parent=base["Heading3"],
             fontName=config.bold_font,
-            fontSize=12,
-            leading=16,
+            fontSize=11.5,
+            leading=17,
             alignment=TA_LEFT,
-            textColor=colors.HexColor("#222222"),
+            textColor=colors.HexColor("#1F2937"),
             spaceBefore=8,
-            spaceAfter=5,
+            spaceAfter=4,
         ),
         "body": ParagraphStyle(
             "WhitepaperBody",
             parent=base["BodyText"],
             fontName=config.body_font,
             fontSize=10.5,
-            leading=16,
-            alignment=TA_LEFT,
-            textColor=colors.HexColor("#111111"),
+            leading=16.5,
+            alignment=TA_JUSTIFY,
+            textColor=colors.HexColor("#111827"),
             spaceAfter=8,
+        ),
+        "callout": ParagraphStyle(
+            "WhitepaperCallout",
+            parent=base["BodyText"],
+            fontName=config.body_font,
+            fontSize=10.2,
+            leading=15.5,
+            alignment=TA_LEFT,
+            textColor=colors.HexColor("#1F2937"),
+            leftIndent=10,
+            rightIndent=10,
+            borderPadding=10,
+            borderWidth=0.7,
+            borderColor=colors.HexColor("#D1D5DB"),
+            backColor=colors.HexColor("#F9FAFB"),
+            spaceAfter=12,
         ),
         "bullet": ParagraphStyle(
             "WhitepaperBullet",
@@ -107,7 +167,7 @@ def paragraph_styles(config: RenderConfig) -> dict[str, ParagraphStyle]:
             alignment=TA_LEFT,
             leftIndent=14,
             firstLineIndent=-10,
-            textColor=colors.HexColor("#111111"),
+            textColor=colors.HexColor("#111827"),
             spaceAfter=4,
         ),
         "number": ParagraphStyle(
@@ -119,7 +179,7 @@ def paragraph_styles(config: RenderConfig) -> dict[str, ParagraphStyle]:
             alignment=TA_LEFT,
             leftIndent=18,
             firstLineIndent=-14,
-            textColor=colors.HexColor("#111111"),
+            textColor=colors.HexColor("#111827"),
             spaceAfter=4,
         ),
     }
@@ -226,22 +286,62 @@ def parse_blocks(text: str) -> list[tuple[str, object]]:
     return blocks
 
 
+def add_cover(story: list[object], styles: dict[str, ParagraphStyle], config: RenderConfig, title: str) -> None:
+    story.append(Spacer(1, 46))
+    story.append(Paragraph(config.edition_label, styles["cover_kicker"]))
+    story.append(HRFlowable(width="18%", thickness=1.1, color=colors.HexColor("#9CA3AF"), lineCap="round"))
+    story.append(Spacer(1, 22))
+    story.append(Paragraph(format_inline(title), styles["cover_title"]))
+    story.append(Paragraph(config.cover_tagline, styles["cover_tagline"]))
+    story.append(Spacer(1, 8))
+    story.append(Paragraph(config.language_label, styles["cover_meta"]))
+    story.append(Paragraph(config.cover_note, styles["cover_meta"]))
+    story.append(Spacer(1, 22))
+    story.append(
+        Paragraph(
+            "Koinara defines a minimum protocol for collective inference, centered on MAI and minimum reward."
+            if config.language_label == "English"
+            else "Koinara는 MAI와 최소 보상을 중심으로 한 집단 추론의 최소 프로토콜을 정의한다.",
+            styles["callout"],
+        )
+    )
+    story.append(PageBreak())
+
+
 def build_story(config: RenderConfig) -> list[object]:
     styles = paragraph_styles(config)
     text = config.source.read_text(encoding="utf-8")
     blocks = parse_blocks(text)
     story: list[object] = []
-    title_seen = False
 
-    for kind, payload in blocks:
+    if not blocks or blocks[0][0] != "title":
+        raise ValueError(f"Expected first block in {config.source} to be a title")
+
+    cover_title = str(blocks[0][1])
+    add_cover(story, styles, config, cover_title)
+
+    title_seen = False
+    for block_index, (kind, payload) in enumerate(blocks):
         if kind == "title":
-            story.append(Spacer(1, 18))
-            story.append(Paragraph(format_inline(str(payload)), styles["title"]))
-            story.append(Paragraph(config.language_label, styles["meta"]))
-            title_seen = True
+            if title_seen:
+                story.append(Paragraph(format_inline(str(payload)), styles["title"]))
+            else:
+                story.append(Paragraph(format_inline(str(payload)), styles["title"]))
+                story.append(Paragraph(config.language_label, styles["meta"]))
+                story.append(
+                    Paragraph(
+                        "Official distribution-ready whitepaper edition."
+                        if config.language_label == "English"
+                        else "공식 배포용 백서 판본.",
+                        styles["meta"],
+                    )
+                )
+                title_seen = True
             continue
 
         if kind == "h2":
+            if block_index > 1:
+                story.append(Spacer(1, 2))
             story.append(Paragraph(format_inline(str(payload)), styles["h2"]))
             continue
 
@@ -250,10 +350,7 @@ def build_story(config: RenderConfig) -> list[object]:
             continue
 
         if kind == "paragraph":
-            if not title_seen:
-                story.append(Paragraph(format_inline(str(payload)), styles["meta"]))
-            else:
-                story.append(Paragraph(format_inline(str(payload)), styles["body"]))
+            story.append(Paragraph(format_inline(str(payload)), styles["body"]))
             continue
 
         if kind == "bullet_list":
@@ -273,9 +370,10 @@ def build_story(config: RenderConfig) -> list[object]:
 def footer(config: RenderConfig):
     def draw(canvas, doc) -> None:
         canvas.saveState()
-        canvas.setFont(config.footer_font, 9)
-        canvas.setFillColor(colors.HexColor("#666666"))
-        canvas.drawRightString(A4[0] - 18 * mm, 12 * mm, f"Koinara Whitepaper | {config.language_label} | {canvas.getPageNumber()}")
+        canvas.setFont(config.footer_font, 8.8)
+        canvas.setFillColor(colors.HexColor("#6B7280"))
+        canvas.drawString(18 * mm, 11.5 * mm, "Koinara Whitepaper")
+        canvas.drawRightString(A4[0] - 18 * mm, 11.5 * mm, f"{config.language_label} | {canvas.getPageNumber()}")
         canvas.restoreState()
 
     return draw
@@ -288,10 +386,11 @@ def render_pdf(config: RenderConfig) -> None:
         pagesize=A4,
         leftMargin=22 * mm,
         rightMargin=22 * mm,
-        topMargin=20 * mm,
+        topMargin=18 * mm,
         bottomMargin=18 * mm,
         title="Koinara Whitepaper",
         author="Koinara",
+        subject=f"Koinara whitepaper ({config.language_label})",
     )
     story = build_story(config)
     decorator = footer(config)
@@ -309,6 +408,9 @@ def main() -> None:
             body_font="Times-Roman",
             bold_font="Times-Bold",
             footer_font="Times-Roman",
+            cover_note="Reference Whitepaper | March 10, 2026",
+            cover_tagline="The open network for collective inference",
+            edition_label="KOINARA WHITEPAPER",
         ),
         RenderConfig(
             source=DOCS_DIR / "whitepaper.ko.md",
@@ -317,6 +419,9 @@ def main() -> None:
             body_font="MalgunGothic",
             bold_font="MalgunGothic-Bold",
             footer_font="MalgunGothic",
+            cover_note="참조 백서 | 2026년 3월 10일",
+            cover_tagline="집단 추론을 위한 개방형 네트워크",
+            edition_label="KOINARA 백서",
         ),
     ]
 
