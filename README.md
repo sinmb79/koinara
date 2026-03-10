@@ -6,6 +6,10 @@ Koinara is `A Peer-to-Peer Collective Inference Network` and the open network fo
 
 This repository is a v1 reference implementation of the minimum viable Koinara protocol. It defines only `Minimum Acceptable Inference (MAI)` and `Minimum Reward`. Market quality, depth, speed, and user preference stay outside the protocol boundary.
 
+## Whitepaper
+
+The canonical single-document whitepaper lives at [`docs/whitepaper.md`](./docs/whitepaper.md).
+
 ## Core Philosophy
 
 - minimal protocol surface
