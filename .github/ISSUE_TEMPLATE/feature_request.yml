@@ -1,0 +1,52 @@
+name: Feature request
+description: Propose a feature or improvement for the Koinara reference repo
+title: "[Feature] "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for changes that improve the reference repo while respecting the v1 boundary.
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Contracts
+        - Docs
+        - Tests
+        - Scripts
+        - CI / Tooling
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Describe the feature you want.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: Explain why this helps Koinara.
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope guardrails
+      options:
+        - label: This stays within the v1 minimum viable protocol goal
+        - label: This does not add bridge, cross-chain settlement, zkML, DAO governance, or advanced oracle logic
+        - label: This does not turn market quality judgment into protocol validity
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Extra notes
+      description: Add links, sketches, tradeoffs, or implementation ideas.
+

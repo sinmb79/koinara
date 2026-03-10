@@ -1,0 +1,53 @@
+name: Bug report
+description: Report a bug in contracts, docs, tests, or scripts
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for reproducible defects in the Koinara reference repo.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Contracts
+        - Docs
+        - Tests
+        - Scripts
+        - CI / Tooling
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Briefly describe the bug.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Include exact commands, inputs, and expected vs actual behavior.
+      placeholder: |
+        1. Run ...
+        2. Call ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: Explain whether this affects MAI/PoI logic, reward flow, state transitions, or documentation clarity.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include Foundry version, OS, network, and relevant commit/tag if available.
+

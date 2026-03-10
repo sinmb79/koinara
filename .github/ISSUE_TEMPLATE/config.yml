@@ -1,0 +1,6 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Koinara repository
+    url: https://github.com/sinmb79/koinara
+    about: Check the README, docs, and release notes before opening a new issue.
+
