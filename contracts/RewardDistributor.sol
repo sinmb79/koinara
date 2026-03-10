@@ -98,11 +98,7 @@ contract RewardDistributor is IRewardDistributor, Events {
         verifierRewardTotal = totalReward - providerReward;
     }
 
-    function distributeRewards(uint256 jobId, address provider, address[] calldata verifiers)
-        external
-        override
-        nonReentrant
-    {
+    function distributeRewards(uint256 jobId, address provider) external override nonReentrant {
         if (rewardsDistributed[jobId]) {
             revert Errors.RewardsAlreadyDistributed();
         }
@@ -119,20 +115,12 @@ contract RewardDistributor is IRewardDistributor, Events {
         }
 
         address[] memory approvedVerifiers = verifier.getApprovedVerifiers(jobId);
-        if (approvedVerifiers.length != verifiers.length) {
-            revert Errors.LengthMismatch();
-        }
-
-        for (uint256 i = 0; i < approvedVerifiers.length; ++i) {
-            if (approvedVerifiers[i] != verifiers[i]) {
-                revert Errors.InvalidVerifierSet();
-            }
-        }
 
         (, uint256 providerReward, uint256 verifierRewardTotal) = getRewardBreakdown(jobId);
 
-        uint256 perVerifierReward = verifiers.length == 0 ? 0 : verifierRewardTotal / verifiers.length;
-        uint256 verifierDust = verifierRewardTotal - (perVerifierReward * verifiers.length);
+        uint256 verifierCount = approvedVerifiers.length;
+        uint256 perVerifierReward = verifierCount == 0 ? 0 : verifierRewardTotal / verifierCount;
+        uint256 verifierDust = verifierRewardTotal - (perVerifierReward * verifierCount);
         providerReward += verifierDust;
 
         rewardsDistributed[jobId] = true;
@@ -145,8 +133,8 @@ contract RewardDistributor is IRewardDistributor, Events {
 
         uint256 distributedVerifierReward;
         if (perVerifierReward > 0) {
-            for (uint256 i = 0; i < verifiers.length; ++i) {
-                token.mint(verifiers[i], perVerifierReward);
+            for (uint256 i = 0; i < verifierCount; ++i) {
+                token.mint(approvedVerifiers[i], perVerifierReward);
                 distributedVerifierReward += perVerifierReward;
             }
         }

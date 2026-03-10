@@ -15,6 +15,7 @@ contract ProofOfInferenceVerifier is IProofOfInferenceVerifier, Events {
     mapping(uint256 => IProofOfInferenceVerifier.VerificationRecord) private _records;
     mapping(uint256 => mapping(address => bool)) private _hasParticipated;
     mapping(uint256 => address[]) private _approvedVerifiers;
+    mapping(uint256 => uint256) private _rejectionCounts;
     mapping(uint256 => bytes32) public rejectionReasonHash;
 
     constructor(address registry_) {
@@ -94,12 +95,18 @@ contract ProofOfInferenceVerifier is IProofOfInferenceVerifier, Events {
         }
 
         _hasParticipated[jobId][msg.sender] = true;
-        record.rejected = true;
-        record.finalized = true;
-        record.verificationPass = false;
-        rejectionReasonHash[jobId] = keccak256(bytes(reason));
+        uint256 rejectionCount = _rejectionCounts[jobId] + 1;
+        _rejectionCounts[jobId] = rejectionCount;
+        rejectionReasonHash[jobId] =
+            keccak256(abi.encodePacked(rejectionReasonHash[jobId], msg.sender, keccak256(bytes(reason))));
 
-        registry.markRejected(jobId);
+        if (rejectionCount >= record.quorum) {
+            record.rejected = true;
+            record.finalized = true;
+            record.verificationPass = false;
+
+            registry.markRejected(jobId);
+        }
         emit SubmissionRejected(jobId, msg.sender, reason);
     }
 

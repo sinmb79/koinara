@@ -28,6 +28,8 @@ Where:
 
 The reference contracts interpret `epochEmission(epoch)` as the baseline Simple-job reward scalar for that epoch.
 
+The token cap is a hard ceiling rather than a guaranteed fully issued terminal supply; under the discrete halving schedule, issuance may stop below the cap if the cap is not reached earlier.
+
 ## Job Type Weights
 
 - `Simple = 1`

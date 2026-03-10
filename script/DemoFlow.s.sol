@@ -16,9 +16,6 @@ contract DemoFlowScript is ScriptBase {
         uint256 verifierThreePrivateKey = vm.envUint("VERIFIER_THREE_PRIVATE_KEY");
 
         address provider = vm.addr(providerPrivateKey);
-        address verifierOne = vm.addr(verifierOnePrivateKey);
-        address verifierTwo = vm.addr(verifierTwoPrivateKey);
-        address verifierThree = vm.addr(verifierThreePrivateKey);
 
         InferenceJobRegistry registry = InferenceJobRegistry(vm.envAddress("REGISTRY"));
         ProofOfInferenceVerifier verifier = ProofOfInferenceVerifier(vm.envAddress("VERIFIER"));
@@ -50,14 +47,9 @@ contract DemoFlowScript is ScriptBase {
         verifier.verifySubmission(jobId);
         vm.stopBroadcast();
 
-        address[] memory approvedVerifiers = new address[](3);
-        approvedVerifiers[0] = verifierOne;
-        approvedVerifiers[1] = verifierTwo;
-        approvedVerifiers[2] = verifierThree;
-
         vm.startBroadcast(creatorPrivateKey);
         verifier.finalizePoI(jobId);
-        distributor.distributeRewards(jobId, provider, approvedVerifiers);
+        distributor.distributeRewards(jobId, provider);
         vm.stopBroadcast();
     }
 }

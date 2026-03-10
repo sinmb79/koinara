@@ -9,5 +9,5 @@ interface IRewardDistributor {
         external
         view
         returns (uint256 totalReward, uint256 providerReward, uint256 verifierRewardTotal);
-    function distributeRewards(uint256 jobId, address provider, address[] calldata verifiers) external;
+    function distributeRewards(uint256 jobId, address provider) external;
 }

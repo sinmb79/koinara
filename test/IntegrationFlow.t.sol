@@ -9,10 +9,10 @@ contract IntegrationFlowTest is KoinaraFixture {
         uint256 jobId = _createJob(JobTypes.JobType.Collective, 2 days, 2 ether);
         _submitResponse(jobId, RESPONSE_HASH);
         _registerSubmission(jobId);
-        address[] memory approvedVerifiers = _approveCollective(jobId);
+        _approveCollective(jobId);
         verifier.finalizePoI(jobId);
 
-        distributor.distributeRewards(jobId, provider, approvedVerifiers);
+        distributor.distributeRewards(jobId, provider);
 
         assertEq(token.balanceOf(provider), 4_900 ether);
         assertEq(token.balanceOf(verifierOne), 420 ether);

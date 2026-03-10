@@ -359,6 +359,8 @@ Figure 4. Issuance Curve
 
 ![Figure 4: Issuance curve](./figures/whitepaper/ko/figure-04-issuance-curve.png)
 
+KOIN cap은 반드시 전량 발행되어야 하는 목표치가 아니라 hard ceiling이며, 이산적 반감 구조에서는 그 이전에 cap에 도달하지 않으면 발행이 cap 미만에서 종료될 수 있다.
+
 이 곡선은 연속 곡선이 아니라 계단형이다. 초기 epoch일수록 baseline emission이 크고, 시간이 갈수록 프로토콜 보상보다 market reward의 중요성이 커진다.
 
 Koinara는 초기에는 발행 보상에 의해 유지되는 추론 네트워크로 시작하고, 시간이 지남에 따라 시장 보상에 의해 유지되는 추론 경제로 전환된다.

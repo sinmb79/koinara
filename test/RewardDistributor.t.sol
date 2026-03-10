@@ -9,11 +9,11 @@ contract RewardDistributorTest is KoinaraFixture {
         uint256 jobId = _createJob(JobTypes.JobType.Simple, 1 days, 1 ether);
         _submitResponse(jobId, RESPONSE_HASH);
         _registerSubmission(jobId);
-        address[] memory approvedVerifiers = _approveSimple(jobId);
+        _approveSimple(jobId);
         verifier.finalizePoI(jobId);
 
         uint256 providerEthBefore = provider.balance;
-        distributor.distributeRewards(jobId, provider, approvedVerifiers);
+        distributor.distributeRewards(jobId, provider);
 
         assertEq(token.balanceOf(provider), 700 ether);
         assertEq(token.balanceOf(verifierOne), 300 ether);

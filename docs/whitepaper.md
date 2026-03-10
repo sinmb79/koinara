@@ -361,6 +361,8 @@ Figure 4. Issuance Curve
 
 The curve is stepwise rather than continuous. Early epochs carry the strongest baseline emission, and later epochs depend increasingly on market reward rather than protocol subsidy.
 
+The token cap is a hard ceiling rather than a guaranteed fully issued terminal supply; under the discrete halving schedule, issuance may stop below the cap if the cap is not reached earlier.
+
 Koinara begins as an issuance-supported inference network and gradually transitions into a market-supported inference economy.
 
 ### 7.3 Generalized Epoch Allocation
