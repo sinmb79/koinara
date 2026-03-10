@@ -10,6 +10,10 @@ This repository is a v1 reference implementation of the minimum viable Koinara p
 
 - English: [`docs/whitepaper.md`](./docs/whitepaper.md)
 - Korean: [`docs/whitepaper.ko.md`](./docs/whitepaper.ko.md)
+- English PDF: [`docs/pdf/koinara-whitepaper-en.pdf`](./docs/pdf/koinara-whitepaper-en.pdf)
+- Korean PDF: [`docs/pdf/koinara-whitepaper-ko.pdf`](./docs/pdf/koinara-whitepaper-ko.pdf)
+
+Regenerate PDFs with `python tools/render_whitepaper_pdfs.py`.
 
 ## Core Philosophy
 
