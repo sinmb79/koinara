@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Koinara | The open network for collective inference</title>
+    <meta
+      name="description"
+      content="Koinara is a peer-to-peer collective inference network centered on Minimum Acceptable Inference and Minimum Reward."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./pages.css" />
+  </head>
+  <body>
+    <div class="site-bg"></div>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark">K</span>
+          <span class="brand-copy">
+            <strong>Koinara</strong>
+            <span>A Peer-to-Peer Collective Inference Network</span>
+          </span>
+        </a>
+        <nav class="site-nav">
+          <a href="#whitepaper">Whitepaper</a>
+          <a href="#figures">Figures</a>
+          <a href="#next-track">Next Track</a>
+          <a href="https://github.com/sinmb79/koinara">GitHub</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero section">
+          <div class="hero-copy">
+            <p class="eyebrow">MINIMUM PROTOCOL / OPEN INFERENCE MARKET</p>
+            <h1>The open network for collective inference.</h1>
+            <p class="lede">
+              Koinara defines only two protocol primitives:
+              <code>Minimum Acceptable Inference (MAI)</code> and
+              <code>Minimum Reward</code>. Everything above that floor, from quality
+              and speed to depth and user preference, belongs to the market.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="./pdf/koinara-whitepaper-en.pdf">English Whitepaper</a>
+              <a class="btn btn-secondary" href="./pdf/koinara-whitepaper-ko.pdf">Korean Whitepaper</a>
+              <a class="btn btn-ghost" href="https://github.com/sinmb79/koinara">Repository</a>
+            </div>
+            <div class="meta-strip">
+              <span>Fair launch</span>
+              <span>Ownerless direction</span>
+              <span>Chain-independent theory</span>
+              <span>Worldland-friendly v1</span>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <article class="figure-card figure-card-large">
+              <div class="figure-card-top">
+                <span>Primary Figure</span>
+                <span>Section 6</span>
+              </div>
+              <img
+                src="./figures/whitepaper/en/figure-03-layered-architecture.png"
+                alt="Koinara layered architecture"
+              />
+              <h2>Layered architecture</h2>
+              <p>Demand publication, response generation, verification, and settlement are intentionally separated.</p>
+            </article>
+
+            <article class="figure-card figure-card-small">
+              <div class="figure-card-top">
+                <span>Economic Figure</span>
+                <span>Section 7</span>
+              </div>
+              <img
+                src="./figures/whitepaper/en/figure-04-issuance-curve.png"
+                alt="Koinara issuance curve"
+              />
+              <h3>Declining issuance, rising market reward influence</h3>
+            </article>
+          </div>
+        </section>
+
+        <section class="section protocol-floor">
+          <div class="section-heading">
+            <p class="eyebrow">PROTOCOL FLOOR</p>
+            <h2>Only the minimum is canonical.</h2>
+          </div>
+
+          <div class="floor-grid">
+            <article class="floor-card">
+              <h3>Minimum Acceptable Inference</h3>
+              <p>
+                MAI is not a best-answer oracle. It is the minimum line of protocol
+                acceptance, defined in v1 by valid job state, deadline compliance,
+                non-empty response, format pass, and verifier approval.
+              </p>
+            </article>
+            <article class="floor-card">
+              <h3>Minimum Reward</h3>
+              <p>
+                KOIN issuance rewards accepted inference at the protocol floor. Premium
+                rewards stay market-funded and must remain separate from protocol issuance.
+              </p>
+            </article>
+            <article class="floor-card">
+              <h3>Proof of Inference</h3>
+              <p>
+                PoI proves that a submission satisfied the minimum protocol conditions. It
+                does not prove universal truth or market-best quality.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section whitepaper-package" id="whitepaper">
+          <div class="section-heading">
+            <p class="eyebrow">WHITEPAPER PACKAGE</p>
+            <h2>Main paper plus companion appendices.</h2>
+          </div>
+
+          <div class="paper-grid">
+            <article class="paper-card">
+              <span class="paper-tag">Main</span>
+              <h3>English Whitepaper</h3>
+              <p>The protocol thesis, figures, MAI, PoI, incentives, and minimal architecture.</p>
+              <a href="./pdf/koinara-whitepaper-en.pdf">Download PDF</a>
+            </article>
+            <article class="paper-card">
+              <span class="paper-tag">Main</span>
+              <h3>Korean Whitepaper</h3>
+              <p>The Korean main paper mirrors the current English release.</p>
+              <a href="./pdf/koinara-whitepaper-ko.pdf">Download PDF</a>
+            </article>
+            <article class="paper-card">
+              <span class="paper-tag">Appendix</span>
+              <h3>English Appendices</h3>
+              <p>Deployment profiles, contract mapping, portability notes, and parameter references.</p>
+              <a href="./pdf/koinara-whitepaper-appendices-en.pdf">Download PDF</a>
+            </article>
+            <article class="paper-card">
+              <span class="paper-tag">Appendix</span>
+              <h3>Korean Appendices</h3>
+              <p>The appendix package is published separately so the main paper can stay concise.</p>
+              <a href="./pdf/koinara-whitepaper-appendices-ko.pdf">Download PDF</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="section figures-section" id="figures">
+          <div class="section-heading">
+            <p class="eyebrow">RENDERED FIGURES</p>
+            <h2>Visuals now live in the main body of the paper.</h2>
+          </div>
+
+          <div class="figure-grid">
+            <figure class="figure-tile">
+              <img src="./figures/whitepaper/en/figure-01-state-machine.png" alt="Job lifecycle state machine" />
+              <figcaption>Figure 1. Job lifecycle state machine</figcaption>
+            </figure>
+            <figure class="figure-tile">
+              <img src="./figures/whitepaper/en/figure-02-network-flow.png" alt="Main network flow" />
+              <figcaption>Figure 2. Main network flow</figcaption>
+            </figure>
+            <figure class="figure-tile">
+              <img src="./figures/whitepaper/en/figure-03-layered-architecture.png" alt="Layered architecture" />
+              <figcaption>Figure 3. Layered architecture</figcaption>
+            </figure>
+            <figure class="figure-tile">
+              <img src="./figures/whitepaper/en/figure-04-issuance-curve.png" alt="Issuance curve" />
+              <figcaption>Figure 4. Issuance curve</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="section worldland-section" id="next-track">
+          <div class="section-heading">
+            <p class="eyebrow">NEXT TRACK</p>
+            <h2>Review the protocol first, then build the Worldland track in its own repo.</h2>
+          </div>
+
+          <div class="worldland-grid">
+            <article class="network-card">
+              <span class="network-label">Step 1</span>
+              <h3>Protocol review comes first</h3>
+              <p>
+                Before Worldland deployment or operator-node work begins, the current
+                protocol and review feedback should be examined and resolved in this
+                repository.
+              </p>
+            </article>
+
+            <article class="network-card">
+              <span class="network-label">Step 2</span>
+              <h3>Separate Worldland repo</h3>
+              <p>
+                Worldland deployment work, chain-specific runbooks, and operator-node
+                implementation should live in the dedicated repository below.
+              </p>
+              <a href="https://github.com/sinmb79/Koinara-Worldland">Koinara-Worldland</a>
+            </article>
+
+            <article class="network-card roadmap-card">
+              <span class="network-label">Step 3</span>
+              <h3>Operator node after review</h3>
+              <p>
+                After protocol review closes, the next build should cover Worldland
+                deployment, provider and verifier modes, off-chain payload handling, and
+                reusable operator packaging in the separate deployment repository.
+              </p>
+            </article>
+          </div>
+
+          <div class="roadmap-strip">
+            <div>
+              <strong>Protocol</strong>
+              <span>Review feedback, identify design risks, and tighten the protocol surface.</span>
+            </div>
+            <div>
+              <strong>Deployment</strong>
+              <span>Move Worldland-specific deployment artifacts into <code>Koinara-Worldland</code>.</span>
+            </div>
+            <div>
+              <strong>Node</strong>
+              <span>Build provider and verifier operator modes only after the protocol review is stable.</span>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>Koinara is a reference implementation for an owner-light, fair-launch collective inference protocol.</p>
+        <div>
+          <a href="./pdf/koinara-whitepaper-en.pdf">Whitepaper</a>
+          <a href="./pdf/koinara-whitepaper-appendices-en.pdf">Appendices</a>
+          <a href="https://github.com/sinmb79/koinara">GitHub</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

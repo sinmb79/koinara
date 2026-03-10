@@ -22,6 +22,16 @@ The canonical whitepaper now includes protocol formulas, PoI and MAI receipt log
 
 Regenerate whitepaper figures and PDFs with `python tools/render_whitepaper_pdfs.py`.
 
+## Repository Boundary
+
+This repository is the canonical home of the Koinara protocol, reference contracts, tests, and whitepaper package.
+
+Worldland-specific deployment runbooks, environment configuration, and operator-node implementation should live in the dedicated repository:
+
+- [`sinmb79/Koinara-Worldland`](https://github.com/sinmb79/Koinara-Worldland)
+
+Before that deployment track begins, protocol review feedback should be examined and resolved in this repository.
+
 ## Core Philosophy
 
 - minimal protocol surface
@@ -184,4 +194,4 @@ forge script script/DemoFlow.s.sol:DemoFlowScript --rpc-url <RPC_URL> --broadcas
 - add stronger verifier admission and anti-sybil mechanisms
 - add benchmark scripts for epoch simulations
 - add richer failure-path tests for premium refunds and duplicate settlement
-- add deployment config profiles for Worldland and local dev environments
+- coordinate deployment profiles with the dedicated Worldland deployment repository
