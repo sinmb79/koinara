@@ -11,8 +11,12 @@ This repository is a v1 reference implementation of the minimum viable Koinara p
 - Download page: [`docs/whitepaper-downloads.md`](./docs/whitepaper-downloads.md)
 - English: [`docs/whitepaper.md`](./docs/whitepaper.md)
 - Korean: [`docs/whitepaper.ko.md`](./docs/whitepaper.ko.md)
+- English appendices: [`docs/whitepaper-appendices.md`](./docs/whitepaper-appendices.md)
+- Korean appendices: [`docs/whitepaper-appendices.ko.md`](./docs/whitepaper-appendices.ko.md)
 - English PDF: [`docs/pdf/koinara-whitepaper-en.pdf`](./docs/pdf/koinara-whitepaper-en.pdf)
 - Korean PDF: [`docs/pdf/koinara-whitepaper-ko.pdf`](./docs/pdf/koinara-whitepaper-ko.pdf)
+- English appendix PDF: [`docs/pdf/koinara-whitepaper-appendices-en.pdf`](./docs/pdf/koinara-whitepaper-appendices-en.pdf)
+- Korean appendix PDF: [`docs/pdf/koinara-whitepaper-appendices-ko.pdf`](./docs/pdf/koinara-whitepaper-appendices-ko.pdf)
 
 The canonical whitepaper now includes protocol formulas, PoI and MAI receipt logic, state-machine diagrams, architecture figures, and issuance-curve visuals.
 
@@ -57,6 +61,8 @@ Excluded:
       whitepaper/
     whitepaper-downloads.md
     whitepaper-summary.md
+    whitepaper-appendices.md
+    whitepaper-appendices.ko.md
     protocol-spec.md
     protocol-glossary.md
     architecture.md

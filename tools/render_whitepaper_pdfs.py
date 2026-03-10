@@ -485,6 +485,30 @@ def main() -> None:
             edition_label="KOINARA 백서",
             cover_summary="Koinara는 MAI와 최소 보상을 중심으로 집단 추론의 최소 프로토콜을 정의한다.",
         ),
+        RenderConfig(
+            source=DOCS_DIR / "whitepaper-appendices.md",
+            output=PDF_DIR / "koinara-whitepaper-appendices-en.pdf",
+            language_label="English",
+            body_font="Times-Roman",
+            bold_font="Times-Bold",
+            footer_font="Times-Roman",
+            cover_note="Companion Appendices | March 10, 2026",
+            cover_tagline="Deployment profiles, contract mappings, and parameter notes",
+            edition_label="KOINARA APPENDICES",
+            cover_summary="These appendices accompany the main Koinara whitepaper with deployment, portability, and parameter references.",
+        ),
+        RenderConfig(
+            source=DOCS_DIR / "whitepaper-appendices.ko.md",
+            output=PDF_DIR / "koinara-whitepaper-appendices-ko.pdf",
+            language_label="Korean",
+            body_font="MalgunGothic",
+            bold_font="MalgunGothic-Bold",
+            footer_font="MalgunGothic",
+            cover_note="부록 문서 | 2026년 3월 10일",
+            cover_tagline="배포 프로파일, 컨트랙트 매핑, 파라미터 참고 문서",
+            edition_label="KOINARA 부록",
+            cover_summary="이 부록 문서는 메인 Koinara 백서를 보조하는 배포, 이식성, 파라미터 참조를 담는다.",
+        ),
     ]
 
     for config in configs:
