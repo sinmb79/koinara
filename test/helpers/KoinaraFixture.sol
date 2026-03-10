@@ -59,17 +59,13 @@ abstract contract KoinaraFixture is TestBase {
         vm.stopPrank();
     }
 
-    function _createJob(
-        JobTypes.JobType jobType,
-        uint64 deadlineOffset,
-        uint256 premiumReward
-    ) internal returns (uint256 jobId) {
+    function _createJob(JobTypes.JobType jobType, uint64 deadlineOffset, uint256 premiumReward)
+        internal
+        returns (uint256 jobId)
+    {
         vm.prank(creator);
         jobId = registry.createJob{value: premiumReward}(
-            REQUEST_HASH,
-            SCHEMA_HASH,
-            uint64(block.timestamp + deadlineOffset),
-            jobType
+            REQUEST_HASH, SCHEMA_HASH, uint64(block.timestamp + deadlineOffset), jobType
         );
     }
 

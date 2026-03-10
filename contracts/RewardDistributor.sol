@@ -87,19 +87,22 @@ contract RewardDistributor is IRewardDistributor, Events {
         return epochEmission(submissionEpoch) * job.jobType.weight();
     }
 
-    function getRewardBreakdown(
-        uint256 jobId
-    ) public view override returns (uint256 totalReward, uint256 providerReward, uint256 verifierRewardTotal) {
+    function getRewardBreakdown(uint256 jobId)
+        public
+        view
+        override
+        returns (uint256 totalReward, uint256 providerReward, uint256 verifierRewardTotal)
+    {
         totalReward = calculateJobReward(jobId);
         providerReward = (totalReward * 70) / 100;
         verifierRewardTotal = totalReward - providerReward;
     }
 
-    function distributeRewards(
-        uint256 jobId,
-        address provider,
-        address[] calldata verifiers
-    ) external override nonReentrant {
+    function distributeRewards(uint256 jobId, address provider, address[] calldata verifiers)
+        external
+        override
+        nonReentrant
+    {
         if (rewardsDistributed[jobId]) {
             revert Errors.RewardsAlreadyDistributed();
         }
@@ -126,11 +129,7 @@ contract RewardDistributor is IRewardDistributor, Events {
             }
         }
 
-        (
-            ,
-            uint256 providerReward,
-            uint256 verifierRewardTotal
-        ) = getRewardBreakdown(jobId);
+        (, uint256 providerReward, uint256 verifierRewardTotal) = getRewardBreakdown(jobId);
 
         uint256 perVerifierReward = verifiers.length == 0 ? 0 : verifierRewardTotal / verifiers.length;
         uint256 verifierDust = verifierRewardTotal - (perVerifierReward * verifiers.length);

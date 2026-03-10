@@ -23,12 +23,10 @@ interface IInferenceJobRegistry {
     }
 
     function totalJobs() external view returns (uint256);
-    function createJob(
-        bytes32 requestHash,
-        bytes32 schemaHash,
-        uint64 deadline,
-        JobTypes.JobType jobType
-    ) external payable returns (uint256);
+    function createJob(bytes32 requestHash, bytes32 schemaHash, uint64 deadline, JobTypes.JobType jobType)
+        external
+        payable
+        returns (uint256);
     function submitResponse(uint256 jobId, bytes32 responseHash) external;
     function moveToVerification(uint256 jobId) external;
     function markAccepted(uint256 jobId) external;

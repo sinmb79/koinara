@@ -14,45 +14,17 @@ abstract contract Events {
         uint256 premiumReward
     );
 
-    event JobStateTransition(
-        uint256 indexed jobId,
-        JobTypes.JobState previousState,
-        JobTypes.JobState newState
-    );
+    event JobStateTransition(uint256 indexed jobId, JobTypes.JobState previousState, JobTypes.JobState newState);
 
-    event ResponseSubmitted(
-        uint256 indexed jobId,
-        address indexed provider,
-        bytes32 responseHash,
-        uint64 submittedAt
-    );
+    event ResponseSubmitted(uint256 indexed jobId, address indexed provider, bytes32 responseHash, uint64 submittedAt);
 
-    event SubmissionRegistered(
-        uint256 indexed jobId,
-        address indexed provider,
-        bytes32 responseHash,
-        uint256 quorum
-    );
+    event SubmissionRegistered(uint256 indexed jobId, address indexed provider, bytes32 responseHash, uint256 quorum);
 
-    event SubmissionVerified(
-        uint256 indexed jobId,
-        address indexed verifier,
-        uint256 approvals,
-        uint256 quorum
-    );
+    event SubmissionVerified(uint256 indexed jobId, address indexed verifier, uint256 approvals, uint256 quorum);
 
-    event SubmissionRejected(
-        uint256 indexed jobId,
-        address indexed verifier,
-        string reason
-    );
+    event SubmissionRejected(uint256 indexed jobId, address indexed verifier, string reason);
 
-    event PoIFinalized(
-        uint256 indexed jobId,
-        bytes32 indexed poiHash,
-        address indexed provider,
-        uint256 approvals
-    );
+    event PoIFinalized(uint256 indexed jobId, bytes32 indexed poiHash, address indexed provider, uint256 approvals);
 
     event RewardsDistributed(
         uint256 indexed jobId,

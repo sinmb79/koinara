@@ -1,5 +1,7 @@
 # Koinara
 
+[![CI](https://github.com/sinmb79/koinara/actions/workflows/ci.yml/badge.svg)](https://github.com/sinmb79/koinara/actions/workflows/ci.yml)
+
 Koinara is `A Peer-to-Peer Collective Inference Network` and the open network for collective inference.
 
 This repository is a v1 reference implementation of the minimum viable Koinara protocol. It defines only `Minimum Acceptable Inference (MAI)` and `Minimum Reward`. Market quality, depth, speed, and user preference stay outside the protocol boundary.

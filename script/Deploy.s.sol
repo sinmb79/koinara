@@ -26,13 +26,7 @@ contract DeployScript is ScriptBase {
         verifier = new ProofOfInferenceVerifier(address(registry));
         token = new KOINToken(deployer);
         distributor = new RewardDistributor(
-            address(token),
-            address(registry),
-            address(verifier),
-            block.timestamp,
-            1 days,
-            365,
-            1_000 ether
+            address(token), address(registry), address(verifier), block.timestamp, 1 days, 365, 1_000 ether
         );
 
         registry.setVerifier(address(verifier));

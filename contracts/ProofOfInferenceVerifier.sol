@@ -143,9 +143,12 @@ contract ProofOfInferenceVerifier is IProofOfInferenceVerifier, Events {
         emit PoIFinalized(jobId, poiHash, record.provider, record.approvals);
     }
 
-    function getRecord(
-        uint256 jobId
-    ) external view override returns (IProofOfInferenceVerifier.VerificationRecord memory) {
+    function getRecord(uint256 jobId)
+        external
+        view
+        override
+        returns (IProofOfInferenceVerifier.VerificationRecord memory)
+    {
         return _records[jobId];
     }
 
@@ -157,9 +160,11 @@ contract ProofOfInferenceVerifier is IProofOfInferenceVerifier, Events {
         return _hasParticipated[jobId][verifier];
     }
 
-    function _requireActiveRecord(
-        uint256 jobId
-    ) internal view returns (IProofOfInferenceVerifier.VerificationRecord storage record) {
+    function _requireActiveRecord(uint256 jobId)
+        internal
+        view
+        returns (IProofOfInferenceVerifier.VerificationRecord storage record)
+    {
         record = _records[jobId];
         if (!record.validJob) {
             revert Errors.SubmissionNotFound();

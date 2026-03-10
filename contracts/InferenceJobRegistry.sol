@@ -85,12 +85,12 @@ contract InferenceJobRegistry is IInferenceJobRegistry, Events {
         admin = address(0);
     }
 
-    function createJob(
-        bytes32 requestHash,
-        bytes32 schemaHash,
-        uint64 deadline,
-        JobTypes.JobType jobType
-    ) external payable override returns (uint256 jobId) {
+    function createJob(bytes32 requestHash, bytes32 schemaHash, uint64 deadline, JobTypes.JobType jobType)
+        external
+        payable
+        override
+        returns (uint256 jobId)
+    {
         if (requestHash == bytes32(0) || schemaHash == bytes32(0)) {
             revert Errors.InvalidHash();
         }
@@ -131,10 +131,7 @@ contract InferenceJobRegistry is IInferenceJobRegistry, Events {
         }
 
         _submissions[jobId] = IInferenceJobRegistry.Submission({
-            provider: msg.sender,
-            responseHash: responseHash,
-            submittedAt: uint64(block.timestamp),
-            exists: true
+            provider: msg.sender, responseHash: responseHash, submittedAt: uint64(block.timestamp), exists: true
         });
 
         emit ResponseSubmitted(jobId, msg.sender, responseHash, uint64(block.timestamp));
@@ -189,10 +186,13 @@ contract InferenceJobRegistry is IInferenceJobRegistry, Events {
         _transition(jobId, JobTypes.JobState.Settled);
     }
 
-    function releasePremiumToProvider(
-        uint256 jobId,
-        address provider
-    ) external override onlyRewardDistributor nonReentrant returns (uint256 amount) {
+    function releasePremiumToProvider(uint256 jobId, address provider)
+        external
+        override
+        onlyRewardDistributor
+        nonReentrant
+        returns (uint256 amount)
+    {
         IInferenceJobRegistry.Job storage job = _requireJob(jobId);
         if (provider == address(0)) {
             revert Errors.ZeroAddress();
@@ -234,9 +234,7 @@ contract InferenceJobRegistry is IInferenceJobRegistry, Events {
         return _jobs[jobId];
     }
 
-    function getSubmission(
-        uint256 jobId
-    ) external view override returns (IInferenceJobRegistry.Submission memory) {
+    function getSubmission(uint256 jobId) external view override returns (IInferenceJobRegistry.Submission memory) {
         return _submissions[jobId];
     }
 
@@ -258,7 +256,7 @@ contract InferenceJobRegistry is IInferenceJobRegistry, Events {
             return;
         }
 
-        (bool success, ) = to.call{value: amount}("");
+        (bool success,) = to.call{value: amount}("");
         if (!success) {
             revert Errors.TransferFailed();
         }
