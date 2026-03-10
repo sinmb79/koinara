@@ -102,26 +102,11 @@ Koinara v1은 세 가지 가벼운 job category를 사용한다.
 
 ### 3.3 상태 기계
 
-v1의 job lifecycle은 다음과 같다.
-
 Figure 1. Job Lifecycle State Machine
 
-```text
-Created
-  |
-  v
-Open
-  |-- (마감 전 응답 없음) ---------> Expired
-  |
-  '-- (응답 제출) ----------------> Submitted
-                                         |
-                                         v
-                                UnderVerification
-                                   |           |
-                                   |           '-- (실패) --> Rejected
-                                   |
-                                   '-- (통과) --> Accepted --> Settled
-```
+![Figure 1: Job lifecycle state machine](./figures/whitepaper/ko/figure-01-state-machine.png)
+
+이 도식은 job 생성부터 accepted settlement 또는 비발행 종료 상태에 이르기까지의 최소 v1 경로를 보여준다.
 
 v1 참조 구현은 `Rejected`와 `Expired`를 비발행 종료 상태로 유지한다. Premium refund 처리는 accepted settlement 경로와 분리된다. 더 넓은 회계 모델에서는 rejected job을 일반 settlement 상태로 옮길 수 있지만, v1은 상태 기계를 더 단순하게 유지한다.
 
@@ -331,66 +316,13 @@ Koinara는 v1에서 단일 routing algorithm을 하드코딩하지 않는다. Ro
 
 ### 6.7 Figure 2. Main Network Flow
 
-```text
-User
-  |
-  v
-Inference Job
-  |
-  v
-Provider Network
-  |
-  v
-Candidate Responses
-  |
-  v
-Verifier Network
-  |
-  v
-Minimum Acceptable Inference Check
-  |
-  v
-Proof of Inference
-  |
-  v
-Reward Distribution + Job Settlement
-```
+![Figure 2: Main network flow](./figures/whitepaper/ko/figure-02-network-flow.png)
 
 이 도식은 Koinara job이 게시된 뒤 보상 정산까지 도달하는 최소 end-to-end 경로를 보여준다.
 
 ### 6.8 Figure 3. Layered Architecture
 
-```text
-+------------------+
-|      Users       |
-+---------+--------+
-          |
-          | submit jobs
-          v
-+------------------+
-|   InferenceJob   |
-|     Registry     |
-+---------+--------+
-          |
-          | open jobs
-          v
-+------------------+
-|    Providers     |
-+---------+--------+
-          |
-          | responses
-          v
-+------------------+
-|    Verifiers     |
-+---------+--------+
-          |
-          | PoI
-          v
-+------------------+
-|    Settlement    |
-|    + Rewards     |
-+------------------+
-```
+![Figure 3: Layered architecture](./figures/whitepaper/ko/figure-03-layered-architecture.png)
 
 이 도식은 수요 게시, 응답 생산, 최소 검증, 정산이 분리되어 있음을 보여준다. 이 분리가 프로토콜을 최소로 유지하면서도, 그 위에서 더 풍부한 시장이 형성될 수 있게 만든다.
 
@@ -423,29 +355,11 @@ E_t = E_0 * (1/2)^(floor(t / H))
 
 이 함수는 계단형으로 감소하는 공급 곡선을 만든다.
 
-Figure 4. Issuance Curve (text view)
+Figure 4. Issuance Curve
 
-```text
-Issuance
-  ^
-  |
-  |########
-  |######
-  |####
-  |##
-  |#
-  +----------------------> Time
-```
+![Figure 4: Issuance curve](./figures/whitepaper/ko/figure-04-issuance-curve.png)
 
-또는 epoch 구간으로 쓰면:
-
-```text
-Epoch 1-H      : High emission
-Epoch H-2H     : Half emission
-Epoch 2H-3H    : Half again
-Epoch 3H-4H    : Continued decline
-Long-term      : Low issuance, market-dominant rewards
-```
+이 곡선은 연속 곡선이 아니라 계단형이다. 초기 epoch일수록 baseline emission이 크고, 시간이 갈수록 프로토콜 보상보다 market reward의 중요성이 커진다.
 
 Koinara는 초기에는 발행 보상에 의해 유지되는 추론 네트워크로 시작하고, 시간이 지남에 따라 시장 보상에 의해 유지되는 추론 경제로 전환된다.
 
@@ -794,26 +708,6 @@ E_t = E_0 * (1/2)^(floor(t / H))
 - 경쟁이 심화되며
 - market-based income의 중요성이 커진다
 
-### G.4 간단한 텍스트 그래프
+### G.4 Figure Reference
 
-```text
-Issuance
-  ^
-  |
-  |########
-  |######
-  |####
-  |##
-  |#
-  +----------------------> Time
-```
-
-또는 epoch 구간으로 쓰면:
-
-```text
-Epoch 1-H      : High emission
-Epoch H-2H     : Half emission
-Epoch 2H-3H    : Half again
-Epoch 3H-4H    : Continued decline
-Long-term      : Low issuance, market-dominant rewards
-```
+주요 발행 시각화는 Section 7의 Figure 4에 실려 있다. 이 appendix는 경제 규칙과 파라미터 해석에 집중하고, 시각적 발행 곡선은 본문에 남겨둔다.

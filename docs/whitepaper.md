@@ -102,26 +102,11 @@ These categories drive quorum and baseline reward weight rather than attempting 
 
 ### 3.3 State Machine
 
-The job lifecycle in v1 is:
-
 Figure 1. Job Lifecycle State Machine
 
-```text
-Created
-  |
-  v
-Open
-  |-- (no response before deadline) --> Expired
-  |
-  '-- (response submitted) ----------> Submitted
-                                         |
-                                         v
-                                UnderVerification
-                                   |           |
-                                   |           '-- (fail) --> Rejected
-                                   |
-                                   '-- (pass) --> Accepted --> Settled
-```
+![Figure 1: Job lifecycle state machine](./figures/whitepaper/en/figure-01-state-machine.png)
+
+The figure shows the minimum v1 path from job creation to either accepted settlement or non-mint termination.
 
 The v1 reference implementation keeps `Rejected` and `Expired` as non-mint terminal states. Premium refund handling is separate from the accepted settlement path. A broader accounting model could later define a cleanup transition from rejected jobs into a generic settlement state, but v1 keeps the machine simpler.
 
@@ -331,66 +316,13 @@ This separation is what lets market complexity evolve without inflating the base
 
 ### 6.7 Figure 2. Main Network Flow
 
-```text
-User
-  |
-  v
-Inference Job
-  |
-  v
-Provider Network
-  |
-  v
-Candidate Responses
-  |
-  v
-Verifier Network
-  |
-  v
-Minimum Acceptable Inference Check
-  |
-  v
-Proof of Inference
-  |
-  v
-Reward Distribution + Job Settlement
-```
+![Figure 2: Main network flow](./figures/whitepaper/en/figure-02-network-flow.png)
 
 This figure shows the minimum end-to-end path of a Koinara job from publication to reward settlement.
 
 ### 6.8 Figure 3. Layered Architecture
 
-```text
-+------------------+
-|      Users       |
-+---------+--------+
-          |
-          | submit jobs
-          v
-+------------------+
-|   InferenceJob   |
-|     Registry     |
-+---------+--------+
-          |
-          | open jobs
-          v
-+------------------+
-|    Providers     |
-+---------+--------+
-          |
-          | responses
-          v
-+------------------+
-|    Verifiers     |
-+---------+--------+
-          |
-          | PoI
-          v
-+------------------+
-|    Settlement    |
-|    + Rewards     |
-+------------------+
-```
+![Figure 3: Layered architecture](./figures/whitepaper/en/figure-03-layered-architecture.png)
 
 This figure makes the layer split explicit: demand publication, response production, minimum verification, and settlement are separated so that the protocol can stay minimal while richer markets form above it.
 
@@ -423,29 +355,11 @@ Where:
 
 This creates a stepwise declining supply curve.
 
-Figure 4. Issuance Curve (text view)
+Figure 4. Issuance Curve
 
-```text
-Issuance
-  ^
-  |
-  |########
-  |######
-  |####
-  |##
-  |#
-  +----------------------> Time
-```
+![Figure 4: Issuance curve](./figures/whitepaper/en/figure-04-issuance-curve.png)
 
-Or, expressed in epoch bands:
-
-```text
-Epoch 1-H      : High emission
-Epoch H-2H     : Half emission
-Epoch 2H-3H    : Half again
-Epoch 3H-4H    : Continued decline
-Long-term      : Low issuance, market-dominant rewards
-```
+The curve is stepwise rather than continuous. Early epochs carry the strongest baseline emission, and later epochs depend increasingly on market reward rather than protocol subsidy.
 
 Koinara begins as an issuance-supported inference network and gradually transitions into a market-supported inference economy.
 
@@ -794,26 +708,6 @@ In early stages, protocol issuance is the primary incentive. As the network matu
 - competition increases
 - market-based income becomes more important
 
-### G.4 Simple Text Graph
+### G.4 Figure Reference
 
-```text
-Issuance
-  ^
-  |
-  |########
-  |######
-  |####
-  |##
-  |#
-  +----------------------> Time
-```
-
-Or, expressed in epoch bands:
-
-```text
-Epoch 1-H      : High emission
-Epoch H-2H     : Half emission
-Epoch 2H-3H    : Half again
-Epoch 3H-4H    : Continued decline
-Long-term      : Low issuance, market-dominant rewards
-```
+The primary issuance visualization appears as Figure 4 in Section 7. This appendix keeps the parameter interpretation close to the economic rule set while leaving the visual curve in the main body of the whitepaper.

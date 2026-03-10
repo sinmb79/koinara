@@ -17,7 +17,7 @@ This page collects the official Koinara whitepaper sources and distribution file
 
 - The Markdown documents are the editable source texts.
 - The PDF files are the distribution-ready exports.
-- The whitepaper now includes protocol formulas, state-machine diagrams, architecture diagrams, and issuance-curve notes.
+- The whitepaper now includes protocol formulas, state-machine figures, architecture figures, and issuance-curve visuals.
 - If the protocol text changes, update both language versions and regenerate both PDFs with `python tools/render_whitepaper_pdfs.py`.
 
 ## Koinara at a Glance

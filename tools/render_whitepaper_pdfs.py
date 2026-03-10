@@ -6,6 +6,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
+from PIL import Image as PILImage
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT
 from reportlab.lib.pagesizes import A4
@@ -13,12 +14,15 @@ from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import HRFlowable, PageBreak, Paragraph, Preformatted, SimpleDocTemplate, Spacer
+from reportlab.platypus import HRFlowable, Image as PlatypusImage, PageBreak, Paragraph, Preformatted, SimpleDocTemplate, Spacer
+
+from generate_whitepaper_figures import generate_figures
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = ROOT / "docs"
 PDF_DIR = DOCS_DIR / "pdf"
+IMAGE_PATTERN = re.compile(r"^!\[([^\]]*)\]\(([^)]+)\)$")
 
 
 @dataclass(frozen=True)
@@ -220,6 +224,10 @@ def is_minor_heading(line: str) -> bool:
     return line.startswith("### ")
 
 
+def is_image_line(line: str) -> bool:
+    return IMAGE_PATTERN.match(line.strip()) is not None
+
+
 def is_special(line: str) -> bool:
     stripped = line.strip()
     return (
@@ -227,6 +235,7 @@ def is_special(line: str) -> bool:
         or is_heading(stripped)
         or is_subheading(stripped)
         or is_minor_heading(stripped)
+        or is_image_line(stripped)
         or is_bullet_item(stripped)
         or is_ordered_item(stripped)
     )
@@ -261,6 +270,12 @@ def parse_blocks(text: str) -> list[tuple[str, object]]:
 
         if is_heading(line):
             blocks.append(("title", line[2:].strip()))
+            index += 1
+            continue
+
+        image_match = IMAGE_PATTERN.match(line)
+        if image_match:
+            blocks.append(("image", {"alt": image_match.group(1), "path": image_match.group(2)}))
             index += 1
             continue
 
@@ -331,6 +346,20 @@ def add_cover(story: list[object], styles: dict[str, ParagraphStyle], config: Re
     story.append(PageBreak())
 
 
+def build_image_flowable(config: RenderConfig, payload: dict[str, str]) -> PlatypusImage:
+    image_path = (config.source.parent / payload["path"]).resolve()
+    with PILImage.open(image_path) as image:
+        width_px, height_px = image.size
+
+    max_width = A4[0] - (44 * mm)
+    draw_width = max_width
+    draw_height = draw_width * height_px / width_px
+
+    flowable = PlatypusImage(str(image_path), width=draw_width, height=draw_height)
+    flowable.hAlign = "CENTER"
+    return flowable
+
+
 def build_story(config: RenderConfig) -> list[object]:
     styles = paragraph_styles(config)
     text = config.source.read_text(encoding="utf-8")
@@ -371,6 +400,11 @@ def build_story(config: RenderConfig) -> list[object]:
 
         if kind == "paragraph":
             story.append(Paragraph(format_inline(str(payload)), styles["body"]))
+            continue
+
+        if kind == "image":
+            story.append(build_image_flowable(config, payload))  # type: ignore[arg-type]
+            story.append(Spacer(1, 10))
             continue
 
         if kind == "code":
@@ -424,6 +458,7 @@ def render_pdf(config: RenderConfig) -> None:
 
 def main() -> None:
     register_optional_fonts()
+    generate_figures()
 
     configs = [
         RenderConfig(
