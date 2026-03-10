@@ -13,7 +13,7 @@ from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import HRFlowable, PageBreak, Paragraph, SimpleDocTemplate, Spacer
+from reportlab.platypus import HRFlowable, PageBreak, Paragraph, Preformatted, SimpleDocTemplate, Spacer
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,6 +32,7 @@ class RenderConfig:
     cover_note: str
     cover_tagline: str
     edition_label: str
+    cover_summary: str
 
 
 def register_optional_fonts() -> None:
@@ -58,7 +59,6 @@ def paragraph_styles(config: RenderConfig) -> dict[str, ParagraphStyle]:
             alignment=TA_CENTER,
             textColor=colors.HexColor("#6B7280"),
             spaceAfter=14,
-            tracking=0.8,
         ),
         "cover_title": ParagraphStyle(
             "CoverTitle",
@@ -182,6 +182,21 @@ def paragraph_styles(config: RenderConfig) -> dict[str, ParagraphStyle]:
             textColor=colors.HexColor("#111827"),
             spaceAfter=4,
         ),
+        "code": ParagraphStyle(
+            "WhitepaperCode",
+            parent=base["Code"],
+            fontName="Courier",
+            fontSize=8.8,
+            leading=12,
+            leftIndent=8,
+            rightIndent=8,
+            borderPadding=8,
+            borderWidth=0.7,
+            borderColor=colors.HexColor("#D1D5DB"),
+            backColor=colors.HexColor("#F9FAFB"),
+            textColor=colors.HexColor("#111827"),
+            spaceAfter=12,
+        ),
     }
 
 
@@ -249,6 +264,21 @@ def parse_blocks(text: str) -> list[tuple[str, object]]:
             index += 1
             continue
 
+        if line.startswith("```"):
+            fence_lang = line[3:].strip()
+            code_lines: list[str] = []
+            index += 1
+            while index < len(lines) and not lines[index].startswith("```"):
+                code_lines.append(lines[index].rstrip("\n"))
+                index += 1
+            if index < len(lines) and lines[index].startswith("```"):
+                index += 1
+            code_block = "\n".join(code_lines)
+            if fence_lang:
+                code_block = f"[{fence_lang}]\n{code_block}"
+            blocks.append(("code", code_block))
+            continue
+
         if is_subheading(line):
             blocks.append(("h2", line[3:].strip()))
             index += 1
@@ -297,14 +327,7 @@ def add_cover(story: list[object], styles: dict[str, ParagraphStyle], config: Re
     story.append(Paragraph(config.language_label, styles["cover_meta"]))
     story.append(Paragraph(config.cover_note, styles["cover_meta"]))
     story.append(Spacer(1, 22))
-    story.append(
-        Paragraph(
-            "Koinara defines a minimum protocol for collective inference, centered on MAI and minimum reward."
-            if config.language_label == "English"
-            else "Koinara는 MAI와 최소 보상을 중심으로 한 집단 추론의 최소 프로토콜을 정의한다.",
-            styles["callout"],
-        )
-    )
+    story.append(Paragraph(config.cover_summary, styles["callout"]))
     story.append(PageBreak())
 
 
@@ -317,16 +340,13 @@ def build_story(config: RenderConfig) -> list[object]:
     if not blocks or blocks[0][0] != "title":
         raise ValueError(f"Expected first block in {config.source} to be a title")
 
-    cover_title = str(blocks[0][1])
-    add_cover(story, styles, config, cover_title)
+    add_cover(story, styles, config, str(blocks[0][1]))
 
     title_seen = False
     for block_index, (kind, payload) in enumerate(blocks):
         if kind == "title":
-            if title_seen:
-                story.append(Paragraph(format_inline(str(payload)), styles["title"]))
-            else:
-                story.append(Paragraph(format_inline(str(payload)), styles["title"]))
+            story.append(Paragraph(format_inline(str(payload)), styles["title"]))
+            if not title_seen:
                 story.append(Paragraph(config.language_label, styles["meta"]))
                 story.append(
                     Paragraph(
@@ -353,6 +373,10 @@ def build_story(config: RenderConfig) -> list[object]:
             story.append(Paragraph(format_inline(str(payload)), styles["body"]))
             continue
 
+        if kind == "code":
+            story.append(Preformatted(str(payload), styles["code"]))
+            continue
+
         if kind == "bullet_list":
             for item in payload:  # type: ignore[assignment]
                 story.append(Paragraph(f"- {format_inline(item)}", styles["bullet"]))
@@ -369,6 +393,7 @@ def build_story(config: RenderConfig) -> list[object]:
 
 def footer(config: RenderConfig):
     def draw(canvas, doc) -> None:
+        del doc
         canvas.saveState()
         canvas.setFont(config.footer_font, 8.8)
         canvas.setFillColor(colors.HexColor("#6B7280"))
@@ -411,6 +436,7 @@ def main() -> None:
             cover_note="Reference Whitepaper | March 10, 2026",
             cover_tagline="The open network for collective inference",
             edition_label="KOINARA WHITEPAPER",
+            cover_summary="Koinara defines a minimum protocol for collective inference, centered on MAI and minimum reward.",
         ),
         RenderConfig(
             source=DOCS_DIR / "whitepaper.ko.md",
@@ -422,6 +448,7 @@ def main() -> None:
             cover_note="참조 백서 | 2026년 3월 10일",
             cover_tagline="집단 추론을 위한 개방형 네트워크",
             edition_label="KOINARA 백서",
+            cover_summary="Koinara는 MAI와 최소 보상을 중심으로 집단 추론의 최소 프로토콜을 정의한다.",
         ),
     ]
 

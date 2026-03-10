@@ -17,7 +17,8 @@ This page collects the official Koinara whitepaper sources and distribution file
 
 - The Markdown documents are the editable source texts.
 - The PDF files are the distribution-ready exports.
-- If the protocol text changes, update both language versions and regenerate both PDFs.
+- The whitepaper now includes protocol formulas, state-machine diagrams, architecture diagrams, and issuance-curve notes.
+- If the protocol text changes, update both language versions and regenerate both PDFs with `python tools/render_whitepaper_pdfs.py`.
 
 ## Koinara at a Glance
 
@@ -32,3 +33,4 @@ This page collects the official Koinara whitepaper sources and distribution file
 - 국문 PDF: [최신 릴리즈 다운로드](https://github.com/sinmb79/koinara/releases/latest/download/koinara-whitepaper-ko.pdf)
 - 영문 원문: [`whitepaper.md`](./whitepaper.md)
 - 국문 원문: [`whitepaper.ko.md`](./whitepaper.ko.md)
+- 백서는 수식, 상태 기계, 아키텍처 도식, 발행 곡선 설명을 포함한 정식 배포본 기준으로 관리된다.

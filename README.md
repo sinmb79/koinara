@@ -14,6 +14,8 @@ This repository is a v1 reference implementation of the minimum viable Koinara p
 - English PDF: [`docs/pdf/koinara-whitepaper-en.pdf`](./docs/pdf/koinara-whitepaper-en.pdf)
 - Korean PDF: [`docs/pdf/koinara-whitepaper-ko.pdf`](./docs/pdf/koinara-whitepaper-ko.pdf)
 
+The canonical whitepaper now includes protocol formulas, PoI and MAI receipt logic, state-machine diagrams, architecture diagrams, and issuance-curve notes.
+
 Regenerate PDFs with `python tools/render_whitepaper_pdfs.py`.
 
 ## Core Philosophy

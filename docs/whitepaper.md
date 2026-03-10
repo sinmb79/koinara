@@ -6,387 +6,814 @@ This document is the English whitepaper for Koinara.
 
 For the Korean version, see [`whitepaper.ko.md`](./whitepaper.ko.md).
 
-Koinara is a minimal protocol for collective inference. It does not attempt to define intelligence, truth, or optimal answer quality at the protocol layer. Instead, it defines only two protocol primitives: `Minimum Acceptable Inference (MAI)` and `Minimum Reward`. If a submitted response satisfies the minimum acceptance conditions, the network records a `Proof of Inference (PoI)` and issues the baseline protocol reward. All value above this floor, including speed, depth, clarity, usefulness, ranking, and user satisfaction, is left to the market. This design keeps the protocol narrow, neutral, and chain-independent, while allowing humans and AI agents to participate under the same minimum rules. Koinara v1 is an EVM-friendly reference implementation of this model.
+Koinara is a minimal protocol for collective inference. It does not attempt to prove absolute truth or encode a universal ranking of answer quality. Instead, it defines only two protocol primitives: `Minimum Acceptable Inference (MAI)` and `Minimum Reward`. If a submitted response satisfies the minimum acceptance conditions, the network records a `Proof of Inference (PoI)` and issues the baseline protocol reward. All value above this floor, including speed, depth, usefulness, and user satisfaction, is left to the market. This paper presents Koinara as a chain-independent protocol theory with an EVM-friendly v1 reference implementation.
 
-## 1. Introduction
+## 1. The Problem
 
-Advanced inference is increasingly delivered through centralized platforms. Yet the real capacity for reasoning is distributed across individuals, organizations, domain experts, autonomous agents, and AI systems. The missing layer is not only better models. It is shared market infrastructure that allows inference demand and inference supply to meet under open, neutral, and minimum rules.
+Inference capacity is distributed, but inference markets are not. Today, most high-value reasoning flows through centralized platforms that combine demand discovery, response generation, quality ranking, settlement, and economic capture inside a single product surface.
 
-Koinara proposes that collective inference can be coordinated with a much smaller protocol surface than most network designs assume. Rather than embedding subjective quality ranking, reputation ideology, governance overhead, or chain-specific assumptions into the base layer, Koinara asks a narrower question:
+This architecture creates three problems:
+
+- open participation is constrained by platform ownership
+- market value is mixed with protocol validity
+- settlement and proof are subordinated to application logic
+
+Koinara begins from a narrower premise. The protocol layer does not need to decide which answer is best. It only needs to define the smallest useful rule set for:
+
+1. publishing inference demand
+2. submitting a candidate response
+3. checking whether that response satisfies a minimum threshold
+4. issuing a minimum reward when the threshold is met
+
+Koinara therefore asks a very specific question:
 
 How little must a protocol define in order to let an open inference market exist?
 
-The answer in v1 is intentionally strict. The protocol defines only:
+The answer is intentionally minimal. The protocol defines only:
 
 1. `Minimum Acceptable Inference`
 2. `Minimum Reward`
 
-Everything else belongs to competition, application design, or social coordination outside the protocol.
+Everything above that floor belongs to market competition.
 
-## 2. Design Goals
+## 2. Design Principles
 
-Koinara is guided by five design goals.
+Koinara is guided by five principles.
 
 ### 2.1 Minimalism
 
-The protocol should define only the minimum conditions required for open inference exchange. Complexity that does not protect this minimum should remain outside the base layer.
+The protocol should define only the minimum conditions required for open inference exchange. Complexity that does not protect this floor should remain outside the base layer.
 
 ### 2.2 Permissionless Participation
 
-Both humans and AI agents should be able to participate as providers or verifiers. The protocol should not assume a single actor type, vendor, or organization.
+Both humans and AI agents should be able to participate as providers or verifiers. The protocol must not assume a single vendor, actor type, or institutional gatekeeper.
 
 ### 2.3 Market-Driven Quality
 
-The protocol should not attempt to encode the best answer. Quality is contextual and market-specific. Koinara only recognizes whether a response crossed the minimum validity threshold.
+The protocol should not attempt to encode the best answer. Quality is contextual and market-specific. The protocol recognizes only whether the minimum threshold was met.
 
 ### 2.4 Neutral Infrastructure
 
-The base layer should remain owner-light and governance-light. It should serve as shared infrastructure rather than a central planner of inference value.
+The base layer should act as shared infrastructure rather than as a central planner of inference value.
 
 ### 2.5 Chain-Independent Theory
 
-The protocol logic should be conceptually portable across execution environments. Koinara v1 uses an EVM-friendly reference implementation, but the underlying protocol ideas are not tied to a single chain.
+The protocol logic should be portable across execution environments. Koinara v1 is EVM-friendly, but the theory is not restricted to one chain.
 
-## 3. Problem Statement
+## 3. Inference Jobs
 
-Modern inference systems typically combine three separate layers inside one closed product:
+An `Inference Job` is the base unit of demand in Koinara. A job defines a request, the expected response shape, a deadline, an optional market premium, and a minimum settlement path.
 
-- request routing
-- answer production
-- answer validity and payment
+At the logical level, a job can be expressed as:
 
-This makes the market difficult to open. Users depend on a single platform for matching, execution, ranking, and settlement. Providers cannot easily compete on an open protocol surface, and verifiers cannot independently participate in a transparent minimum-validity process.
+```text
+J = (request, schema, deadline, job_type, premium)
+```
 
-Koinara separates these concerns. It does not solve every coordination problem in inference markets. Instead, it provides a minimal public substrate for:
+In the v1 reference implementation, the protocol stores commitments rather than full payloads:
 
-- publishing inference demand
-- submitting a response
-- checking whether the response meets the minimum protocol floor
-- issuing a baseline reward if it does
+- `requestHash`
+- `schemaHash`
+- `deadline`
+- `jobType`
+- `premiumReward`
+- `state`
 
-This creates a common settlement and validity layer without forcing the protocol to decide what the best answer is.
+This distinction is deliberate. Raw prompts and outputs may live off-chain, while the protocol stores the minimum commitments necessary for lifecycle and reward settlement.
 
-## 4. Core Concepts
+### 3.1 Job Fields
 
-### 4.1 Inference Job
+At the protocol theory level, every job includes:
 
-An `Inference Job` is the basic unit of demand in the network. A job defines the request commitment, schema commitment, deadline, job type, optional market premium, and lifecycle state.
+- request payload or request commitment
+- format requirements
+- deadline
+- optional premium reward
 
-### 4.2 Provider
+### 3.2 Job Types
 
-A `Provider` submits an inference response for a job. In v1, the canonical on-chain object is the response hash rather than the full response payload.
-
-### 4.3 Verifier
-
-A `Verifier` checks whether the submission satisfies the minimum protocol rules. In v1, verifiers do not rank quality. They only approve or reject against the minimum floor.
-
-### 4.4 Minimum Acceptable Inference
-
-`Minimum Acceptable Inference (MAI)` is the minimum threshold required for a response to be recognized as valid by the protocol.
-
-### 4.5 Proof of Inference
-
-`Proof of Inference (PoI)` is the protocol record that a submission has satisfied the MAI conditions and has been finalized by the verifier process.
-
-### 4.6 KOIN
-
-`KOIN` is the protocol token. It is minted only through accepted inference reward distribution, subject to the protocol cap and emission schedule.
-
-### 4.7 Market Reward
-
-The `Market Reward` is a user-funded premium reward attached to a job. It is distinct from protocol issuance and reflects market demand rather than baseline protocol economics.
-
-## 5. Minimum Acceptable Inference
-
-Koinara is built around a clear separation between protocol validity and market value. A protocol must define some floor, but that floor should not be mistaken for quality supremacy.
-
-In v1, a response is recognized as `Minimum Acceptable Inference` only if all of the following are satisfied:
-
-1. `ValidJob`
-2. `WithinDeadline`
-3. `FormatPass`
-4. `NonEmptyResponse`
-5. `VerificationPass`
-
-These conditions are interpreted as follows.
-
-### 5.1 ValidJob
-
-The referenced job exists and was created through the protocol with the required non-zero commitments.
-
-### 5.2 WithinDeadline
-
-The response was submitted at or before the declared deadline.
-
-### 5.3 FormatPass
-
-The submission is attached to a job with a valid schema commitment and can be evaluated under the minimum structural rules of the protocol.
-
-### 5.4 NonEmptyResponse
-
-The response commitment is not empty.
-
-### 5.5 VerificationPass
-
-The required verifier quorum approves the submission.
-
-These conditions say nothing about whether the answer is the best, deepest, fastest, or most useful answer in a broader market sense. MAI is not a universal truth predicate. It is a minimum protocol acceptance rule.
-
-## 6. Proof of Inference
-
-PoI is the protocol artifact produced when a submission crosses the MAI threshold.
-
-PoI means that:
-
-- a valid job existed
-- a provider submitted a non-empty response in time
-- the minimum structural checks passed
-- verifier quorum approved the submission
-
-PoI does not mean:
-
-- the answer is globally optimal
-- the answer is objectively true in every context
-- the market cannot prefer another answer
-- user satisfaction is guaranteed
-
-This distinction is essential. Koinara records minimum acceptable participation, not perfect cognition.
-
-## 7. Network Roles
-
-Koinara v1 defines three explicit roles.
-
-### 7.1 Job Creator
-
-The job creator opens demand by publishing an inference request commitment and optionally escrowing a premium reward.
-
-### 7.2 Provider
-
-The provider submits the response commitment and becomes the recipient of protocol reward and premium reward if the submission is accepted.
-
-### 7.3 Verifier
-
-The verifier checks whether the submission satisfies the minimum rules and either contributes approval toward quorum or rejects the submission.
-
-The protocol does not assume that these roles are played only by humans or only by AI systems. Koinara is designed for mixed participation.
-
-## 8. Job Lifecycle
-
-The v1 lifecycle is intentionally narrow.
-
-### 8.1 States
-
-- `Created`
-- `Open`
-- `Submitted`
-- `UnderVerification`
-- `Accepted`
-- `Rejected`
-- `Settled`
-- `Expired`
-
-### 8.2 Transition Flow
-
-1. A creator opens a job.
-2. A provider submits a response.
-3. The verifier contract registers the submission and moves the job into verification.
-4. Verifiers approve or reject.
-5. If quorum is reached, the protocol finalizes PoI and marks the job accepted.
-6. Rewards are distributed and the job is settled.
-7. If no valid completion occurs before the deadline, the job can expire.
-
-### 8.3 Lifecycle Principle
-
-Only accepted jobs mint KOIN. Rejected and expired jobs do not create protocol issuance.
-
-## 9. Job Types and Quorum
-
-Koinara v1 includes three job types:
+Koinara v1 uses three lightweight job categories:
 
 - `Simple`
 - `General`
 - `Collective`
 
-These types affect both verifier quorum and reward weight.
+These categories drive quorum and baseline reward weight rather than attempting a full ontology of task complexity.
 
-### 9.1 Verifier Quorum
+### 3.3 State Machine
 
-- `Simple = 1`
-- `General = 3`
-- `Collective = 5`
+The job lifecycle in v1 is:
 
-### 9.2 Reward Weight
+Figure 1. Job Lifecycle State Machine
+
+```text
+Created
+  |
+  v
+Open
+  |-- (no response before deadline) --> Expired
+  |
+  '-- (response submitted) ----------> Submitted
+                                         |
+                                         v
+                                UnderVerification
+                                   |           |
+                                   |           '-- (fail) --> Rejected
+                                   |
+                                   '-- (pass) --> Accepted --> Settled
+```
+
+The v1 reference implementation keeps `Rejected` and `Expired` as non-mint terminal states. Premium refund handling is separate from the accepted settlement path. A broader accounting model could later define a cleanup transition from rejected jobs into a generic settlement state, but v1 keeps the machine simpler.
+
+## 4. Minimum Acceptable Inference
+
+`Minimum Acceptable Inference (MAI)` is the minimum threshold required for a response to be recognized as valid by the protocol.
+
+The core idea is:
+
+MAI is not the highest line of quality. It is the lowest line of protocol acceptance.
+
+### 4.1 Three Evaluation Layers
+
+Koinara can be understood as evaluating MAI across three layers.
+
+### A. Structural Validity
+
+The response is structurally admissible.
+
+- schema-compatible
+- non-empty
+- deadline-compliant
+- within allowed format bounds
+
+### B. Task Suitability
+
+The response is minimally relevant to the job.
+
+- not pure spam
+- not obviously unrelated to the request
+- not inconsistent with required tags, classifications, or tool outputs
+
+### C. Verification Pass
+
+The verifier set confirms that the submission is minimally acceptable for the job type.
+
+### 4.2 General Acceptance Score
+
+In the abstract, MAI can be written as an acceptance function:
+
+```text
+A(r, j) = w_f * F(r, j) + w_t * T(r, j) + w_v * V(r, j)
+
+MAI(r, j) = 1 if A(r, j) >= theta_j
+          = 0 otherwise
+```
+
+Where:
+
+- `F(r, j)` is the format score
+- `T(r, j)` is the task-suitability score
+- `V(r, j)` is the verifier approval score
+- `w_f`, `w_t`, `w_v` are weights
+- `theta_j` is the job-specific minimum threshold
+
+This generalized form is useful for future versions, but it is not the v1 reference rule.
+
+### 4.3 v1 Boolean Rule
+
+The v1 reference implementation deliberately collapses MAI into a clearer boolean rule:
+
+```text
+MAI_v1(r, j) =
+    ValidJob(j)
+  and WithinDeadline(r, j)
+  and FormatPass(r, j)
+  and NonEmptyResponse(r)
+  and VerificationPass(r, j)
+```
+
+This is intentionally closer to Bitcoin-style minimum validity logic than to a dense scoring model. The protocol rewards minimum acceptable participation, not editorial judgment.
+
+## 5. Proof of Inference
+
+`Proof of Inference (PoI)` is the protocol record that a submission satisfied MAI and is eligible for minimum reward.
+
+PoI is a participation proof. It is not a proof that the response is the globally optimal answer.
+
+### 5.1 Purpose of PoI
+
+PoI proves only that:
+
+- a valid job existed
+- a provider submitted a response
+- the response was submitted in time
+- the response met the minimum format floor
+- the verifier process accepted it
+- the submission is eligible for minimum reward
+
+PoI does not prove:
+
+- best quality
+- objective truth in every context
+- maximal usefulness
+- universal user satisfaction
+
+### 5.2 Logical PoI Receipt
+
+At the portable protocol level, a PoI receipt may minimally include:
+
+- `job_id`
+- `provider_id`
+- `submission_hash`
+- `result_cid`
+- `submitted_at`
+- `deadline`
+- `verification_hash`
+- `verifier_set_hash`
+- `acceptance_score`
+- `proof_signature`
+
+These fields mean:
+
+- `job_id`: which question the response belongs to
+- `provider_id`: who submitted it
+- `submission_hash`: the response commitment
+- `result_cid`: where the actual result is stored, such as IPFS or another content-addressed layer
+- `submitted_at`: when it was submitted
+- `deadline`: the job deadline
+- `verification_hash`: a summary commitment of verification outcome
+- `verifier_set_hash`: commitment to the verifying set
+- `acceptance_score`: the minimum-acceptance result, whether boolean or scored
+- `proof_signature`: proof completion signature or equivalent attestational marker
+
+The v1 reference implementation stores an on-chain subset of this receipt. It directly records fields such as job identity, provider identity, response hash, submission time, approval count, quorum, and `poiHash`. Fields such as `result_cid`, `acceptance_score`, or `proof_signature` belong to the broader receipt model and may live off-chain or in later versions.
+
+### 5.3 PoI Generation Condition
+
+A logical PoI rule can be written as:
+
+```text
+PoI(r, j) = 1 iff
+    ValidJob(j)
+  and WithinDeadline(r, j)
+  and FormatPass(r, j)
+  and NonEmptyResponse(r)
+  and HashMatch(r)
+  and VerifyPass(r, j)
+
+PoI(r, j) = 0 otherwise
+```
+
+In the portable protocol model, `HashMatch(r)` means the submitted response commitment and referenced result receipt are consistent. In the v1 reference implementation, the protocol records the response hash on-chain and leaves the storage location itself as an external concern.
+
+## 6. Network and Routing
+
+Koinara is not a monolithic application. It is a layered inference network.
+
+### 6.1 Four Logical Layers
+
+Koinara consists of four logical layers:
+
+1. `Job Layer`
+2. `Provider Layer`
+3. `Verification Layer`
+4. `Settlement Layer`
+
+### 6.2 Job Layer
+
+Users submit inference jobs to the network. Each job contains:
+
+- request payload or request commitment
+- format requirements
+- deadline
+- optional premium reward
+
+### 6.3 Provider Layer
+
+Providers observe open jobs and submit candidate inference responses. Providers may be:
+
+- language model nodes
+- tool-augmented agents
+- hybrid reasoning systems
+- human-assisted nodes
+
+### 6.4 Verification Layer
+
+Verifiers evaluate submitted responses against MAI rules. Verification may include:
+
+- schema validation
+- duplicate detection
+- consistency checks
+- lightweight recomputation
+- committee confirmation
+
+### 6.5 Settlement Layer
+
+Accepted responses generate PoI. The settlement layer:
+
+- records accepted inference
+- distributes KOIN issuance
+- distributes verifier rewards
+- finalizes job state
+
+### 6.6 Routing
+
+Koinara does not hardcode a single routing algorithm in v1. Routing belongs primarily to the market layer above the minimum protocol. Providers may discover jobs through relays, indexers, order books, gossip networks, application frontends, or future peer-to-peer discovery systems.
+
+The protocol therefore separates:
+
+- job publication
+- response production
+- verifier acceptance
+- reward settlement
+
+This separation is what lets market complexity evolve without inflating the base layer.
+
+### 6.7 Figure 2. Main Network Flow
+
+```text
+User
+  |
+  v
+Inference Job
+  |
+  v
+Provider Network
+  |
+  v
+Candidate Responses
+  |
+  v
+Verifier Network
+  |
+  v
+Minimum Acceptable Inference Check
+  |
+  v
+Proof of Inference
+  |
+  v
+Reward Distribution + Job Settlement
+```
+
+This figure shows the minimum end-to-end path of a Koinara job from publication to reward settlement.
+
+### 6.8 Figure 3. Layered Architecture
+
+```text
++------------------+
+|      Users       |
++---------+--------+
+          |
+          | submit jobs
+          v
++------------------+
+|   InferenceJob   |
+|     Registry     |
++---------+--------+
+          |
+          | open jobs
+          v
++------------------+
+|    Providers     |
++---------+--------+
+          |
+          | responses
+          v
++------------------+
+|    Verifiers     |
++---------+--------+
+          |
+          | PoI
+          v
++------------------+
+|    Settlement    |
+|    + Rewards     |
++------------------+
+```
+
+This figure makes the layer split explicit: demand publication, response production, minimum verification, and settlement are separated so that the protocol can stay minimal while richer markets form above it.
+
+## 7. Incentives and Minimum Reward
+
+Koinara separates protocol issuance from market compensation.
+
+### 7.1 Reward Principle
+
+The protocol handles baseline emission only. Premium value belongs to the market.
+
+Put differently:
+
+- the protocol pays for minimum acceptable inference
+- the market pays for quality above the minimum
+
+### 7.2 Epoch Emission Curve
+
+KOIN issuance follows a declining epoch-based model:
+
+```text
+E_t = E_0 * (1/2)^(floor(t / H))
+```
+
+Where:
+
+- `E_t` is issuance in epoch `t`
+- `E_0` is the initial epoch emission
+- `H` is the halving interval in epochs
+
+This creates a stepwise declining supply curve.
+
+Figure 4. Issuance Curve (text view)
+
+```text
+Issuance
+  ^
+  |
+  |########
+  |######
+  |####
+  |##
+  |#
+  +----------------------> Time
+```
+
+Or, expressed in epoch bands:
+
+```text
+Epoch 1-H      : High emission
+Epoch H-2H     : Half emission
+Epoch 2H-3H    : Half again
+Epoch 3H-4H    : Continued decline
+Long-term      : Low issuance, market-dominant rewards
+```
+
+Koinara begins as an issuance-supported inference network and gradually transitions into a market-supported inference economy.
+
+### 7.3 Generalized Epoch Allocation
+
+A more general epoch-normalized reward allocation can be written as:
+
+```text
+Reward_j^(general) = E_t * W_j / sum_{k in epoch(t)} W_k
+```
+
+Where:
+
+- `W_j` is the weight of job `j`
+- the denominator is the sum of all rewarded job weights in epoch `t`
+
+This expresses the protocol theory cleanly, but it is not the exact v1 reference implementation.
+
+### 7.4 v1 Reward Rule
+
+The v1 reference implementation uses a simpler job reward rule:
+
+```text
+Reward_j^(v1) = E_t * W_j
+```
+
+This keeps the MVP easy to reason about and easy to implement while still preserving the halving curve and the relative job-type weights.
+
+### 7.5 Job Weights
+
+In the abstract, job weight may be modeled as:
+
+```text
+W_j = alpha * C_j + beta * L_j + gamma * V_j
+```
+
+Where:
+
+- `C_j` is complexity grade
+- `L_j` is latency or timing profile
+- `V_j` is required verifier intensity
+
+The v1 reference implementation simplifies this to:
 
 - `Simple = 1`
 - `General = 3`
 - `Collective = 7`
 
-The protocol does not interpret these types as deep ontology. They are lightweight coordination categories used for minimum settlement logic in v1.
+### 7.6 Reward Split
 
-## 10. Reward Model
+Koinara v1 keeps reward splitting simple:
 
-Koinara separates protocol issuance from market compensation.
+```text
+Reward_j = P_j + V_j
 
-### 10.1 Protocol Reward
+P_j = 0.7 * Reward_j
+V_j = 0.3 * Reward_j
+```
 
-The protocol reward is the baseline issuance of `KOIN`. It exists to reward accepted inference under the minimum rules of the network.
+If `n_j` verifiers participate in the accepted verifier set, then:
 
-### 10.2 Market Reward
+```text
+V_{j,i} = V_j / n_j
+```
 
-The market reward is an optional premium funded by the job creator. It expresses local market demand and remains distinct from KOIN issuance.
+Any rounding remainder can be assigned by implementation policy. The v1 reference implementation assigns verifier rounding dust to the provider to avoid stranded token units.
 
-### 10.3 Provider Income
+### 7.7 Protocol Reward vs User Premium
 
-For an accepted job:
+The provider's total income is:
 
-`ProviderIncome = ProtocolReward + MarketReward`
-
-This rule allows the protocol to remain minimal while still supporting market-driven upside.
-
-## 11. Tokenomics
-
-### 11.1 Token Properties
-
-- Name: `Koinara`
-- Symbol: `KOIN`
-- Maximum supply: `2,100,000,000 KOIN`
-
-### 11.2 Fair Launch
-
-Koinara follows a fair launch model:
-
-- no pre-mine
-- no founder allocation
-- no admin mint
-- no hidden treasury mint
-- no issuance path outside accepted inference
-
-### 11.3 Issuance Rule
-
-All KOIN enters circulation only through accepted Proof of Inference reward distribution.
-
-### 11.4 Epoch Emission
-
-The v1 reference model uses epoch-based halving:
-
-`E_t = E_0 * (1/2)^(floor(t / H))`
+```text
+TotalProviderIncome_j = ProtocolReward_j + UserPremium_j
+```
 
 Where:
 
-- `E_0` is the initial epoch emission
-- `t` is the epoch index
-- `H` is the halving interval in epochs
+- `ProtocolReward_j` is KOIN issuance
+- `UserPremium_j` is user-funded market reward
 
-For a given job:
+This separation is one of the most important rules in Koinara. The protocol should never confuse baseline issuance with market valuation.
 
-`JobReward = epochEmission(submissionEpoch) * jobWeight`
+## 8. Market Above the Minimum
 
-### 11.5 Reward Split
+Koinara intentionally defines only the minimum. Everything above it is a market layer.
 
-Protocol issuance is split as:
+The market may price:
 
-- provider: `70%`
-- verifiers: `30%`
+- higher quality
+- faster turnaround
+- deeper analysis
+- better tooling
+- domain specialization
+- human review
+- stronger reputation
 
-Verifier reward is split evenly across the approving verifier set in v1. Any remainder caused by integer rounding is assigned to the provider to avoid stranded units.
+The protocol does not need to encode these values in order for them to exist. In fact, the protocol becomes more neutral by refusing to canonize them too early.
 
-## 12. Architecture
+In this sense, Koinara is not a full theory of inference value. It is a minimum coordination layer upon which richer markets can emerge.
 
-Koinara v1 is implemented as four primary contracts.
+## 9. Storage, Receipts, and Settlement
 
-### 12.1 InferenceJobRegistry
+Koinara separates payload storage from settlement logic.
 
-The registry is the lifecycle source of truth for jobs and canonical submissions. It also escrows premium rewards and manages premium release or refund.
+### 9.1 On-Chain Commitments
 
-### 12.2 ProofOfInferenceVerifier
+The v1 reference implementation places the following kinds of data on-chain:
 
-The verifier contract tracks the MAI condition flags, distinct verifier approvals, rejection, and PoI finalization.
+- request commitment
+- schema commitment
+- deadline
+- job type
+- premium escrow amount
+- response hash
+- approval count and quorum state
+- PoI commitment
+- reward settlement state
 
-### 12.3 RewardDistributor
+### 9.2 Off-Chain Payloads
 
-The distributor calculates epoch-based issuance, applies job weight, splits protocol rewards, triggers premium release, and settles accepted jobs.
+The following may live off-chain:
 
-### 12.4 KOINToken
+- raw request text
+- raw response output
+- tool traces
+- result content-address
+- verifier notes
+- richer receipts
 
-The token contract is intentionally simple. It enforces the supply cap and restricts minting to the reward distributor.
+### 9.3 Receipt Layers
 
-This separation keeps premium reward accounting separate from protocol issuance accounting.
+This leads to a layered record model:
 
-## 13. Ownerless Direction
+- on-chain commitments for protocol validity
+- off-chain receipts for richer application evidence
 
-Koinara aims toward an owner-light or ownerless protocol character. In the v1 reference implementation, privileged setup exists only to wire the system:
+Koinara therefore supports minimal on-chain settlement without requiring every inference artifact to be fully embedded on-chain.
 
-- set verifier address
-- set reward distributor address
-- set token minter
+### 9.4 Settlement Rule
 
-After deployment wiring, admin control can be renounced. This is not full governance minimization in every sense, but it keeps the trusted setup surface intentionally small.
+Only accepted jobs generate protocol issuance. Rejected and expired jobs do not mint KOIN. Premium reward settlement remains separate from issuance and follows job outcome rules.
 
-## 14. Security and Trust Assumptions
+## 10. Security Assumptions and Attack Model
 
-Koinara v1 is deliberately modest about what it secures.
+Koinara v1 is modest about what it secures.
 
-It does secure:
+### 10.1 Secured in v1
 
-- explicit job state transitions
 - restricted mint authority
-- supply cap enforcement
+- capped token supply
+- explicit job state transitions
 - duplicate settlement prevention
 - duplicate verifier participation prevention
-- premium reward separation from protocol issuance
+- separation of premium reward accounting from protocol issuance
 
-It does not fully solve:
+### 10.2 Threats Considered
 
-- verifier sybil resistance
-- semantic correctness
-- off-chain data availability
-- collusion resistance
-- universal truth evaluation
-- cross-chain settlement
+The protocol should be analyzed against at least the following attack classes:
 
-These are not oversights in v1. They are deliberately excluded so that the minimum protocol can remain simple and composable.
+- verifier collusion
+- verifier sybil behavior
+- provider spam
+- irrelevant low-effort submissions
+- duplicate or replayed responses
+- invalid or unavailable result references
+- deadline gaming
+- settlement abuse
+- deployer misconfiguration during initial wiring
 
-## 15. v1 Scope and Exclusions
+### 10.3 Threats Not Fully Solved in v1
 
-Koinara v1 is a `Minimum Viable Protocol`.
+The reference implementation does not fully solve:
 
-Included:
+- sybil resistance
+- universal semantic correctness
+- off-chain storage availability
+- robust reputation
+- adversarial routing markets
+- cross-chain settlement security
 
-- on-chain registry
-- on-chain verifier flow
-- on-chain reward distribution
-- capped token issuance
-- fair launch token path
-- market reward escrow
+These exclusions are deliberate. Koinara v1 is a minimum viable protocol, not a final theory of secure global inference exchange.
 
-Excluded:
+## 11. Participation, Fair Launch, and the Deployer
 
-- bridge logic
-- cross-chain settlement
-- zkML
-- advanced oracle systems
-- DAO governance
-- subjective answer ranking
-- advanced reputation systems
-- autonomous agent mesh coordination
+Koinara is designed for mixed participation by:
 
-The protocol should not absorb these concerns until the minimum layer is proven useful.
+- human experts
+- AI systems
+- hybrid agent stacks
+- future autonomous participants
 
-## 16. Why This Minimality Matters
+### 11.1 Fair Launch
 
-Protocols often fail by trying to price, rank, govern, and interpret everything at once. In inference markets, that temptation is even stronger because correctness and value are often contextual.
+Koinara follows strict fair-launch commitments:
 
-Koinara takes the opposite direction. It defines a floor rather than a ceiling. It allows open participation without pretending that the protocol can settle every argument about quality. In this sense, Koinara is not a complete theory of intelligence markets. It is a minimum coordination layer for them.
+- no pre-mine
+- no founder allocation
+- no arbitrary admin mint
+- no hidden treasury mint
+- no issuance path outside accepted inference
 
-This matters because it preserves flexibility:
+### 11.2 The Deployer
 
-- applications can compete on quality models
-- markets can compete on premium pricing
-- ecosystems can layer reputation without changing the minimum protocol
-- future chains can adopt the same conceptual rules
+The deployer exists only to wire the reference implementation:
 
-## 17. Conclusion
+- configure verifier address
+- configure reward distributor address
+- configure token minter
 
-Koinara is an attempt to define the smallest useful protocol for collective inference. By limiting the protocol to Minimum Acceptable Inference and Minimum Reward, it avoids turning the base layer into a centralized judge of intelligence quality. Instead, it offers a neutral foundation on which humans, AI agents, and applications can coordinate open inference markets.
+After wiring, privileged control should be minimized or renounced. The deployer is not meant to become a permanent economic sovereign over the network.
+
+## 12. Autonomous Expansion and Successive Versions
+
+Koinara is intentionally small in v1 so it can expand without confusing protocol validity with market expression.
+
+Future versions may include:
+
+- richer routing markets
+- stronger receipt schemas
+- portable verifier committees
+- reputation layers
+- optional storage proofs
+- additional chain settlement profiles
+- autonomous agent meshes
+
+But these belong to successive versions. They should not be forced into the v1 base layer before the minimum protocol has proven itself.
+
+## 13. Conclusion
+
+Koinara is an attempt to define the smallest useful protocol for collective inference. By restricting the base layer to Minimum Acceptable Inference and Minimum Reward, it avoids turning the protocol into a centralized judge of answer quality. Instead, it offers a neutral foundation on which humans, AI agents, and applications can coordinate open inference markets.
+
+Koinara begins as an issuance-supported inference network and gradually transitions into a market-supported inference economy.
 
 The v1 reference implementation is intentionally narrow. It is not the final form of collective inference infrastructure. It is the first credible minimum.
+
+The appendices that follow are part of the same canonical whitepaper. They are not separate papers. The main body states the protocol thesis and minimum mechanics; the appendices collect deployment profiles, portability notes, contract mappings, and parameter references.
+
+## Appendix A. Deployment Profiles
+
+Koinara is designed as a chain-independent protocol with multiple deployment profiles.
+
+Recommended profile categories:
+
+- local development profile
+- EVM-compatible production profile
+- Worldland-oriented profile
+- future non-EVM compatibility profiles
+
+The protocol theory should remain stable even where deployment assumptions change.
+
+## Appendix B. Reference Deployment: Worldland
+
+Worldland is a natural reference environment for an EVM-friendly Koinara deployment because it allows the v1 contracts to operate without changing the minimum protocol model.
+
+In this profile:
+
+- KOIN issuance remains tied to PoI
+- jobs, verification, and settlement remain on-chain
+- premium reward may remain native-asset based
+
+Worldland in this paper is a reference deployment profile, not a protocol dependency.
+
+## Appendix C. EVM-Compatible Deployment
+
+Any EVM-compatible environment can host the v1 reference contracts so long as it supports:
+
+- standard contract deployment
+- native-asset escrow for premium rewards
+- hash commitments
+- deterministic state transitions
+
+The reference implementation is intentionally written so that the protocol concepts remain legible across EVM-compatible chains.
+
+## Appendix D. Solana Deployment Model
+
+A Solana-oriented deployment would preserve the same conceptual model while mapping jobs, receipts, and reward logic into Solana-native account and program structures.
+
+This appendix is non-normative in v1. It signals portability rather than a finished implementation.
+
+## Appendix E. Bitcoin Anchoring Model
+
+Bitcoin anchoring may later be used for timestamping, commitment finality, or cross-system auditability without forcing Koinara settlement to become Bitcoin-native.
+
+This appendix is also non-normative in v1. It describes a possible anchoring direction rather than an implemented feature.
+
+## Appendix F. Reference Contracts and Code Notes
+
+The v1 reference implementation consists of four primary contracts:
+
+- `InferenceJobRegistry`
+- `ProofOfInferenceVerifier`
+- `RewardDistributor`
+- `KOINToken`
+
+### F.1 Logical Architecture
+
+Koinara consists of four logical layers:
+
+1. Job Layer
+2. Provider Layer
+3. Verification Layer
+4. Settlement Layer
+
+### F.2 Contract Mapping Note
+
+The main architecture figures appear in Section 6. This appendix maps those layers to the v1 reference contracts:
+
+- `Job Layer` -> `InferenceJobRegistry`
+- `Verification Layer` -> `ProofOfInferenceVerifier`
+- `Settlement Layer` -> `RewardDistributor`
+- `Issuance Asset` -> `KOINToken`
+
+This mapping keeps the whitepaper readable in the main body while still tying the abstract protocol layers to the concrete reference codebase.
+
+## Appendix G. Parameters
+
+### G.1 Default v1 Parameters
+
+- token cap: `2,100,000,000 KOIN`
+- provider share: `70%`
+- verifier share: `30%`
+- job weights: `Simple = 1`, `General = 3`, `Collective = 7`
+- verifier quorum: `Simple = 1`, `General = 3`, `Collective = 5`
+
+### G.2 Issuance Curve
+
+KOIN issuance follows a declining epoch schedule:
+
+```text
+E_t = E_0 * (1/2)^(floor(t / H))
+```
+
+Properties of this curve:
+
+- early participation receives stronger baseline incentives
+- issuance decreases over time
+- long-term scarcity is preserved by fixed supply
+- market rewards can gradually replace protocol rewards as the dominant incentive
+
+### G.3 Economic Interpretation
+
+In early stages, protocol issuance is the primary incentive. As the network matures:
+
+- job demand increases
+- premium rewards increase
+- competition increases
+- market-based income becomes more important
+
+### G.4 Simple Text Graph
+
+```text
+Issuance
+  ^
+  |
+  |########
+  |######
+  |####
+  |##
+  |#
+  +----------------------> Time
+```
+
+Or, expressed in epoch bands:
+
+```text
+Epoch 1-H      : High emission
+Epoch H-2H     : Half emission
+Epoch 2H-3H    : Half again
+Epoch 3H-4H    : Continued decline
+Long-term      : Low issuance, market-dominant rewards
+```
