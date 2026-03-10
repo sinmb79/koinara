@@ -8,7 +8,8 @@ This repository is a v1 reference implementation of the minimum viable Koinara p
 
 ## Whitepaper
 
-The canonical single-document whitepaper lives at [`docs/whitepaper.md`](./docs/whitepaper.md).
+- English: [`docs/whitepaper.md`](./docs/whitepaper.md)
+- Korean: [`docs/whitepaper.ko.md`](./docs/whitepaper.ko.md)
 
 ## Core Philosophy
 

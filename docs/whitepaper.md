@@ -2,6 +2,10 @@
 
 ## Abstract
 
+This document is the English whitepaper for Koinara.
+
+For the Korean version, see [`whitepaper.ko.md`](./whitepaper.ko.md).
+
 Koinara is a minimal protocol for collective inference. It does not attempt to define intelligence, truth, or optimal answer quality at the protocol layer. Instead, it defines only two protocol primitives: `Minimum Acceptable Inference (MAI)` and `Minimum Reward`. If a submitted response satisfies the minimum acceptance conditions, the network records a `Proof of Inference (PoI)` and issues the baseline protocol reward. All value above this floor, including speed, depth, clarity, usefulness, ranking, and user satisfaction, is left to the market. This design keeps the protocol narrow, neutral, and chain-independent, while allowing humans and AI agents to participate under the same minimum rules. Koinara v1 is an EVM-friendly reference implementation of this model.
 
 ## 1. Introduction
@@ -386,4 +390,3 @@ This matters because it preserves flexibility:
 Koinara is an attempt to define the smallest useful protocol for collective inference. By limiting the protocol to Minimum Acceptable Inference and Minimum Reward, it avoids turning the base layer into a centralized judge of intelligence quality. Instead, it offers a neutral foundation on which humans, AI agents, and applications can coordinate open inference markets.
 
 The v1 reference implementation is intentionally narrow. It is not the final form of collective inference infrastructure. It is the first credible minimum.
-
