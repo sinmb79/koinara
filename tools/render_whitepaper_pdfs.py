@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import html
+import io
 import os
 import re
 from dataclasses import dataclass
@@ -348,14 +349,16 @@ def add_cover(story: list[object], styles: dict[str, ParagraphStyle], config: Re
 
 def build_image_flowable(config: RenderConfig, payload: dict[str, str]) -> PlatypusImage:
     image_path = (config.source.parent / payload["path"]).resolve()
-    with PILImage.open(image_path) as image:
+    image_bytes = image_path.read_bytes()
+
+    with PILImage.open(io.BytesIO(image_bytes)) as image:
         width_px, height_px = image.size
 
     max_width = A4[0] - (44 * mm)
     draw_width = max_width
     draw_height = draw_width * height_px / width_px
 
-    flowable = PlatypusImage(str(image_path), width=draw_width, height=draw_height)
+    flowable = PlatypusImage(io.BytesIO(image_bytes), width=draw_width, height=draw_height)
     flowable.hAlign = "CENTER"
     return flowable
 
