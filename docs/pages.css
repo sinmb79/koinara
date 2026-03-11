@@ -341,7 +341,8 @@ code {
 
 .section-heading h2 {
   font-size: clamp(2rem, 4vw, 3.1rem);
-  max-width: 14ch;
+  max-width: none;
+  text-wrap: balance;
 }
 
 .protocol-floor {
