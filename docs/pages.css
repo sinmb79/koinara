@@ -331,7 +331,8 @@ code {
 .floor-grid,
 .paper-grid,
 .figure-grid,
-.worldland-grid {
+.worldland-grid,
+.node-grid {
   display: grid;
   gap: 18px;
 }
@@ -352,10 +353,15 @@ code {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.node-grid {
+  grid-template-columns: 1.2fr 0.8fr 1fr;
+}
+
 .floor-card,
 .paper-card,
 .figure-tile,
-.network-card {
+.network-card,
+.node-card {
   padding: 22px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--line);
@@ -366,6 +372,7 @@ code {
 .floor-card p,
 .paper-card p,
 .network-card p,
+.node-card p,
 .source-note {
   color: var(--muted);
   line-height: 1.7;
@@ -408,6 +415,41 @@ code {
   background:
     radial-gradient(circle at top right, rgba(15, 118, 110, 0.1), transparent 28%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.92));
+}
+
+.node-section {
+  background:
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.11), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(217, 119, 6, 0.1), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.94));
+}
+
+.node-card-primary {
+  background:
+    linear-gradient(180deg, rgba(239, 250, 247, 0.95), rgba(255, 255, 255, 0.92)),
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.12), transparent 34%);
+}
+
+.command-block {
+  margin: 12px 0 0;
+  padding: 18px;
+  overflow: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: #132033;
+  color: #f3f5f8;
+}
+
+.command-block code {
+  white-space: pre;
+  line-height: 1.7;
+}
+
+.node-list {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.8;
 }
 
 .network-card dl {
@@ -497,7 +539,8 @@ code {
 
   .floor-grid,
   .paper-grid,
-  .worldland-grid {
+  .worldland-grid,
+  .node-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -544,7 +587,8 @@ code {
   .paper-grid,
   .figure-grid,
   .worldland-grid,
-  .roadmap-strip {
+  .roadmap-strip,
+  .node-grid {
     grid-template-columns: 1fr;
   }
 }

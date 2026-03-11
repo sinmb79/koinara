@@ -8,6 +8,14 @@
       name="description"
       content="Koinara is a peer-to-peer collective inference network centered on Minimum Acceptable Inference and Minimum Reward."
     />
+    <link rel="canonical" href="https://koinara.xyz/" />
+    <meta property="og:title" content="Koinara | The open network for collective inference" />
+    <meta
+      property="og:description"
+      content="Koinara is a peer-to-peer collective inference network centered on Minimum Acceptable Inference and Minimum Reward."
+    />
+    <meta property="og:url" content="https://koinara.xyz/" />
+    <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -29,6 +37,7 @@
         </a>
         <nav class="site-nav">
           <a href="#whitepaper">Whitepaper</a>
+          <a href="#node">Node</a>
           <a href="#figures">Figures</a>
           <a href="#next-track">Next Track</a>
           <a href="https://github.com/sinmb79/koinara">GitHub</a>
@@ -49,7 +58,7 @@
             <div class="cta-row">
               <a class="btn btn-primary" href="./pdf/koinara-whitepaper-en.pdf">English Whitepaper</a>
               <a class="btn btn-secondary" href="./pdf/koinara-whitepaper-ko.pdf">Korean Whitepaper</a>
-              <a class="btn btn-ghost" href="https://github.com/sinmb79/koinara">Repository</a>
+              <a class="btn btn-ghost" href="#node">Run a Node</a>
             </div>
             <div class="meta-strip">
               <span>Fair launch</span>
@@ -153,6 +162,57 @@
           </div>
         </section>
 
+        <section class="section node-section" id="node">
+          <div class="section-heading">
+            <p class="eyebrow">PUBLIC NODE</p>
+            <h2>Read the protocol here. Run the node from its own repo.</h2>
+          </div>
+
+          <div class="node-grid">
+            <article class="node-card node-card-primary">
+              <span class="network-label">Koinara-node</span>
+              <h3>Provider, verifier, or both</h3>
+              <p>
+                `Koinara-node` is the standalone public background node for the network.
+                It connects directly to Worldland RPC and the Koinara contracts, with no hosted API,
+                no business layer, and no UI dependency.
+              </p>
+              <div class="cta-row">
+                <a class="btn btn-primary" href="https://github.com/sinmb79/Koinara-node">Open Repo</a>
+                <a class="btn btn-secondary" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/home-test-quickstart.md">Home Test Quickstart</a>
+              </div>
+            </article>
+
+            <article class="node-card">
+              <span class="network-label">Install</span>
+              <h3>Three-step operator path</h3>
+              <pre class="command-block"><code>git clone https://github.com/sinmb79/Koinara-node.git
+cd Koinara-node
+npm install
+npm run setup
+npm run doctor
+npm run node</code></pre>
+            </article>
+
+            <article class="node-card">
+              <span class="network-label">Docs</span>
+              <h3>What the node package includes</h3>
+              <ul class="node-list">
+                <li>provider / verifier / both roles</li>
+                <li>ollama / openai backends</li>
+                <li>doctor, status, and logs commands</li>
+                <li>manifest + receipt discovery spec</li>
+                <li>home-test and operator checklists</li>
+              </ul>
+              <div class="source-links">
+                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">Node Setup</a>
+                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">Operator Checklist</a>
+                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/protocol-compatibility.md">Protocol Compatibility</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
         <section class="section figures-section" id="figures">
           <div class="section-heading">
             <p class="eyebrow">RENDERED FIGURES</p>
@@ -237,6 +297,7 @@
       <footer class="site-footer">
         <p>Koinara is a reference implementation for an owner-light, fair-launch collective inference protocol.</p>
         <div>
+          <a href="https://github.com/sinmb79/Koinara-node">Koinara-node</a>
           <a href="./pdf/koinara-whitepaper-en.pdf">Whitepaper</a>
           <a href="./pdf/koinara-whitepaper-appendices-en.pdf">Appendices</a>
           <a href="https://github.com/sinmb79/koinara">GitHub</a>
