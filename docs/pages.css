@@ -185,7 +185,7 @@ code {
 }
 
 .hero h1 {
-  max-width: 12ch;
+  max-width: none;
   font-size: clamp(3.4rem, 8vw, 6.4rem);
 }
 
