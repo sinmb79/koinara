@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Koinara Docs | OpenClaw를 Koinara-node에 연결하기</title>
+    <meta
+      name="description"
+      content="OpenClaw를 Koinara-node에 연결하는 단계별 가이드입니다. 로컬 agent 확인, 스킬 설치, backend 설정, Worldland v2 provider 실행까지 설명합니다."
+    />
+    <link rel="canonical" href="https://koinara.xyz/ko/openclaw/setup/" />
+    <link rel="alternate" hreflang="en" href="https://koinara.xyz/openclaw/setup/" />
+    <link rel="alternate" hreflang="ko" href="https://koinara.xyz/ko/openclaw/setup/" />
+    <link rel="alternate" hreflang="zh" href="https://koinara.xyz/zh/openclaw/setup/" />
+    <link rel="alternate" hreflang="x-default" href="https://koinara.xyz/openclaw/setup/" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../pages.css" />
+  </head>
+  <body data-locale="ko">
+    <div class="site-bg"></div>
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="header-shell">
+          <a class="brand" href="../../index.html">
+            <span class="brand-mark">K</span>
+            <span class="brand-copy">
+              <strong>Koinara</strong>
+              <span>OpenClaw 연결 가이드</span>
+            </span>
+          </a>
+          <div class="nav-group">
+            <nav class="site-nav">
+              <a href="../../index.html">홈</a>
+              <a href="../../install/">설치</a>
+              <a href="../">OpenClaw</a>
+              <a href="https://github.com/sinmb79/Koinara-node">Node Repo</a>
+            </nav>
+            <div class="lang-switch" aria-label="언어 전환">
+              <a href="../../../openclaw/setup/">EN</a>
+              <a href="./index.html" aria-current="page">KO</a>
+              <a href="../../../zh/openclaw/setup/">ZH</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero section">
+          <div class="hero-copy">
+            <p class="eyebrow">DOCS / OPENCLAW</p>
+            <h1 class="hero-title">
+              <span>OpenClaw를 연결하고</span>
+              <span class="accent">실행은 Koinara-node에 맡기세요.</span>
+            </h1>
+            <p class="lede">
+              OpenClaw는 에이전트 계층이고, <code>Koinara-node</code>는 프로토콜 실행 경계입니다.
+              노드 등록, heartbeat, provider 제출, verifier 참여, 보상 claim은 계속 Koinara-node가 맡습니다.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#step1-check">1단계부터 시작</a>
+              <a class="btn btn-secondary" href="../../install/">설치 가이드</a>
+              <a class="btn btn-ghost" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">저장소 문서</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <p class="eyebrow">순서</p>
+            <h2 class="section-title">OpenClaw는 추론, Koinara-node는 실행을 담당합니다.</h2>
+          </div>
+          <div class="guide-index">
+            <a class="guide-index-card" href="#step1-check">
+              <span class="guide-tag">Step 1</span>
+              <h3 class="guide-index-title">로컬 OpenClaw CLI 응답 확인</h3>
+              <p class="guide-note">내장 backend는 같은 CLI 경로를 그대로 사용합니다.</p>
+            </a>
+            <a class="guide-index-card" href="#step2-skill">
+              <span class="guide-tag">Step 2</span>
+              <h3 class="guide-index-title">번들된 OpenClaw 스킬 설치</h3>
+              <p class="guide-note">이제 저장소 안에 Koinara 전용 스킬 패키지가 포함됩니다.</p>
+            </a>
+            <a class="guide-index-card" href="#step3-run">
+              <span class="guide-tag">Step 3</span>
+              <h3 class="guide-index-title">OpenClaw provider 경로 실행</h3>
+              <p class="guide-note">doctor, start, claim 전용 명령을 사용하면 됩니다.</p>
+            </a>
+          </div>
+        </section>
+
+        <section class="section" id="step1-check">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">01</span></div>
+            <article class="panel guide-step-body">
+              <div class="guide-step-header">
+                <p class="eyebrow">STEP 1</p>
+                <h2 class="guide-step-title">먼저 OpenClaw가 로컬에서 응답하는지 확인하세요.</h2>
+              </div>
+              <pre class="command-block"><code>openclaw agent --agent main --local --json --message "Reply with exactly OK"</code></pre>
+              <div class="guide-shot">
+                <img src="../../../figures/guides/openclaw-step1.svg" alt="OpenClaw local agent 확인 명령과 JSON 응답 예시" />
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="step2-skill">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">02</span></div>
+            <article class="panel guide-step-body">
+              <div class="guide-step-header">
+                <p class="eyebrow">STEP 2</p>
+                <h2 class="guide-step-title">번들된 OpenClaw 스킬 패키지를 설치하세요.</h2>
+              </div>
+              <pre class="command-block"><code>powershell -ExecutionPolicy Bypass -File .\scripts\install-openclaw-skill.ps1</code></pre>
+              <div class="guide-shot">
+                <img src="../../../figures/guides/openclaw-step2.svg" alt="Koinara OpenClaw 스킬 설치 명령 예시" />
+              </div>
+              <ul class="guide-list">
+                <li>복사 위치: <code>%USERPROFILE%\.openclaw\skills\koinara-node</code></li>
+                <li>OpenClaw가 이미 열려 있으면 재시작하거나 스킬을 다시 불러오세요.</li>
+                <li>이 저장소를 OpenClaw 워크스페이스로 열면 저장소 내부 skill도 바로 사용할 수 있습니다.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="step3-run">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">03</span></div>
+            <article class="panel guide-step-body">
+              <div class="guide-step-header">
+                <p class="eyebrow">STEP 3</p>
+                <h2 class="guide-step-title">OpenClaw provider 전용 명령으로 doctor, start, claim 하세요.</h2>
+              </div>
+              <pre class="command-block"><code>npm.cmd run provider:v2:openclaw:doctor
+npm.cmd run provider:v2:openclaw:start
+npm.cmd run provider:v2:openclaw:claim</code></pre>
+              <div class="guide-shot">
+                <img src="../../../figures/guides/openclaw-step3.svg" alt="OpenClaw provider doctor, start, claim 명령 예시" />
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-shell">
+          <a class="footer-brand" href="../../index.html">
+            <span class="brand-mark">K</span>
+            <span class="brand-copy">
+              <strong>Koinara</strong>
+              <span>OpenClaw 문서</span>
+            </span>
+          </a>
+          <div class="footer-links">
+            <a href="../../install/">설치 가이드</a>
+            <a href="../">OpenClaw 소개</a>
+            <a href="https://github.com/sinmb79/Koinara-node">Node Repo</a>
+          </div>
+          <span class="footer-copy">OpenClaw는 추론을, Koinara-node는 체인 실행을 담당합니다.</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

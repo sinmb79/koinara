@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Koinara Docs | Windows에서 Koinara-node 설치하기</title>
+    <meta
+      name="description"
+      content="Windows에서 Koinara-node를 설치하는 단계별 가이드입니다. 실제 명령어, 캡처 이미지, Worldland v2 실행 경로를 함께 설명합니다."
+    />
+    <link rel="canonical" href="https://koinara.xyz/ko/install/" />
+    <link rel="alternate" hreflang="en" href="https://koinara.xyz/install/" />
+    <link rel="alternate" hreflang="ko" href="https://koinara.xyz/ko/install/" />
+    <link rel="alternate" hreflang="zh" href="https://koinara.xyz/zh/install/" />
+    <link rel="alternate" hreflang="x-default" href="https://koinara.xyz/install/" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../pages.css" />
+  </head>
+  <body data-locale="ko">
+    <div class="site-bg"></div>
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="header-shell">
+          <a class="brand" href="../index.html">
+            <span class="brand-mark">K</span>
+            <span class="brand-copy">
+              <strong>Koinara</strong>
+              <span>노드 설치 가이드</span>
+            </span>
+          </a>
+          <div class="nav-group">
+            <nav class="site-nav">
+              <a href="../index.html">홈</a>
+              <a href="../scan/">Scan</a>
+              <a href="../openclaw/">OpenClaw</a>
+              <a href="https://github.com/sinmb79/Koinara-node">Node Repo</a>
+            </nav>
+            <div class="lang-switch" aria-label="언어 전환">
+              <a href="../../install/">EN</a>
+              <a href="./index.html" aria-current="page">KO</a>
+              <a href="../../zh/install/">ZH</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero section">
+          <div class="hero-copy">
+            <p class="eyebrow">DOCS / WINDOWS 설치</p>
+            <h1 class="hero-title">
+              <span>Koinara-node를</span>
+              <span class="accent">Windows에서 바로 설치하세요.</span>
+            </h1>
+            <p class="lede">
+              이 페이지는 처음 설치하는 운영자를 위한 실제 Windows 경로입니다.
+              PowerShell의 <code>npm.ps1</code> 오류를 피하고, 저장소는 사용자 폴더 아래에 두며,
+              Worldland v2 명령만 따라가면 되도록 정리했습니다.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#step1-clone">1단계부터 시작</a>
+              <a class="btn btn-secondary" href="../openclaw/setup/">OpenClaw 연결 가이드</a>
+              <a class="btn btn-ghost" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">저장소 문서</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <p class="eyebrow">순서</p>
+            <h2 class="section-title">아래 순서대로 따라 하세요.</h2>
+          </div>
+          <div class="guide-index">
+            <a class="guide-index-card" href="#step1-clone">
+              <span class="guide-tag">Step 1</span>
+              <h3 class="guide-index-title">사용자 폴더 아래에 클론</h3>
+              <p class="guide-note"><code>Desktop</code>이나 <code>system32</code>에서는 시작하지 마세요.</p>
+            </a>
+            <a class="guide-index-card" href="#step2-setup">
+              <span class="guide-tag">Step 2</span>
+              <h3 class="guide-index-title">setup을 실행하고 홈 경로 기본값 유지</h3>
+              <p class="guide-note">런타임 파일은 <code>%USERPROFILE%\.koinara-node</code> 아래에 저장됩니다.</p>
+            </a>
+            <a class="guide-index-card" href="#step3-start">
+              <span class="guide-tag">Step 3</span>
+              <h3 class="guide-index-title">doctor, start, claim 순서로 실행</h3>
+              <p class="guide-note">라이브 Worldland v2 명령을 그대로 사용하면 됩니다.</p>
+            </a>
+          </div>
+        </section>
+
+        <section class="section" id="step1-clone">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">01</span></div>
+            <article class="panel guide-step-body">
+              <div class="guide-step-header">
+                <p class="eyebrow">STEP 1</p>
+                <h2 class="guide-step-title">현재 로그인한 사용자 폴더 아래에 저장소를 클론하세요.</h2>
+              </div>
+              <pre class="command-block"><code>cd $env:USERPROFILE
+git clone https://github.com/sinmb79/Koinara-node.git koinara-node
+cd $env:USERPROFILE\koinara-node
+npm.cmd install</code></pre>
+              <div class="guide-shot">
+                <img src="../../figures/guides/install-step1.svg" alt="사용자 홈 폴더에서 저장소를 클론하고 npm.cmd로 설치하는 Windows PowerShell 예시" />
+              </div>
+              <div class="guide-callout">
+                Windows PowerShell에서는 <code>npm</code> 대신 <code>npm.cmd</code>를 쓰는 편이 안전합니다.
+                그래야 <code>npm.ps1</code> 실행 정책 오류를 피할 수 있습니다.
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="step2-setup">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">02</span></div>
+            <article class="panel guide-step-body">
+              <div class="guide-step-header">
+                <p class="eyebrow">STEP 2</p>
+                <h2 class="guide-step-title">setup을 실행하고 기본 경로를 그대로 사용하세요.</h2>
+              </div>
+              <pre class="command-block"><code>npm.cmd run setup</code></pre>
+              <div class="guide-shot">
+                <img src="../../figures/guides/install-step2.svg" alt="setup 마법사에서 사용자 홈 경로가 기본값으로 표시되는 예시" />
+              </div>
+              <ul class="guide-list">
+                <li>manifest / receipt root: <code>%USERPROFILE%\.koinara-node\network</code></li>
+                <li>artifact root: <code>%USERPROFILE%\.koinara-node\artifacts</code></li>
+                <li>state root: <code>%USERPROFILE%\.koinara-node\state</code></li>
+                <li>지갑 키와 RPC 비밀값은 로컬 파일에만 저장하세요.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="step3-start">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">03</span></div>
+            <article class="panel guide-step-body">
+              <div class="guide-step-header">
+                <p class="eyebrow">STEP 3</p>
+                <h2 class="guide-step-title">doctor로 확인하고, start 후 epoch가 닫히면 claim하세요.</h2>
+              </div>
+              <pre class="command-block"><code>npm.cmd run provider:v2:doctor
+npm.cmd run provider:v2:start
+
+# verifier도 같이 돌릴 경우 다른 PowerShell 창에서
+npm.cmd run verifier:v2:doctor
+npm.cmd run verifier:v2:start
+
+# 현재 epoch가 닫힌 뒤에만 claim
+npm.cmd run provider:v2:claim
+npm.cmd run verifier:v2:claim</code></pre>
+              <div class="guide-shot">
+                <img src="../../figures/guides/install-step3.svg" alt="provider와 verifier의 doctor, start, claim 명령 예시" />
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-shell">
+          <a class="footer-brand" href="../index.html">
+            <span class="brand-mark">K</span>
+            <span class="brand-copy">
+              <strong>Koinara</strong>
+              <span>설치 문서</span>
+            </span>
+          </a>
+          <div class="footer-links">
+            <a href="../index.html">홈</a>
+            <a href="../openclaw/setup/">OpenClaw 연결 가이드</a>
+            <a href="https://github.com/sinmb79/Koinara-node">Node Repo</a>
+          </div>
+          <span class="footer-copy">사용자 홈 경로 + npm.cmd 조합을 권장합니다.</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

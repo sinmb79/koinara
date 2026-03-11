@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Koinara Docs | 在 Windows 上安装 Koinara-node</title>
+    <meta
+      name="description"
+      content="Koinara-node 的 Windows 安装文档。包含可直接复制的命令、步骤图和 Worldland v2 运行命令。"
+    />
+    <link rel="canonical" href="https://koinara.xyz/zh/install/" />
+    <link rel="alternate" hreflang="en" href="https://koinara.xyz/install/" />
+    <link rel="alternate" hreflang="ko" href="https://koinara.xyz/ko/install/" />
+    <link rel="alternate" hreflang="zh" href="https://koinara.xyz/zh/install/" />
+    <link rel="alternate" hreflang="x-default" href="https://koinara.xyz/install/" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../pages.css" />
+  </head>
+  <body data-locale="zh">
+    <div class="site-bg"></div>
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="header-shell">
+          <a class="brand" href="../index.html">
+            <span class="brand-mark">K</span>
+            <span class="brand-copy">
+              <strong>Koinara</strong>
+              <span>节点安装文档</span>
+            </span>
+          </a>
+          <div class="nav-group">
+            <nav class="site-nav">
+              <a href="../index.html">首页</a>
+              <a href="../scan/">Scan</a>
+              <a href="../openclaw/">OpenClaw</a>
+              <a href="https://github.com/sinmb79/Koinara-node">Node Repo</a>
+            </nav>
+            <div class="lang-switch" aria-label="语言切换">
+              <a href="../../install/">EN</a>
+              <a href="../../ko/install/">KO</a>
+              <a href="./index.html" aria-current="page">ZH</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero section">
+          <div class="hero-copy">
+            <p class="eyebrow">DOCS / WINDOWS 安装</p>
+            <h1 class="hero-title">
+              <span>在 Windows 上安装</span>
+              <span class="accent">Koinara-node。</span>
+            </h1>
+            <p class="lede">
+              这是一条给首次运营者使用的 Windows 路径。它会避开 PowerShell 的
+              <code>npm.ps1</code> 错误，把仓库放到当前用户目录下，并直接使用
+              Worldland v2 的命令。
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#step1-clone">从步骤 1 开始</a>
+              <a class="btn btn-secondary" href="../openclaw/setup/">OpenClaw 指南</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="guide-index">
+            <a class="guide-index-card" href="#step1-clone">
+              <span class="guide-tag">Step 1</span>
+              <h3 class="guide-index-title">在用户目录下克隆仓库</h3>
+              <p class="guide-note">不要把仓库放在 <code>Desktop</code> 或 <code>system32</code> 下。</p>
+            </a>
+            <a class="guide-index-card" href="#step2-setup">
+              <span class="guide-tag">Step 2</span>
+              <h3 class="guide-index-title">运行 setup 并保留默认路径</h3>
+              <p class="guide-note">运行时文件位于 <code>%USERPROFILE%\.koinara-node</code>。</p>
+            </a>
+            <a class="guide-index-card" href="#step3-start">
+              <span class="guide-tag">Step 3</span>
+              <h3 class="guide-index-title">执行 doctor、start 和 claim</h3>
+              <p class="guide-note">使用 Worldland v2 的专用命令。</p>
+            </a>
+          </div>
+        </section>
+
+        <section class="section" id="step1-clone">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">01</span></div>
+            <article class="panel guide-step-body">
+              <h2 class="guide-step-title">先在当前用户目录下克隆仓库。</h2>
+              <pre class="command-block"><code>cd $env:USERPROFILE
+git clone https://github.com/sinmb79/Koinara-node.git koinara-node
+cd $env:USERPROFILE\koinara-node
+npm.cmd install</code></pre>
+              <div class="guide-shot">
+                <img src="../../figures/guides/install-step1.svg" alt="在 Windows PowerShell 中克隆并用 npm.cmd 安装依赖" />
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="step2-setup">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">02</span></div>
+            <article class="panel guide-step-body">
+              <h2 class="guide-step-title">运行 setup，并保留默认的用户主目录路径。</h2>
+              <pre class="command-block"><code>npm.cmd run setup</code></pre>
+              <div class="guide-shot">
+                <img src="../../figures/guides/install-step2.svg" alt="setup 向导显示用户主目录下的默认运行路径" />
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="step3-start">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">03</span></div>
+            <article class="panel guide-step-body">
+              <h2 class="guide-step-title">先运行 doctor，再 start，epoch 结束后再 claim。</h2>
+              <pre class="command-block"><code>npm.cmd run provider:v2:doctor
+npm.cmd run provider:v2:start
+npm.cmd run provider:v2:claim</code></pre>
+              <div class="guide-shot">
+                <img src="../../figures/guides/install-step3.svg" alt="provider 和 verifier 的 doctor、start、claim 命令示例" />
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

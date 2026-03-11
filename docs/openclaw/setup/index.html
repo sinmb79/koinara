@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Koinara Docs | Connect OpenClaw to Koinara-node</title>
+    <meta
+      name="description"
+      content="Step-by-step OpenClaw guide for Koinara-node: verify the local agent, install the bundled skill, configure the backend, and start the Worldland v2 provider path."
+    />
+    <link rel="canonical" href="https://koinara.xyz/openclaw/setup/" />
+    <link rel="alternate" hreflang="en" href="https://koinara.xyz/openclaw/setup/" />
+    <link rel="alternate" hreflang="ko" href="https://koinara.xyz/ko/openclaw/setup/" />
+    <link rel="alternate" hreflang="zh" href="https://koinara.xyz/zh/openclaw/setup/" />
+    <link rel="alternate" hreflang="x-default" href="https://koinara.xyz/openclaw/setup/" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../pages.css" />
+  </head>
+  <body data-locale="en">
+    <div class="site-bg"></div>
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="header-shell">
+          <a class="brand" href="../../index.html">
+            <span class="brand-mark">K</span>
+            <span class="brand-copy">
+              <strong>Koinara</strong>
+              <span>OpenClaw setup guide</span>
+            </span>
+          </a>
+          <div class="nav-group">
+            <nav class="site-nav">
+              <a href="../../index.html">Home</a>
+              <a href="../../install/">Install</a>
+              <a href="../">OpenClaw</a>
+              <a href="https://github.com/sinmb79/Koinara-node">Node Repo</a>
+            </nav>
+            <div class="lang-switch" aria-label="Language switcher">
+              <a href="./index.html" aria-current="page">EN</a>
+              <a href="../../ko/openclaw/setup/">KO</a>
+              <a href="../../zh/openclaw/setup/">ZH</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero section">
+          <div class="hero-copy">
+            <p class="eyebrow">DOCS / OPENCLAW</p>
+            <h1 class="hero-title">
+              <span>Connect OpenClaw</span>
+              <span class="accent">to the real Koinara runtime.</span>
+            </h1>
+            <p class="lede">
+              OpenClaw is the agent layer. <code>Koinara-node</code> remains the protocol execution
+              boundary for registration, heartbeat, provider submission, verifier participation, and
+              reward claims.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#step1-check">Start with step 1</a>
+              <a class="btn btn-secondary" href="../../install/">Install guide</a>
+              <a class="btn btn-ghost" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">Repo doc</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <p class="eyebrow">FLOW</p>
+            <h2 class="section-title">Use OpenClaw for inference. Keep Koinara-node for execution.</h2>
+          </div>
+          <div class="guide-index">
+            <a class="guide-index-card" href="#step1-check">
+              <span class="guide-tag">Step 1</span>
+              <h3 class="guide-index-title">Verify the local OpenClaw CLI</h3>
+              <p class="guide-note">The built-in backend uses the same local agent path.</p>
+            </a>
+            <a class="guide-index-card" href="#step2-skill">
+              <span class="guide-tag">Step 2</span>
+              <h3 class="guide-index-title">Install the bundled OpenClaw skill</h3>
+              <p class="guide-note">The repo now ships a reusable Koinara skill package.</p>
+            </a>
+            <a class="guide-index-card" href="#step3-run">
+              <span class="guide-tag">Step 3</span>
+              <h3 class="guide-index-title">Run the OpenClaw-backed provider path</h3>
+              <p class="guide-note">Doctor, start, and claim with the dedicated commands.</p>
+            </a>
+          </div>
+        </section>
+
+        <section class="section" id="step1-check">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">01</span></div>
+            <article class="panel guide-step-body">
+              <div class="guide-step-header">
+                <p class="eyebrow">STEP 1</p>
+                <h2 class="guide-step-title">Verify that OpenClaw responds locally.</h2>
+              </div>
+              <pre class="command-block"><code>openclaw agent --agent main --local --json --message "Reply with exactly OK"</code></pre>
+              <div class="guide-shot">
+                <img src="../../figures/guides/openclaw-step1.svg" alt="OpenClaw local CLI verification command and JSON response" />
+              </div>
+              <div class="guide-callout">
+                Do not continue until this command returns a valid JSON payload. The Koinara provider
+                backend shells out to this exact CLI path.
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="step2-skill">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">02</span></div>
+            <article class="panel guide-step-body">
+              <div class="guide-step-header">
+                <p class="eyebrow">STEP 2</p>
+                <h2 class="guide-step-title">Install the bundled OpenClaw skill package.</h2>
+              </div>
+              <pre class="command-block"><code>powershell -ExecutionPolicy Bypass -File .\scripts\install-openclaw-skill.ps1</code></pre>
+              <div class="guide-shot">
+                <img src="../../figures/guides/openclaw-step2.svg" alt="Install command for the bundled Koinara OpenClaw skill package" />
+              </div>
+              <ul class="guide-list">
+                <li>The skill is copied into <code>%USERPROFILE%\.openclaw\skills\koinara-node</code>.</li>
+                <li>If OpenClaw already runs, restart it or reload skills.</li>
+                <li>If you open this repo as an OpenClaw workspace, the repo-local skill can also be used directly.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="step3-run">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">03</span></div>
+            <article class="panel guide-step-body">
+              <div class="guide-step-header">
+                <p class="eyebrow">STEP 3</p>
+                <h2 class="guide-step-title">Run the OpenClaw-backed provider commands.</h2>
+              </div>
+              <pre class="command-block"><code>npm.cmd run provider:v2:openclaw:doctor
+npm.cmd run provider:v2:openclaw:start
+npm.cmd run provider:v2:openclaw:claim</code></pre>
+              <div class="guide-shot">
+                <img src="../../figures/guides/openclaw-step3.svg" alt="OpenClaw-backed provider doctor, start, and claim commands" />
+              </div>
+              <div class="guide-mini-grid">
+                <article class="floor-card">
+                  <h3>What OpenClaw does</h3>
+                  <p>Generates the provider-side response text through the local agent CLI.</p>
+                </article>
+                <article class="floor-card">
+                  <h3>What Koinara-node does</h3>
+                  <p>Registers the node, sends heartbeat, hashes the response, submits on-chain, and claims rewards.</p>
+                </article>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-shell">
+          <a class="footer-brand" href="../../index.html">
+            <span class="brand-mark">K</span>
+            <span class="brand-copy">
+              <strong>Koinara</strong>
+              <span>OpenClaw docs</span>
+            </span>
+          </a>
+          <div class="footer-links">
+            <a href="../../install/">Install guide</a>
+            <a href="../">OpenClaw overview</a>
+            <a href="https://github.com/sinmb79/Koinara-node">Node repo</a>
+          </div>
+          <span class="footer-copy">OpenClaw thinks. Koinara-node executes.</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

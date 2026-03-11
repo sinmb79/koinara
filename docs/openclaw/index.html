@@ -34,6 +34,7 @@
         </a>
         <nav class="site-nav">
           <a href="../index.html">Home</a>
+          <a href="../install/">Install</a>
           <a href="https://github.com/sinmb79/Koinara-node">Node Repo</a>
           <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">Node Doc</a>
           <div class="lang-switch" aria-label="Language switcher">
@@ -55,9 +56,9 @@
               polling jobs, validating hashes, signing transactions, submitting responses, and settling rewards.
             </p>
             <div class="cta-row">
-              <a class="btn btn-primary" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">Node-side Guide</a>
-              <a class="btn btn-secondary" href="https://github.com/sinmb79/Koinara-node">Koinara-node Repo</a>
-              <a class="btn btn-ghost" href="../index.html#node">Back to Node</a>
+              <a class="btn btn-primary" href="./setup/">Step-by-step guide</a>
+              <a class="btn btn-secondary" href="../install/">Windows install</a>
+              <a class="btn btn-ghost" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">Node-side Guide</a>
             </div>
           </div>
         </section>
@@ -124,20 +125,20 @@ openclaw agent --agent main --local --json --message "Reply with exactly OK"</co
         <section class="section">
           <div class="section-heading">
             <p class="eyebrow">CURRENT STATE</p>
-            <h2>Built-in backend exists. One-line attach still does not.</h2>
+            <h2>Built-in backend and reusable skill package are both available now.</h2>
           </div>
           <div class="floor-grid">
             <article class="floor-card">
               <h3>What exists now</h3>
-              <p>OpenClaw can now be used directly as a built-in provider backend inside <code>Koinara-node</code>.</p>
+              <p>OpenClaw can now be used directly as a built-in provider backend inside <code>Koinara-node</code>, and the repo ships a reusable OpenClaw skill package.</p>
             </article>
             <article class="floor-card">
-              <h3>What does not exist yet</h3>
-              <p>A first-class built-in command like `openclaw connect koinara-node` is not implemented yet.</p>
+              <h3>What still does not exist yet</h3>
+              <p>A first-class built-in command like <code>openclaw connect koinara-node</code> is still not implemented.</p>
             </article>
             <article class="floor-card">
               <h3>Clean future direction</h3>
-              <p>A dedicated OpenClaw skill package that talks to a local or remote Koinara-node.</p>
+              <p>The next clean step is a richer skill package that can talk to a local or remote Koinara-node with more automation.</p>
             </article>
           </div>
         </section>
@@ -200,7 +201,7 @@ npm run verifier:v2:openclaw:claim</code></pre>
             <article class="node-card">
               <span class="network-label">Future</span>
               <h3>Dedicated skill package</h3>
-              <p>The long-term clean path is a separate OpenClaw skill package that talks to a local or remote node runtime.</p>
+              <p>The repo now ships the first bundled OpenClaw skill. The long-term path is a richer package that can talk to a local or remote node runtime.</p>
             </article>
           </div>
         </section>
@@ -210,6 +211,7 @@ npm run verifier:v2:openclaw:claim</code></pre>
         <p>OpenClaw improves the workflow. Koinara-node remains the protocol execution boundary.</p>
         <div>
           <a href="../index.html">Home</a>
+          <a href="./setup/">OpenClaw setup guide</a>
           <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">Node-side guide</a>
           <a href="https://github.com/sinmb79/Koinara-node">Koinara-node</a>
         </div>

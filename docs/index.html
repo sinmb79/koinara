@@ -48,6 +48,7 @@
             <a href="#whitepaper">Whitepaper</a>
             <a href="#live">Live</a>
             <a href="/scan.html">Scan</a>
+            <a href="/install/">Install</a>
             <a href="#node">Node</a>
             <a href="/openclaw/">OpenClaw</a>
             <a href="#supported-networks">Networks</a>
@@ -317,21 +318,21 @@
                     </svg>
                     Open Repo
                   </a>
-                  <a class="btn btn-ghost" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">
+                  <a class="btn btn-ghost" href="/install/">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M5 6.75h14" />
                       <path d="M5 12h14" />
                       <path d="M5 17.25h9" />
                     </svg>
-                    Node Setup
+                    Install Guide
                   </a>
-                  <a class="btn btn-secondary" href="/openclaw/">
+                  <a class="btn btn-secondary" href="/openclaw/setup/">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M6 8.5h12" />
                       <path d="M6 12h12" />
                       <path d="M6 15.5h8" />
                     </svg>
-                    OpenClaw Path
+                    OpenClaw Guide
                   </a>
                 </div>
               </div>
@@ -346,18 +347,17 @@
                   <span class="terminal-label">terminal</span>
                 </div>
                 <div class="terminal-body">
-                  <code>$ git clone https://github.com/sinmb79/Koinara-node.git
-$ cd Koinara-node
-$ npm install
-$ npm run provider:v2:start
-$ npm run provider:v2:claim
-$ npm run verifier:v2:start
-$ npm run verifier:v2:claim</code>
+                  <code>$ cd %USERPROFILE%
+$ git clone https://github.com/sinmb79/Koinara-node.git koinara-node
+$ cd %USERPROFILE%\koinara-node
+$ npm.cmd install
+$ npm.cmd run provider:v2:start
+$ npm.cmd run verifier:v2:start</code>
                 </div>
               </article>
               <p class="terminal-note">
-                v2 commands target the live Worldland deployment, keep state in separate v2 folders,
-                and expose dedicated claim commands after each closed epoch.
+                The detailed Windows install path now lives in a separate doc page with
+                step-by-step commands and screenshots.
               </p>
               <p class="terminal-note">
                 If you want OpenClaw as the provider brain, keep
@@ -380,10 +380,11 @@ $ npm run verifier:v2:claim</code>
                   <li>separate v2 mainnet config and artifact directories</li>
                 </ul>
                 <div class="source-links">
+                  <a href="/install/">Install Guide</a>
                   <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">Operator Checklist</a>
                   <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">Supported Networks</a>
                   <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/protocol-compatibility.md">Protocol Compatibility</a>
-                  <a href="/openclaw/">OpenClaw Integration</a>
+                  <a href="/openclaw/setup/">OpenClaw Setup</a>
                 </div>
               </div>
             </article>

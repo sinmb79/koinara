@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Koinara Docs | Install Koinara-node on Windows</title>
+    <meta
+      name="description"
+      content="Step-by-step Windows installation guide for Koinara-node with exact commands, screenshots, and v2 start and claim flow."
+    />
+    <link rel="canonical" href="https://koinara.xyz/install/" />
+    <link rel="alternate" hreflang="en" href="https://koinara.xyz/install/" />
+    <link rel="alternate" hreflang="ko" href="https://koinara.xyz/ko/install/" />
+    <link rel="alternate" hreflang="zh" href="https://koinara.xyz/zh/install/" />
+    <link rel="alternate" hreflang="x-default" href="https://koinara.xyz/install/" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../pages.css" />
+  </head>
+  <body data-locale="en">
+    <div class="site-bg"></div>
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="header-shell">
+          <a class="brand" href="../index.html">
+            <span class="brand-mark">K</span>
+            <span class="brand-copy">
+              <strong>Koinara</strong>
+              <span>Node install guide</span>
+            </span>
+          </a>
+          <div class="nav-group">
+            <nav class="site-nav">
+              <a href="../index.html">Home</a>
+              <a href="../scan.html">Scan</a>
+              <a href="../openclaw/">OpenClaw</a>
+              <a href="https://github.com/sinmb79/Koinara-node">Node Repo</a>
+            </nav>
+            <div class="lang-switch" aria-label="Language switcher">
+              <a href="./index.html" aria-current="page">EN</a>
+              <a href="../ko/install/">KO</a>
+              <a href="../zh/install/">ZH</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero section">
+          <div class="hero-copy">
+            <p class="eyebrow">DOCS / WINDOWS INSTALL</p>
+            <h1 class="hero-title">
+              <span>Install Koinara-node</span>
+              <span class="accent">from a clean Windows shell.</span>
+            </h1>
+            <p class="lede">
+              This page is the exact Windows path for a first-time operator. It avoids
+              the common PowerShell <code>npm.ps1</code> error, keeps the repo under the current user
+              folder, and uses the live Worldland v2 commands.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#step1-clone">Start with step 1</a>
+              <a class="btn btn-secondary" href="../openclaw/setup/">OpenClaw guide</a>
+              <a class="btn btn-ghost" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">Repo doc</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <p class="eyebrow">FLOW</p>
+            <h2 class="section-title">Follow the steps in order.</h2>
+          </div>
+          <div class="guide-index">
+            <a class="guide-index-card" href="#step1-clone">
+              <span class="guide-tag">Step 1</span>
+              <h3 class="guide-index-title">Clone under your user folder</h3>
+              <p class="guide-note">Do not clone into <code>Desktop</code> or <code>system32</code>.</p>
+            </a>
+            <a class="guide-index-card" href="#step2-setup">
+              <span class="guide-tag">Step 2</span>
+              <h3 class="guide-index-title">Run setup and accept the home-path defaults</h3>
+              <p class="guide-note">Runtime files now live under <code>%USERPROFILE%\.koinara-node</code>.</p>
+            </a>
+            <a class="guide-index-card" href="#step3-start">
+              <span class="guide-tag">Step 3</span>
+              <h3 class="guide-index-title">Doctor, start, then claim after epoch close</h3>
+              <p class="guide-note">Use the dedicated v2 commands for the live Worldland path.</p>
+            </a>
+          </div>
+        </section>
+
+        <section class="section" id="step1-clone">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">01</span></div>
+            <article class="panel guide-step-body">
+              <div class="guide-step-header">
+                <p class="eyebrow">STEP 1</p>
+                <h2 class="guide-step-title">Clone the repo into the current user folder.</h2>
+              </div>
+              <p class="guide-copy">
+                Open a fresh PowerShell window and run these commands exactly. On Windows PowerShell,
+                use <code>npm.cmd</code> instead of <code>npm</code> so you do not hit the
+                <code>npm.ps1</code> execution-policy error.
+              </p>
+              <pre class="command-block"><code>cd $env:USERPROFILE
+git clone https://github.com/sinmb79/Koinara-node.git koinara-node
+cd $env:USERPROFILE\koinara-node
+npm.cmd install</code></pre>
+              <div class="guide-shot">
+                <img src="../figures/guides/install-step1.svg" alt="PowerShell commands for cloning the repo and installing with npm.cmd" />
+              </div>
+              <div class="guide-callout">
+                If you already cloned to <code>Desktop</code>, move the folder to
+                <code>C:\Users\&lt;your-user&gt;\koinara-node</code> before continuing.
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="step2-setup">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">02</span></div>
+            <article class="panel guide-step-body">
+              <div class="guide-step-header">
+                <p class="eyebrow">STEP 2</p>
+                <h2 class="guide-step-title">Run setup and keep the default runtime paths.</h2>
+              </div>
+              <p class="guide-copy">
+                The setup wizard writes <code>node.config.json</code> and <code>.env.local</code>.
+                The current default runtime root is the user home folder, not the cloned repo.
+              </p>
+              <pre class="command-block"><code>npm.cmd run setup</code></pre>
+              <div class="guide-shot">
+                <img src="../figures/guides/install-step2.svg" alt="Setup wizard showing runtime files under the user home path" />
+              </div>
+              <ul class="guide-list">
+                <li>Shared manifest root: <code>%USERPROFILE%\.koinara-node\network</code></li>
+                <li>Artifact root: <code>%USERPROFILE%\.koinara-node\artifacts</code></li>
+                <li>State root: <code>%USERPROFILE%\.koinara-node\state</code></li>
+                <li>Keep wallet keys in local files only. Do not commit them.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="step3-start">
+          <div class="guide-step">
+            <div class="roadmap-marker"><span class="step-badge">03</span></div>
+            <article class="panel guide-step-body">
+              <div class="guide-step-header">
+                <p class="eyebrow">STEP 3</p>
+                <h2 class="guide-step-title">Run doctor, start the role, then claim after the epoch closes.</h2>
+              </div>
+              <pre class="command-block"><code>npm.cmd run provider:v2:doctor
+npm.cmd run provider:v2:start
+
+# in another PowerShell window if you also run a verifier
+npm.cmd run verifier:v2:doctor
+npm.cmd run verifier:v2:start
+
+# claim only after the current epoch has closed
+npm.cmd run provider:v2:claim
+npm.cmd run verifier:v2:claim</code></pre>
+              <div class="guide-shot">
+                <img src="../figures/guides/install-step3.svg" alt="Doctor, start, and claim commands for the live Worldland v2 path" />
+              </div>
+              <div class="guide-mini-grid">
+                <article class="floor-card">
+                  <h3>Provider only</h3>
+                  <p>Use the provider doctor, start, and claim commands if you only want to submit responses.</p>
+                </article>
+                <article class="floor-card">
+                  <h3>Provider + verifier</h3>
+                  <p>Use separate <code>.env.provider.local</code> and <code>.env.verifier.local</code> files and separate PowerShell windows.</p>
+                </article>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-shell">
+          <a class="footer-brand" href="../index.html">
+            <span class="brand-mark">K</span>
+            <span class="brand-copy">
+              <strong>Koinara</strong>
+              <span>Install docs</span>
+            </span>
+          </a>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="../openclaw/setup/">OpenClaw guide</a>
+            <a href="https://github.com/sinmb79/Koinara-node">Node repo</a>
+          </div>
+          <span class="footer-copy">Use the user-home path. Use npm.cmd in PowerShell.</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
