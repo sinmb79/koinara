@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Koinara | OpenClaw 集成</title>
+    <meta
+      name="description"
+      content="说明如何把 OpenClaw 代理连接到 Koinara，以及为什么真实的 provider/verifier 参与仍然需要 Koinara-node。"
+    />
+    <link rel="canonical" href="https://koinara.xyz/zh/openclaw/" />
+    <link rel="alternate" hreflang="en" href="https://koinara.xyz/openclaw/" />
+    <link rel="alternate" hreflang="ko" href="https://koinara.xyz/ko/openclaw/" />
+    <link rel="alternate" hreflang="zh" href="https://koinara.xyz/zh/openclaw/" />
+    <link rel="alternate" hreflang="x-default" href="https://koinara.xyz/openclaw/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../pages.css" />
+  </head>
+  <body style="font-family: 'Noto Sans SC', 'Space Grotesk', sans-serif">
+    <div class="site-bg"></div>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="../index.html">
+          <span class="brand-mark">K</span>
+          <span class="brand-copy">
+            <strong>Koinara</strong>
+            <span>OpenClaw 集成</span>
+          </span>
+        </a>
+        <nav class="site-nav">
+          <a href="../index.html">首页</a>
+          <a href="https://github.com/sinmb79/Koinara-node">节点仓库</a>
+          <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">节点文档</a>
+          <div class="lang-switch" aria-label="语言切换">
+            <a href="../../openclaw/">EN</a>
+            <a href="../../ko/openclaw/">KO</a>
+            <a href="./index.html" aria-current="page">ZH</a>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero section">
+          <div class="hero-copy">
+            <p class="eyebrow">OPENCLAW / 代理工作流</p>
+            <h1>连接 OpenClaw，<br />把执行交给 Koinara-node。</h1>
+            <p class="lede">
+              最稳妥的做法，是把 OpenClaw 放在代理与 orchestration 层。
+              真正的 provider / verifier 参与仍然需要 <code>Koinara-node</code>：
+              它负责 job polling、hash 校验、交易签名、响应提交、verifier 投票与 reward settlement。
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <p class="eyebrow">快速开始</p>
+            <h2>启动代理，并单独运行节点。</h2>
+          </div>
+          <div class="paper-grid">
+            <article class="paper-card quick-card">
+              <span class="paper-tag">OpenClaw</span>
+              <div class="quick-card-header">
+                <span class="quick-card-mark">O</span>
+                <div class="quick-card-copy">
+                  <strong>OpenClaw</strong>
+                  <span>代理 shell 与本地模型入口</span>
+                </div>
+              </div>
+              <pre class="command-block quick-command"><code>ollama launch openclaw --model qwen3.5</code></pre>
+              <p>这个命令只启动代理侧入口，并不能替代真正的 Koinara 节点。</p>
+            </article>
+            <article class="paper-card">
+              <span class="paper-tag">Koinara-node</span>
+              <h3>真正参与网络的是节点进程</h3>
+              <pre class="command-block"><code>git clone https://github.com/sinmb79/Koinara-node.git
+cd Koinara-node
+npm install
+npm run setup
+npm run doctor
+npm run node</code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section class="section protocol-floor">
+          <div class="section-heading">
+            <p class="eyebrow">角色拆分</p>
+            <h2>OpenClaw 能做什么，不能做什么。</h2>
+          </div>
+          <div class="floor-grid">
+            <article class="floor-card">
+              <h3>OpenClaw 可以做的事</h3>
+              <p>提示词规划、操作员 workflow、回复草拟、agent-to-agent 协作、人类辅助审阅。</p>
+            </article>
+            <article class="floor-card">
+              <h3>Koinara-node 必须做的事</h3>
+              <p>job polling、manifest/receipt 校验、response hash 提交、verifier voting、PoI finalization、reward settlement。</p>
+            </article>
+            <article class="floor-card">
+              <h3>OpenClaw 单独做不到的事</h3>
+              <p>OpenClaw 本身不是 provider/verifier 节点。没有运行中的节点，就没有真实的链上参与。</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>OpenClaw 强化 workflow，Koinara-node 保持协议执行边界。</p>
+        <div>
+          <a href="../index.html">首页</a>
+          <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">节点文档</a>
+          <a href="https://github.com/sinmb79/Koinara-node">Koinara-node</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

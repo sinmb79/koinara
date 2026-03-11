@@ -193,9 +193,31 @@ npm run node</code></pre>
               <div class="source-links">
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">Node Setup</a>
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">OpenClaw Integration</a>
+                <a href="./openclaw/">Site Guide</a>
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">Operator Checklist</a>
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">Supported Networks</a>
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/protocol-compatibility.md">Protocol Compatibility</a>
+              </div>
+            </article>
+
+            <article class="node-card quick-card">
+              <span class="network-label">OpenClaw</span>
+              <div class="quick-card-header">
+                <span class="quick-card-mark">O</span>
+                <div class="quick-card-copy">
+                  <strong>OpenClaw</strong>
+                  <span>Agent workflow above a local Koinara node</span>
+                </div>
+              </div>
+              <pre class="command-block quick-command"><code>ollama launch openclaw --model qwen3.5</code></pre>
+              <p>
+                Use OpenClaw for prompt orchestration and operator workflow, then let
+                <code>Koinara-node</code> handle wallet signing, hash submission, verifier votes,
+                and settlement participation.
+              </p>
+              <div class="source-links">
+                <a href="./openclaw/">OpenClaw on koinara.xyz</a>
+                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">Node-side guide</a>
               </div>
             </article>
           </div>

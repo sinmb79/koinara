@@ -143,8 +143,30 @@ npm run node</code></pre>
               <div class="source-links">
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">节点设置</a>
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">OpenClaw 集成</a>
+                <a href="./openclaw/">站内指南</a>
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">操作员清单</a>
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">支持的网络</a>
+              </div>
+            </article>
+
+            <article class="node-card quick-card">
+              <span class="network-label">OpenClaw</span>
+              <div class="quick-card-header">
+                <span class="quick-card-mark">O</span>
+                <div class="quick-card-copy">
+                  <strong>OpenClaw</strong>
+                  <span>位于本地 Koinara-node 之上的代理工作流层</span>
+                </div>
+              </div>
+              <pre class="command-block quick-command"><code>ollama launch openclaw --model qwen3.5</code></pre>
+              <p>
+                让 OpenClaw 负责提示词编排与操作员 workflow，而让
+                <code>Koinara-node</code> 继续负责钱包签名、hash 提交、
+                verifier 投票与结算参与，这是最稳妥的结构。
+              </p>
+              <div class="source-links">
+                <a href="./openclaw/">koinara.xyz 指南</a>
+                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">节点文档</a>
               </div>
             </article>
           </div>

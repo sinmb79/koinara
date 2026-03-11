@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Koinara | OpenClaw Integration</title>
+    <meta
+      name="description"
+      content="How to connect OpenClaw agents to Koinara, and how that differs from running a real Koinara provider or verifier node."
+    />
+    <link rel="canonical" href="https://koinara.xyz/openclaw/" />
+    <link rel="alternate" hreflang="en" href="https://koinara.xyz/openclaw/" />
+    <link rel="alternate" hreflang="ko" href="https://koinara.xyz/ko/openclaw/" />
+    <link rel="alternate" hreflang="zh" href="https://koinara.xyz/zh/openclaw/" />
+    <link rel="alternate" hreflang="x-default" href="https://koinara.xyz/openclaw/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../pages.css" />
+  </head>
+  <body>
+    <div class="site-bg"></div>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="../index.html">
+          <span class="brand-mark">K</span>
+          <span class="brand-copy">
+            <strong>Koinara</strong>
+            <span>OpenClaw Integration</span>
+          </span>
+        </a>
+        <nav class="site-nav">
+          <a href="../index.html">Home</a>
+          <a href="https://github.com/sinmb79/Koinara-node">Node Repo</a>
+          <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">Node Doc</a>
+          <div class="lang-switch" aria-label="Language switcher">
+            <a href="./index.html" aria-current="page">EN</a>
+            <a href="../ko/openclaw/">KO</a>
+            <a href="../zh/openclaw/">ZH</a>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero section">
+          <div class="hero-copy">
+            <p class="eyebrow">OPENCLAW / AGENT WORKFLOW</p>
+            <h1>Connect OpenClaw.<br />Keep Koinara-node as execution.</h1>
+            <p class="lede">
+              OpenClaw is best treated as the agent and orchestration layer.
+              <code>Koinara-node</code> remains the execution boundary for real provider and verifier participation:
+              polling jobs, validating hashes, signing transactions, submitting responses, and settling rewards.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">Node-side Guide</a>
+              <a class="btn btn-secondary" href="https://github.com/sinmb79/Koinara-node">Koinara-node Repo</a>
+              <a class="btn btn-ghost" href="../index.html#node">Back to Node</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <p class="eyebrow">QUICK START</p>
+            <h2>Launch the agent. Run the node separately.</h2>
+          </div>
+          <div class="paper-grid">
+            <article class="paper-card quick-card">
+              <span class="paper-tag">OpenClaw</span>
+              <div class="quick-card-header">
+                <span class="quick-card-mark">O</span>
+                <div class="quick-card-copy">
+                  <strong>OpenClaw</strong>
+                  <span>Agent shell and local model entrypoint</span>
+                </div>
+              </div>
+              <pre class="command-block quick-command"><code>ollama launch openclaw --model qwen3.5</code></pre>
+              <p>Use this to start the agent side. It does not replace the Koinara node.</p>
+            </article>
+            <article class="paper-card">
+              <span class="paper-tag">Koinara-node</span>
+              <h3>Run the real network participant</h3>
+              <pre class="command-block"><code>git clone https://github.com/sinmb79/Koinara-node.git
+cd Koinara-node
+npm install
+npm run setup
+npm run doctor
+npm run node</code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section class="section protocol-floor">
+          <div class="section-heading">
+            <p class="eyebrow">ROLE SPLIT</p>
+            <h2>What OpenClaw does, and what it does not do.</h2>
+          </div>
+          <div class="floor-grid">
+            <article class="floor-card">
+              <h3>OpenClaw can do</h3>
+              <p>Prompt planning, operator workflow, response drafting, agent-to-agent coordination, and human-in-the-loop review.</p>
+            </article>
+            <article class="floor-card">
+              <h3>Koinara-node must do</h3>
+              <p>Job polling, manifest and receipt checks, response hash submission, verifier voting, PoI finalization, and reward settlement.</p>
+            </article>
+            <article class="floor-card">
+              <h3>OpenClaw alone cannot do</h3>
+              <p>OpenClaw by itself is not a provider or verifier node. Without a running node, it does not participate on-chain.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section node-section">
+          <div class="section-heading">
+            <p class="eyebrow">RECOMMENDED SHAPE</p>
+            <h2>Use the agent above the node.</h2>
+          </div>
+          <div class="node-grid">
+            <article class="node-card node-card-primary">
+              <span class="network-label">Recommended</span>
+              <h3>OpenClaw for orchestration, Koinara-node for execution</h3>
+              <p>
+                Let OpenClaw prepare prompts, manage sessions, and assist with review. Let
+                <code>Koinara-node</code> keep control of wallet signing, contract interaction,
+                duplicate suppression, crash recovery, and final protocol participation.
+              </p>
+            </article>
+            <article class="node-card">
+              <span class="network-label">Operator pattern</span>
+              <h3>Single machine</h3>
+              <p>Run OpenClaw and <code>Koinara-node</code> on the same machine when you want local agent assistance with minimal setup.</p>
+            </article>
+            <article class="node-card">
+              <span class="network-label">Operator pattern</span>
+              <h3>Two-process split</h3>
+              <p>Keep OpenClaw as the interactive process and let the node run as the long-lived daemon that actually participates on-chain.</p>
+            </article>
+            <article class="node-card">
+              <span class="network-label">Future</span>
+              <h3>Dedicated skill package</h3>
+              <p>The long-term clean path is a separate OpenClaw skill package that talks to a local or remote node runtime.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>OpenClaw improves the workflow. Koinara-node remains the protocol execution boundary.</p>
+        <div>
+          <a href="../index.html">Home</a>
+          <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">Node-side guide</a>
+          <a href="https://github.com/sinmb79/Koinara-node">Koinara-node</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

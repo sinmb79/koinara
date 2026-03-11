@@ -174,8 +174,30 @@ npm run node</code></pre>
               <div class="source-links">
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">노드 설정</a>
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">OpenClaw 연동</a>
+                <a href="./openclaw/">사이트 가이드</a>
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">운영자 체크리스트</a>
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">지원 네트워크</a>
+              </div>
+            </article>
+
+            <article class="node-card quick-card">
+              <span class="network-label">OpenClaw</span>
+              <div class="quick-card-header">
+                <span class="quick-card-mark">O</span>
+                <div class="quick-card-copy">
+                  <strong>OpenClaw</strong>
+                  <span>로컬 Koinara-node 위에서 동작하는 에이전트 계층</span>
+                </div>
+              </div>
+              <pre class="command-block quick-command"><code>ollama launch openclaw --model qwen3.5</code></pre>
+              <p>
+                OpenClaw는 프롬프트 오케스트레이션과 운영자 workflow를 맡고,
+                <code>Koinara-node</code>는 지갑 서명, hash 제출, verifier 투표,
+                정산 참여를 담당하게 두는 방식이 가장 안전합니다.
+              </p>
+              <div class="source-links">
+                <a href="./openclaw/">koinara.xyz 가이드</a>
+                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">노드 문서</a>
               </div>
             </article>
           </div>
