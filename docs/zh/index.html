@@ -3,20 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Koinara | 面向集体推理的开放网络</title>
+    <title>Koinara | 已在 Worldland 运行的集体推理网络</title>
     <meta
       name="description"
-      content="Koinara 是一个以 Minimum Acceptable Inference 和 Minimum Reward 为核心的点对点集体推理网络。"
+      content="Koinara 是面向集体推理的开放协议。Worldland v2 已上线，包含 active reward、work reward 和公开节点路径。"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2333e2d6'/%3E%3Ctext x='32' y='41' font-family='IBM Plex Mono, monospace' font-size='30' text-anchor='middle' fill='%23061119'%3EK%3C/text%3E%3C/svg%3E"
     />
     <link rel="canonical" href="https://koinara.xyz/zh/" />
     <link rel="alternate" hreflang="en" href="https://koinara.xyz/" />
     <link rel="alternate" hreflang="ko" href="https://koinara.xyz/ko/" />
     <link rel="alternate" hreflang="zh" href="https://koinara.xyz/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://koinara.xyz/" />
-    <meta property="og:title" content="Koinara | 面向集体推理的开放网络" />
+    <meta property="og:title" content="Koinara | 已在 Worldland 运行的集体推理网络" />
     <meta
       property="og:description"
-      content="Koinara 是一个以 Minimum Acceptable Inference 和 Minimum Reward 为核心的点对点集体推理网络。"
+      content="协议只保留最低规则，其上的协作、消息、路由与服务交给代理、dApp 与市场。"
     />
     <meta property="og:url" content="https://koinara.xyz/zh/" />
     <meta property="og:type" content="website" />
@@ -42,15 +46,16 @@
         <div class="nav-group">
           <nav class="site-nav">
             <a href="#whitepaper">白皮书</a>
+            <a href="#live">Live</a>
             <a href="#node">节点</a>
             <a href="#supported-networks">网络</a>
-            <a href="#figures">图示</a>
             <a href="#next-track">路线图</a>
             <a href="https://github.com/sinmb79/koinara">GitHub</a>
           </nav>
           <div class="lang-switch" aria-label="语言切换">
             <a href="../index.html">EN</a>
             <a href="../ko/">KO</a>
+            <a href="./index.html" aria-current="page">ZH</a>
           </div>
         </div>
       </div>
@@ -60,17 +65,16 @@
       <section class="hero-band">
         <div class="section-shell hero-shell">
           <div class="hero-copy">
-            <p class="eyebrow">最小协议 / 开放推理市场</p>
+            <p class="eyebrow">最小协议 / 开放代理网络</p>
             <h1 class="hero-title">
-              <span>面向集体推理的</span>
-              <span class="accent">开放</span>
-              <span>网络。</span>
+              <span>Koinara v2</span>
+              <span class="accent">已经在 Worldland</span>
+              <span>正式运行。</span>
             </h1>
             <p class="hero-lede">
-              Koinara 只定义两个协议原语：
-              <code>Minimum Acceptable Inference (MAI)</code> 与
-              <code>Minimum Reward</code>。高于这条底线的质量、速度、深度与用户偏好，
-              都属于市场层。
+              Koinara 不定义上限，只定义底层。协议负责 active reward、
+              work reward、minimum acceptable inference 等最小结算规则；
+              协作、消息、路由与服务由代理、dApp 与市场在其上自由演化。
             </p>
             <div class="button-row">
               <a class="btn btn-primary" href="../pdf/koinara-whitepaper-en.pdf">
@@ -91,89 +95,30 @@
                 </svg>
                 韩文白皮书
               </a>
-              <a class="btn btn-ghost" href="#node">
+              <a class="btn btn-ghost" href="../v2-theory.md">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 18.25h12" />
-                  <path d="M7.5 6.75L11.75 12l-4.25 5.25" />
+                  <path d="M5 6.75h14" />
+                  <path d="M5 12h14" />
+                  <path d="M5 17.25h9" />
                 </svg>
-                运行节点
+                阅读 v2 理论
               </a>
             </div>
             <div class="meta-row">
-              <span class="meta-chip">公平启动</span>
-              <span class="meta-chip">面向无主化</span>
-              <span class="meta-chip">链无关理论</span>
-              <span class="meta-chip">多链节点运行时</span>
+              <span class="meta-chip">Worldland v2 已上线</span>
+              <span class="meta-chip">Active reward</span>
+              <span class="meta-chip">Work reward</span>
+              <span class="meta-chip">公开节点路径</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="band band-tight">
-        <div class="section-shell">
-          <div class="section-header">
-            <p class="eyebrow">协议底线</p>
-            <h2 class="section-title">被正式定义的只有最低标准。</h2>
-          </div>
-
-          <div class="card-grid-3">
-            <article class="panel">
-              <span class="icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 3.75l6 2.25v5.25c0 4.04-2.43 7.43-6 9-3.57-1.57-6-4.96-6-9V6z" />
-                </svg>
-              </span>
-              <div class="card-copy">
-                <h3 class="card-title">最低可接受推理</h3>
-                <p class="card-body">
-                  MAI 不是最佳答案预言机，而是协议接受的最低门槛。v1 中它由有效任务状态、
-                  截止时间合规、非空响应、格式通过与验证者批准共同定义。
-                </p>
-              </div>
-            </article>
-
-            <article class="panel panel-accent">
-              <span class="icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z" />
-                  <path d="M12 5v2.5" />
-                  <path d="M12 16.5V19" />
-                  <path d="M5 12h2.5" />
-                  <path d="M16.5 12H19" />
-                </svg>
-              </span>
-              <div class="card-copy">
-                <h3 class="card-title">最低奖励</h3>
-                <p class="card-body">
-                  KOIN 发行只奖励达到协议底线的推理，premium reward 仍由市场承担，
-                  必须与协议发行保持分离。
-                </p>
-              </div>
-            </article>
-
-            <article class="panel">
-              <span class="icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M7 12.5l3 3 7-7" />
-                  <circle cx="12" cy="12" r="8.25" />
-                </svg>
-              </span>
-              <div class="card-copy">
-                <h3 class="card-title">推理证明</h3>
-                <p class="card-body">
-                  PoI 证明提交满足最低协议条件，但不证明绝对真理或市场最佳质量。
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="band band-alt" id="whitepaper">
+      <section class="band band-tight" id="whitepaper">
         <div class="section-shell">
           <div class="section-header">
             <p class="eyebrow">白皮书包</p>
-            <h2 class="section-title">主文与配套附录分开发布。</h2>
+            <h2 class="section-title">先读基础协议，再读 v2 的引导方向。</h2>
           </div>
 
           <div class="paper-grid">
@@ -186,12 +131,10 @@
                 </svg>
               </span>
               <span class="paper-card-body">
-                <span class="paper-card-meta">
-                  <span class="tag tag-main">主文</span>
-                </span>
+                <span class="paper-card-meta"><span class="tag tag-main">MAIN</span></span>
                 <span class="card-title">英文白皮书</span>
                 <span class="card-body">
-                  包含协议论题、图示、MAI、PoI、激励结构与最小架构。
+                  介绍 MAI、PoI、minimum reward 与链无关的基础理论。
                 </span>
               </span>
             </a>
@@ -205,53 +148,127 @@
                 </svg>
               </span>
               <span class="paper-card-body">
-                <span class="paper-card-meta">
-                  <span class="tag tag-main">主文</span>
-                </span>
+                <span class="paper-card-meta"><span class="tag tag-main">MAIN</span></span>
                 <span class="card-title">韩文白皮书</span>
                 <span class="card-body">
-                  当前公开版本的完整韩文主文。
+                  当前公开基础协议文档的韩文版本。
                 </span>
               </span>
             </a>
 
-            <a class="card-link" href="../pdf/koinara-whitepaper-appendices-en.pdf">
+            <a class="card-link" href="../v2-theory.md">
               <span class="icon-box" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
-                  <path d="M12 4.75v9.5" />
-                  <path d="M8.25 10.75L12 14.5l3.75-3.75" />
-                  <path d="M6.5 18.25h11" />
+                  <path d="M5 6.75h14" />
+                  <path d="M5 12h14" />
+                  <path d="M5 17.25h9" />
                 </svg>
               </span>
               <span class="paper-card-body">
-                <span class="paper-card-meta">
-                  <span class="tag tag-appendix">附录</span>
-                </span>
-                <span class="card-title">英文附录</span>
+                <span class="paper-card-meta"><span class="tag tag-appendix">V2</span></span>
+                <span class="card-title">v2 理论</span>
                 <span class="card-body">
-                  部署配置、合约映射、可移植性说明与参数参考。
+                  说明始终在线代理网络的引导结构、active reward 与 work reward。
                 </span>
               </span>
             </a>
 
-            <a class="card-link" href="../pdf/koinara-whitepaper-appendices-ko.pdf">
+            <a class="card-link" href="../v2-theory.ko.md">
               <span class="icon-box" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
-                  <path d="M12 4.75v9.5" />
-                  <path d="M8.25 10.75L12 14.5l3.75-3.75" />
-                  <path d="M6.5 18.25h11" />
+                  <path d="M5 6.75h14" />
+                  <path d="M5 12h14" />
+                  <path d="M5 17.25h9" />
                 </svg>
               </span>
               <span class="paper-card-body">
-                <span class="paper-card-meta">
-                  <span class="tag tag-appendix">附录</span>
-                </span>
-                <span class="card-title">韩文附录</span>
+                <span class="paper-card-meta"><span class="tag tag-appendix">V2</span></span>
+                <span class="card-title">v2 理论（韩文）</span>
                 <span class="card-body">
-                  为了保持主文简洁，附录包被单独发布。
+                  当前引导方向与最小规则的韩文版本。
                 </span>
               </span>
             </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="band band-alt" id="live">
+        <div class="section-shell">
+          <div class="section-header">
+            <p class="eyebrow">实时部署</p>
+            <h2 class="section-title">Worldland v2 已经部署到链上。</h2>
+          </div>
+
+          <div class="status-grid">
+            <article class="panel status-kpi">
+              <span class="summary-label">链</span>
+              <strong>Worldland Mainnet</strong>
+              <p class="summary-copy">
+                链 ID <code class="inline-code">103</code>，部署于 2026 年 3 月 11 日，并启用 v2 引导经济结构。
+              </p>
+            </article>
+
+            <article class="panel status-kpi">
+              <span class="summary-label">验证流程</span>
+              <strong>Deploy → Verify → Canary</strong>
+              <p class="summary-copy">
+                已创建真实 canary job，并用独立 provider 与 verifier 节点完成处理流程。
+              </p>
+            </article>
+
+            <article class="panel status-kpi">
+              <span class="summary-label">奖励模型</span>
+              <strong>Active + Work + Premium</strong>
+              <p class="summary-copy">
+                active reward 按 epoch 发放，work reward 来自 accepted job，premium 继续保持为市场奖励。
+              </p>
+            </article>
+          </div>
+
+          <div class="paper-grid" style="margin-top: 18px;">
+            <article class="panel">
+              <div class="card-stack">
+                <h3 class="card-title">核心合约</h3>
+                <p class="panel-subtitle">短链接会打开 Worldland 浏览器地址。</p>
+                <ul class="address-list">
+                  <li>
+                    <strong>Registry</strong>
+                    <a href="https://scan.worldland.foundation/address/0x865315BE82c432A45BB68C959413026F6202e368">0x8653...e368</a>
+                  </li>
+                  <li>
+                    <strong>Verifier</strong>
+                    <a href="https://scan.worldland.foundation/address/0x3b63deb3632b2484bAb6069281f08642ab112b16">0x3b63...2b16</a>
+                  </li>
+                  <li>
+                    <strong>Node Registry</strong>
+                    <a href="https://scan.worldland.foundation/address/0x243fB879fBE521c5c227Da9EF731968413755131">0x243f...5131</a>
+                  </li>
+                  <li>
+                    <strong>Reward Distributor</strong>
+                    <a href="https://scan.worldland.foundation/address/0x6Db94C2c93af7b0B5345C66535D5dC7cD9225126">0x6Db9...5126</a>
+                  </li>
+                  <li>
+                    <strong>KOIN Token</strong>
+                    <a href="https://scan.worldland.foundation/address/0x7749473E36a8d6E741d9E581106E81CacAb7832a">0x7749...832a</a>
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="panel">
+              <div class="card-stack">
+                <h3 class="card-title">v2 的变化</h3>
+                <ul class="micro-list">
+                  <li>新增节点注册与 heartbeat</li>
+                  <li>按 epoch 领取 active reward</li>
+                  <li>epoch 结束后领取 work reward</li>
+                  <li>将市场 premium 与协议发行分离</li>
+                  <li>协议保持最小，扩展交给 dApp 与代理网络</li>
+                </ul>
+                <p class="mono-note">Epoch 长度：86,400 秒 · Active pool：20%</p>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -261,8 +278,8 @@
           <div class="section-header">
             <p class="eyebrow">公开节点</p>
             <h2 class="section-title">
-              <span>在这里阅读协议。</span>
-              <span>在独立仓库中运行节点。</span>
+              <span>运行开放节点。</span>
+              <span>用在线时间和真实工作获得奖励。</span>
             </h2>
           </div>
 
@@ -277,10 +294,10 @@
                     <path d="M8 16h.01" />
                   </svg>
                 </span>
-                <h3 class="card-title">provider、verifier，或两者兼有</h3>
+                <h3 class="card-title">独立公开运行时</h3>
                 <p class="card-body">
-                  <span class="accent">Koinara-node</span> 是连接已部署
-                  Koinara 合约的独立公开后台节点程序，适用于多链运行时。
+                  <span class="accent">Koinara-node</span> 是公开的 provider /
+                  verifier 运行时，不依赖托管 API 或业务层，直接连接已部署合约。
                 </p>
                 <div class="button-row">
                   <a class="btn btn-primary" href="https://github.com/sinmb79/Koinara-node">
@@ -290,19 +307,13 @@
                     </svg>
                     打开仓库
                   </a>
-                  <a
-                    class="btn btn-ghost"
-                    href="https://github.com/sinmb79/Koinara-node/blob/main/docs/home-test-quickstart.md"
-                  >
+                  <a class="btn btn-ghost" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M11 5.5h8" />
-                      <path d="M11 12h8" />
-                      <path d="M11 18.5h8" />
-                      <path d="M5 6.25h.01" />
-                      <path d="M5 12h.01" />
-                      <path d="M5 17.75h.01" />
+                      <path d="M5 6.75h14" />
+                      <path d="M5 12h14" />
+                      <path d="M5 17.25h9" />
                     </svg>
-                    快速开始
+                    节点文档
                   </a>
                 </div>
               </div>
@@ -320,30 +331,29 @@
                   <code>$ git clone https://github.com/sinmb79/Koinara-node.git
 $ cd Koinara-node
 $ npm install
-$ npm run setup
-$ npm run doctor
-$ npm run node</code>
+$ npm run provider:v2:start
+$ npm run verifier:v2:start</code>
                 </div>
               </article>
-              <p class="terminal-note">三步操作路径：克隆、设置、运行。</p>
+              <p class="terminal-note">
+                v2 命令会使用 Worldland 主网 v2 路径与独立的 v2 状态目录。
+              </p>
             </div>
 
             <article class="panel node-docs">
               <div class="card-stack">
-                <h3 class="card-title">节点包包含的内容</h3>
+                <h3 class="card-title">v2 节点路径新增能力</h3>
                 <ul class="node-list">
-                  <li>provider / verifier / both 角色</li>
-                  <li>ollama / openai 推理后端</li>
-                  <li>priority failover 或 all-healthy 多链选择</li>
-                  <li>doctor、status 与 logs 命令</li>
-                  <li>manifest + receipt 发现规范</li>
-                  <li>家庭测试与操作员检查清单</li>
+                  <li>provider / verifier 的 v2 专用入口</li>
+                  <li>自动节点注册与 heartbeat</li>
+                  <li>active reward claim 路径</li>
+                  <li>epoch 结束后的 work reward claim 路径</li>
+                  <li>独立的 v2 mainnet 配置与产物目录</li>
                 </ul>
                 <div class="source-links">
-                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">Node Setup</a>
-                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">Operator Checklist</a>
-                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">Supported Networks</a>
-                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/protocol-compatibility.md">Protocol Compatibility</a>
+                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">运维清单</a>
+                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">支持网络</a>
+                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/protocol-compatibility.md">协议兼容性</a>
                 </div>
               </div>
             </article>
@@ -354,51 +364,57 @@ $ npm run node</code>
       <section class="band band-alt" id="supported-networks">
         <div class="section-shell">
           <div class="section-header">
-            <p class="eyebrow">支持的网络</p>
-            <h2 class="section-title">按链部署，同时让节点为更多网络做好准备。</h2>
+            <p class="eyebrow">支持网络</p>
+            <h2 class="section-title">按链部署，同时保持协议最小化。</h2>
           </div>
 
           <div class="network-grid">
             <article class="panel network-card">
               <div class="card-copy">
-                <span class="tag tag-runtime">EVM Runtime</span>
+                <span class="tag tag-runtime">LIVE</span>
                 <h3 class="card-title">Worldland</h3>
-                <p class="card-body">v1 的首个参考部署路径。</p>
+                <p class="card-body">
+                  第一条真实 v2 路径，已经验证 active reward、work reward 与 canary 流程。
+                </p>
               </div>
             </article>
 
             <article class="panel network-card">
               <div class="card-copy">
-                <span class="tag tag-runtime">EVM Runtime</span>
+                <span class="tag tag-runtime">EVM READY</span>
                 <h3 class="card-title">Base</h3>
                 <p class="card-body">
-                  节点运行时已为其准备健康度驱动的参与切换。
+                  节点运行时已经把 Base 视作独立部署目标。
                 </p>
               </div>
             </article>
 
             <article class="panel network-card">
               <div class="card-copy">
-                <span class="tag tag-runtime">EVM Runtime</span>
+                <span class="tag tag-runtime">EVM READY</span>
                 <h3 class="card-title">Ethereum</h3>
-                <p class="card-body">复用同一条 EVM 运行时路径。</p>
+                <p class="card-body">
+                  不改变节点行为即可部署同样的最小协议表面。
+                </p>
               </div>
             </article>
 
             <article class="panel network-card">
               <div class="card-copy">
-                <span class="tag tag-runtime">EVM Runtime</span>
+                <span class="tag tag-runtime">EVM READY</span>
                 <h3 class="card-title">BNB Smart Chain</h3>
-                <p class="card-body">通过共享 EVM adapter 预备完成。</p>
+                <p class="card-body">
+                  已经在共享 EVM 运行时边界内做好准备。
+                </p>
               </div>
             </article>
 
             <article class="panel network-card">
               <div class="card-copy">
-                <span class="tag tag-prepared">Prepared Only</span>
+                <span class="tag tag-prepared">NEXT ADAPTER</span>
                 <h3 class="card-title">Solana</h3>
                 <p class="card-body">
-                  真正可运行的部署与运行时仍属于后续工作。
+                  理论与边界已准备好，但仍需要下一个生产级适配器路径。
                 </p>
               </div>
             </article>
@@ -406,50 +422,11 @@ $ npm run node</code>
         </div>
       </section>
 
-      <section class="band" id="figures">
-        <div class="section-shell">
-          <div class="section-header">
-            <p class="eyebrow">渲染图示</p>
-            <h2 class="section-title">白皮书中的图示。</h2>
-          </div>
-
-          <div class="figure-grid">
-            <figure class="panel figure-card">
-              <div class="figure-frame">
-                <img src="../figures/whitepaper/en/figure-01-state-machine.png" alt="Job 生命周期状态机" />
-              </div>
-              <figcaption class="figure-caption">图 1. Job 生命周期状态机</figcaption>
-            </figure>
-
-            <figure class="panel figure-card">
-              <div class="figure-frame">
-                <img src="../figures/whitepaper/en/figure-02-network-flow.png" alt="主网络流程" />
-              </div>
-              <figcaption class="figure-caption">图 2. 主网络流程</figcaption>
-            </figure>
-
-            <figure class="panel figure-card">
-              <div class="figure-frame">
-                <img src="../figures/whitepaper/en/figure-03-layered-architecture.png" alt="分层架构" />
-              </div>
-              <figcaption class="figure-caption">图 3. 分层架构</figcaption>
-            </figure>
-
-            <figure class="panel figure-card">
-              <div class="figure-frame">
-                <img src="../figures/whitepaper/en/figure-04-issuance-curve.png" alt="发行曲线" />
-              </div>
-              <figcaption class="figure-caption">图 4. 发行曲线</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <section class="band band-alt" id="next-track">
+      <section class="band" id="next-track">
         <div class="section-shell">
           <div class="section-header">
             <p class="eyebrow">下一阶段</p>
-            <h2 class="section-title">按链部署协议，同时保持节点具备多链就绪能力。</h2>
+            <h2 class="section-title">协议保持小，生态系统在其上扩展。</h2>
           </div>
 
           <div class="roadmap">
@@ -458,17 +435,10 @@ $ npm run node</code>
                 <span class="step-badge">01</span>
               </div>
               <article class="timeline-card">
-                <h3 class="timeline-title">先落地 Worldland</h3>
+                <h3 class="timeline-title">稳定 Worldland v2 路径</h3>
                 <p class="timeline-copy">
-                  Worldland 仍然是 v1 合约的首个参考部署路径，链特定运行手册与部署产物保持在协议仓库之外。
+                  保持现有部署健康运行，让第一批公开运营者积累真实 uptime。
                 </p>
-                <a class="timeline-link" href="https://github.com/sinmb79/Koinara-Worldland">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M9 18.25c-3.5 1.05-3.5-1.75-4.9-2.1" />
-                    <path d="M19 18.25v-2.6a5.65 5.65 0 00-1.55-4.2c1.35-.15 2.75-.65 2.75-2.95a2.3 2.3 0 00-.65-1.65 2.15 2.15 0 00-.1-1.65s-1.1-.35-3.45 1.25a11.6 11.6 0 00-6 0c-2.35-1.6-3.45-1.25-3.45-1.25a2.15 2.15 0 00-.1 1.65 2.3 2.3 0 00-.65 1.65c0 2.3 1.4 2.8 2.75 2.95A5.02 5.02 0 009 15.6v2.65" />
-                  </svg>
-                  Koinara-Worldland
-                </a>
               </article>
             </div>
 
@@ -477,9 +447,9 @@ $ npm run node</code>
                 <span class="step-badge">02</span>
               </div>
               <article class="timeline-card">
-                <h3 class="timeline-title">扩展到更多 EVM 链</h3>
+                <h3 class="timeline-title">发展 dApp 与代理层</h3>
                 <p class="timeline-copy">
-                  Base、Ethereum 与 BNB 都可以承载独立的 Koinara 部署，而无需改变最小协议表面。
+                  消息、路由、信誉与垂直服务应在协议之上自由竞争。
                 </p>
               </article>
             </div>
@@ -489,9 +459,9 @@ $ npm run node</code>
                 <span class="step-badge">03</span>
               </div>
               <article class="timeline-card">
-                <h3 class="timeline-title">准备下一种 adapter</h3>
+                <h3 class="timeline-title">逐链扩张</h3>
                 <p class="timeline-copy">
-                  Solana 与未来的 non-EVM 路线应当落在显式 chain adapter 之后，而不是继续拉伸当前 Solidity 部署模型。
+                  只在有运营者基础的链上部署，不把桥误当成协议本身。
                 </p>
               </article>
             </div>
@@ -501,14 +471,14 @@ $ npm run node</code>
             <article class="panel summary-card summary-card-primary">
               <span class="summary-label">Protocol</span>
               <p class="summary-copy">
-                保持最小协议的链无关性，不把可用性悄悄变成桥接逻辑。
+                minimum acceptable inference、minimum reward 与 open participation 保持 canonical。
               </p>
             </article>
 
             <article class="panel summary-card summary-card-secondary">
-              <span class="summary-label">Deployment</span>
+              <span class="summary-label">Market</span>
               <p class="summary-copy">
-                分别发布链部署，而不是假装某一条链能无声吸收另一条链。
+                代理、dApp 与服务在其上竞争，并构建真实经济。
               </p>
             </article>
           </div>
@@ -525,6 +495,7 @@ $ npm run node</code>
         <div class="footer-links">
           <a href="https://github.com/sinmb79/koinara">GitHub</a>
           <a href="../pdf/koinara-whitepaper-en.pdf">白皮书</a>
+          <a href="../v2-theory.md">v2 理论</a>
         </div>
         <div class="footer-copy">© 2026 Koinara Protocol</div>
       </div>

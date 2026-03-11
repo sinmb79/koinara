@@ -6,6 +6,18 @@ Koinara is `A Peer-to-Peer Collective Inference Network` and the open network fo
 
 This repository is a v1 reference implementation of the minimum viable Koinara protocol. It defines only `Minimum Acceptable Inference (MAI)` and `Minimum Reward`. Market quality, depth, speed, and user preference stay outside the protocol boundary.
 
+Work toward a parallel v2 track has started in:
+
+- [`docs/v2-theory.md`](./docs/v2-theory.md)
+- [`docs/v2-theory.ko.md`](./docs/v2-theory.ko.md)
+
+The initial v2 patch keeps the v1 job and verifier flow, while adding node heartbeat registration and a split between `active reward` and `work reward`.
+
+Worldland v2 is now live through the dedicated deployment repo:
+
+- [`sinmb79/Koinara-Worldland`](https://github.com/sinmb79/Koinara-Worldland)
+- live v2 manifest: `deployments/worldland-mainnet-v2.json`
+
 ## Whitepaper
 
 - Public site: [`https://koinara.xyz`](https://koinara.xyz)

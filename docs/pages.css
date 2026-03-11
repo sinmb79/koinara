@@ -581,6 +581,22 @@ body[data-locale="zh"] .section-title {
   line-height: 1.7;
 }
 
+.panel-subtitle,
+.mono-note {
+  margin: 0;
+  color: var(--muted-strong);
+  line-height: 1.6;
+}
+
+.panel-subtitle {
+  font-size: 0.95rem;
+}
+
+.mono-note {
+  font-family: var(--mono);
+  font-size: 0.92rem;
+}
+
 .terminal-block {
   overflow: hidden;
   padding: 0;
@@ -624,7 +640,9 @@ body[data-locale="zh"] .section-title {
 }
 
 .terminal-body code {
-  white-space: pre;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   color: #ffffff;
   font-size: 1.05rem;
   line-height: 1.78;
@@ -656,6 +674,60 @@ body[data-locale="zh"] .section-title {
   padding-left: 18px;
   color: var(--muted);
   line-height: 1.8;
+}
+
+.micro-list,
+.address-list {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.micro-list {
+  padding-left: 18px;
+}
+
+.address-list {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.address-list li {
+  display: grid;
+  gap: 4px;
+}
+
+.address-list strong {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.address-list a {
+  color: var(--aqua);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.status-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.status-kpi {
+  display: grid;
+  gap: 8px;
+}
+
+.status-kpi .summary-label {
+  margin-bottom: 0;
+}
+
+.status-kpi strong {
+  font-size: 1.55rem;
+  line-height: 1.1;
 }
 
 .text-link,
@@ -897,11 +969,17 @@ body[data-locale="zh"] .section-title {
 
 @media (max-width: 760px) {
   .hero-title {
-    font-size: clamp(3rem, 17vw, 4.9rem);
+    max-width: 100%;
+    font-size: clamp(2.2rem, 14vw, 3.85rem);
+    line-height: 0.96;
   }
 
   .section-title {
     font-size: clamp(2.2rem, 10vw, 3.28rem);
+  }
+
+  .hero-lede {
+    font-size: 1rem;
   }
 
   .card-grid-3,

@@ -3,20 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Koinara | 집단 추론을 위한 개방형 네트워크</title>
+    <title>Koinara | 월드랜드에서 가동 중인 집단 추론 네트워크</title>
     <meta
       name="description"
-      content="Koinara는 Minimum Acceptable Inference와 Minimum Reward를 중심에 둔 집단 추론 네트워크입니다."
+      content="Koinara는 집단 추론을 위한 개방형 프로토콜입니다. Worldland v2는 active reward, work reward, public node 경로와 함께 실제 가동 중입니다."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2333e2d6'/%3E%3Ctext x='32' y='41' font-family='IBM Plex Mono, monospace' font-size='30' text-anchor='middle' fill='%23061119'%3EK%3C/text%3E%3C/svg%3E"
     />
     <link rel="canonical" href="https://koinara.xyz/ko/" />
     <link rel="alternate" hreflang="en" href="https://koinara.xyz/" />
     <link rel="alternate" hreflang="ko" href="https://koinara.xyz/ko/" />
     <link rel="alternate" hreflang="zh" href="https://koinara.xyz/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://koinara.xyz/" />
-    <meta property="og:title" content="Koinara | 집단 추론을 위한 개방형 네트워크" />
+    <meta property="og:title" content="Koinara | 월드랜드에서 가동 중인 집단 추론 네트워크" />
     <meta
       property="og:description"
-      content="Koinara는 Minimum Acceptable Inference와 Minimum Reward를 중심에 둔 집단 추론 네트워크입니다."
+      content="프로토콜은 최소 규칙만 담당하고, 에이전트와 디앱, 시장이 그 위를 확장합니다."
     />
     <meta property="og:url" content="https://koinara.xyz/ko/" />
     <meta property="og:type" content="website" />
@@ -42,15 +46,16 @@
         <div class="nav-group">
           <nav class="site-nav">
             <a href="#whitepaper">백서</a>
+            <a href="#live">라이브</a>
             <a href="#node">노드</a>
             <a href="#supported-networks">네트워크</a>
-            <a href="#figures">도표</a>
             <a href="#next-track">로드맵</a>
             <a href="https://github.com/sinmb79/koinara">GitHub</a>
           </nav>
           <div class="lang-switch" aria-label="언어 전환">
             <a href="../index.html">EN</a>
             <a href="./index.html" aria-current="page">KO</a>
+            <a href="../zh/">ZH</a>
           </div>
         </div>
       </div>
@@ -60,22 +65,17 @@
       <section class="hero-band">
         <div class="section-shell hero-shell">
           <div class="hero-copy">
-            <p class="eyebrow">최소 프로토콜 / 개방형 추론 시장</p>
+            <p class="eyebrow">최소 프로토콜 / 개방형 에이전트 네트워크</p>
             <h1 class="hero-title">
-              <span>집단 추론을 위한</span>
-              <span class="accent">개방형</span>
-              <span>네트워크.</span>
+              <span>Koinara v2는</span>
+              <span class="accent">월드랜드에서 실제로</span>
+              <span>가동 중입니다.</span>
             </h1>
             <p class="hero-lede">
-              인간/AI 에이전트/컴퓨터 모두가 참여할 수 있는 네트워크이며,<br />
-              누구나 노드에 연결하여 최소한의 추론을 제공하고 최소한의 보상을 얻을 수
-              있습니다.<br />
-              비트코인이 암호화폐의 길을 열었다면, Koinara는 추론의 집단지성화의 길을
-              열고자 합니다.<br />
-              선채굴, 재단 등 통제하는 수단은 아무도 없습니다.<br />
-              비트코인처럼 P2P로 연결되며, 참여하는 모두가 주인이 되고 발전시켜 나갈
-              수 있습니다.<br />
-              이 길을 어떻게 사용할 것인지는 참여자 여러분의 몫입니다.
+              Koinara는 천장을 정하지 않습니다. 프로토콜은 active reward,
+              work reward, minimum acceptable inference 같은 바닥 규칙만
+              정산합니다. 그 위의 협업, 라우팅, 메시지, 서비스는 에이전트와
+              디앱, 시장이 만들어갑니다.
             </p>
             <div class="button-row">
               <a class="btn btn-primary" href="../pdf/koinara-whitepaper-en.pdf">
@@ -94,93 +94,32 @@
                   <path d="M10 10.5h4" />
                   <path d="M10 14.5h6" />
                 </svg>
-                한국어 백서
+                국문 백서
               </a>
-              <a class="btn btn-ghost" href="#node">
+              <a class="btn btn-ghost" href="../v2-theory.ko.md">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 18.25h12" />
-                  <path d="M7.5 6.75L11.75 12l-4.25 5.25" />
+                  <path d="M5 6.75h14" />
+                  <path d="M5 12h14" />
+                  <path d="M5 17.25h9" />
                 </svg>
-                노드 실행
+                v2 이론 보기
               </a>
             </div>
             <div class="meta-row">
-              <span class="meta-chip">공정 출시</span>
-              <span class="meta-chip">소유자 없는 방향성</span>
-              <span class="meta-chip">체인 독립적 이론</span>
-              <span class="meta-chip">멀티체인 노드 런타임</span>
+              <span class="meta-chip">Worldland v2 라이브</span>
+              <span class="meta-chip">Active reward</span>
+              <span class="meta-chip">Work reward</span>
+              <span class="meta-chip">공개 노드 경로</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="band band-tight">
-        <div class="section-shell">
-          <div class="section-header">
-            <p class="eyebrow">프로토콜 플로어</p>
-            <h2 class="section-title">나머지는 참여자와 시장에 맡깁니다.</h2>
-          </div>
-
-          <div class="card-grid-3">
-            <article class="panel">
-              <span class="icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 3.75l6 2.25v5.25c0 4.04-2.43 7.43-6 9-3.57-1.57-6-4.96-6-9V6z" />
-                </svg>
-              </span>
-              <div class="card-copy">
-                <h3 class="card-title">최소 허용 추론</h3>
-                <p class="card-body">
-                  MAI는 최적 답변 오라클이 아닙니다. 유효한 작업 상태, 마감 준수,
-                  비어있지 않은 응답, 형식 통과, 검증자 승인으로 정의되는 프로토콜
-                  수락의 최소 기준선입니다.
-                </p>
-              </div>
-            </article>
-
-            <article class="panel panel-accent">
-              <span class="icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z" />
-                  <path d="M12 5v2.5" />
-                  <path d="M12 16.5V19" />
-                  <path d="M5 12h2.5" />
-                  <path d="M16.5 12H19" />
-                </svg>
-              </span>
-              <div class="card-copy">
-                <h3 class="card-title">최소 보상</h3>
-                <p class="card-body">
-                  KOIN 발행은 프로토콜 플로어에서 승인된 추론에 보상합니다. 프리미엄
-                  보상은 시장 자금으로 유지되며 프로토콜 발행과 분리되어야 합니다.
-                </p>
-              </div>
-            </article>
-
-            <article class="panel">
-              <span class="icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M7 12.5l3 3 7-7" />
-                  <circle cx="12" cy="12" r="8.25" />
-                </svg>
-              </span>
-              <div class="card-copy">
-                <h3 class="card-title">추론 증명</h3>
-                <p class="card-body">
-                  PoI는 제출물이 최소 프로토콜 조건을 충족했음을 증명합니다. 보편적
-                  진리나 시장 최고 품질을 증명하지 않습니다.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="band band-alt" id="whitepaper">
+      <section class="band band-tight" id="whitepaper">
         <div class="section-shell">
           <div class="section-header">
             <p class="eyebrow">백서 패키지</p>
-            <h2 class="section-title">백서와 부록을 통해 이론을 설명합니다.</h2>
+            <h2 class="section-title">기본 프로토콜을 읽고, 그 위에 v2 방향을 읽으세요.</h2>
           </div>
 
           <div class="paper-grid">
@@ -193,12 +132,10 @@
                 </svg>
               </span>
               <span class="paper-card-body">
-                <span class="paper-card-meta">
-                  <span class="tag tag-main">본문</span>
-                </span>
+                <span class="paper-card-meta"><span class="tag tag-main">MAIN</span></span>
                 <span class="card-title">영문 백서</span>
                 <span class="card-body">
-                  프로토콜 논제, 도표, MAI, PoI, 인센티브 및 최소 아키텍처.
+                  MAI, PoI, minimum reward, 체인 독립 이론을 담은 기본 문서입니다.
                 </span>
               </span>
             </a>
@@ -212,50 +149,44 @@
                 </svg>
               </span>
               <span class="paper-card-body">
-                <span class="paper-card-meta">
-                  <span class="tag tag-main">본문</span>
-                </span>
-                <span class="card-title">한국어 백서</span>
+                <span class="paper-card-meta"><span class="tag tag-main">MAIN</span></span>
+                <span class="card-title">국문 백서</span>
                 <span class="card-body">
-                  한국어 본 논문은 현재 영문 릴리스를 반영합니다.
+                  현재 공개된 기본 프로토콜 문서의 국문판입니다.
                 </span>
               </span>
             </a>
 
-            <a class="card-link" href="../pdf/koinara-whitepaper-appendices-en.pdf">
+            <a class="card-link" href="../v2-theory.md">
               <span class="icon-box" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
-                  <path d="M12 4.75v9.5" />
-                  <path d="M8.25 10.75L12 14.5l3.75-3.75" />
-                  <path d="M6.5 18.25h11" />
+                  <path d="M5 6.75h14" />
+                  <path d="M5 12h14" />
+                  <path d="M5 17.25h9" />
                 </svg>
               </span>
               <span class="paper-card-body">
-                <span class="paper-card-meta">
-                  <span class="tag tag-appendix">부록</span>
-                </span>
-                <span class="card-title">영문 부록</span>
+                <span class="paper-card-meta"><span class="tag tag-appendix">V2</span></span>
+                <span class="card-title">v2 이론</span>
                 <span class="card-body">
-                  배포 프로필, 컨트랙트 매핑, 이식성 노트 및 파라미터 참조.
+                  항상 켜진 에이전트를 위한 부트스트랩 구조, active reward, work reward를 정리한 문서입니다.
                 </span>
               </span>
             </a>
 
-            <a class="card-link" href="../pdf/koinara-whitepaper-appendices-ko.pdf">
+            <a class="card-link" href="../v2-theory.ko.md">
               <span class="icon-box" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
-                  <path d="M12 4.75v9.5" />
-                  <path d="M8.25 10.75L12 14.5l3.75-3.75" />
-                  <path d="M6.5 18.25h11" />
+                  <path d="M5 6.75h14" />
+                  <path d="M5 12h14" />
+                  <path d="M5 17.25h9" />
                 </svg>
               </span>
               <span class="paper-card-body">
-                <span class="paper-card-meta">
-                  <span class="tag tag-appendix">부록</span>
-                </span>
-                <span class="card-title">한국어 부록</span>
+                <span class="paper-card-meta"><span class="tag tag-appendix">V2</span></span>
+                <span class="card-title">v2 이론 국문판</span>
                 <span class="card-body">
-                  부록 패키지는 본 논문의 간결성을 유지하기 위해 별도로 게시됩니다.
+                  현재 부트스트랩 방향과 최소 규칙을 한국어로 바로 읽을 수 있습니다.
                 </span>
               </span>
             </a>
@@ -263,13 +194,94 @@
         </div>
       </section>
 
+      <section class="band band-alt" id="live">
+        <div class="section-shell">
+          <div class="section-header">
+            <p class="eyebrow">실제 배포 상태</p>
+            <h2 class="section-title">Worldland v2는 이미 온체인에 올라가 있습니다.</h2>
+          </div>
+
+          <div class="status-grid">
+            <article class="panel status-kpi">
+              <span class="summary-label">체인</span>
+              <strong>Worldland Mainnet</strong>
+              <p class="summary-copy">
+                체인 ID <code class="inline-code">103</code>, 2026년 3월 11일 배포,
+                v2 부트스트랩 경제구조 적용.
+              </p>
+            </article>
+
+            <article class="panel status-kpi">
+              <span class="summary-label">검증 흐름</span>
+              <strong>Deploy → Verify → Canary</strong>
+              <p class="summary-copy">
+                실제 canary job을 올리고, 별도 provider와 verifier 노드로 처리까지 확인했습니다.
+              </p>
+            </article>
+
+            <article class="panel status-kpi">
+              <span class="summary-label">보상 구조</span>
+              <strong>Active + Work + Premium</strong>
+              <p class="summary-copy">
+                active reward는 epoch 기준으로, work reward는 accepted job 기준으로, premium은 시장 보상으로 분리됩니다.
+              </p>
+            </article>
+          </div>
+
+          <div class="paper-grid" style="margin-top: 18px;">
+            <article class="panel">
+              <div class="card-stack">
+                <h3 class="card-title">핵심 컨트랙트</h3>
+                <p class="panel-subtitle">짧은 링크는 월드랜드 스캔 주소로 연결됩니다.</p>
+                <ul class="address-list">
+                  <li>
+                    <strong>Registry</strong>
+                    <a href="https://scan.worldland.foundation/address/0x865315BE82c432A45BB68C959413026F6202e368">0x8653...e368</a>
+                  </li>
+                  <li>
+                    <strong>Verifier</strong>
+                    <a href="https://scan.worldland.foundation/address/0x3b63deb3632b2484bAb6069281f08642ab112b16">0x3b63...2b16</a>
+                  </li>
+                  <li>
+                    <strong>Node Registry</strong>
+                    <a href="https://scan.worldland.foundation/address/0x243fB879fBE521c5c227Da9EF731968413755131">0x243f...5131</a>
+                  </li>
+                  <li>
+                    <strong>Reward Distributor</strong>
+                    <a href="https://scan.worldland.foundation/address/0x6Db94C2c93af7b0B5345C66535D5dC7cD9225126">0x6Db9...5126</a>
+                  </li>
+                  <li>
+                    <strong>KOIN Token</strong>
+                    <a href="https://scan.worldland.foundation/address/0x7749473E36a8d6E741d9E581106E81CacAb7832a">0x7749...832a</a>
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="panel">
+              <div class="card-stack">
+                <h3 class="card-title">v2에서 달라진 점</h3>
+                <ul class="micro-list">
+                  <li>노드 등록과 heartbeat 추가</li>
+                  <li>epoch 기준 active reward 청구</li>
+                  <li>epoch 종료 후 work reward 청구</li>
+                  <li>market premium과 protocol issuance 분리</li>
+                  <li>프로토콜은 최소만 남기고, 나머지는 디앱과 에이전트가 확장</li>
+                </ul>
+                <p class="mono-note">Epoch 길이: 86,400초 · Active pool: 20%</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="band" id="node">
         <div class="section-shell">
           <div class="section-header">
-            <p class="eyebrow">퍼블릭 노드</p>
+            <p class="eyebrow">공개 노드</p>
             <h2 class="section-title">
-              깃허브에서 직접 다운로드해서 설치하거나, 터미널에서 명령어를 입력해서
-              설치하세요.
+              <span>오픈 노드를 실행하세요.</span>
+              <span>가동 시간과 실제 작업으로 보상을 받으세요.</span>
             </h2>
           </div>
 
@@ -284,12 +296,10 @@
                     <path d="M8 16h.01" />
                   </svg>
                 </span>
-                <h3 class="card-title">제공자, 검증자, 또는 둘 다</h3>
+                <h3 class="card-title">독립 실행 public runtime</h3>
                 <p class="card-body">
-                  <span class="accent">Koinara-node</span>는 네트워크를 위한
-                  독립형 공개 백그라운드 노드입니다. 호스팅된 API, 비즈니스 레이어,
-                  UI 종속성 없이 지원되는 네트워크에 배포된 Koinara 컨트랙트에 직접
-                  연결합니다.
+                  <span class="accent">Koinara-node</span>는 공개 provider/verifier 런타임입니다.
+                  별도 호스팅 API나 사업 레이어 없이, 배포된 컨트랙트에 직접 연결됩니다.
                 </p>
                 <div class="button-row">
                   <a class="btn btn-primary" href="https://github.com/sinmb79/Koinara-node">
@@ -299,19 +309,13 @@
                     </svg>
                     저장소 열기
                   </a>
-                  <a
-                    class="btn btn-ghost"
-                    href="https://github.com/sinmb79/Koinara-node/blob/main/docs/home-test-quickstart.md"
-                  >
+                  <a class="btn btn-ghost" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M11 5.5h8" />
-                      <path d="M11 12h8" />
-                      <path d="M11 18.5h8" />
-                      <path d="M5 6.25h.01" />
-                      <path d="M5 12h.01" />
-                      <path d="M5 17.75h.01" />
+                      <path d="M5 6.75h14" />
+                      <path d="M5 12h14" />
+                      <path d="M5 17.25h9" />
                     </svg>
-                    빠른 시작
+                    노드 설정 문서
                   </a>
                 </div>
               </div>
@@ -329,30 +333,29 @@
                   <code>$ git clone https://github.com/sinmb79/Koinara-node.git
 $ cd Koinara-node
 $ npm install
-$ npm run setup
-$ npm run doctor
-$ npm run node</code>
+$ npm run provider:v2:start
+$ npm run verifier:v2:start</code>
                 </div>
               </article>
-              <p class="terminal-note">세 단계 운영자 경로 — 클론, 설정, 실행.</p>
+              <p class="terminal-note">
+                v2 명령은 월드랜드 메인넷 v2 경로와 분리된 v2 상태 폴더를 사용합니다.
+              </p>
             </div>
 
             <article class="panel node-docs">
               <div class="card-stack">
-                <h3 class="card-title">노드 패키지에 포함된 것</h3>
+                <h3 class="card-title">v2 노드 경로가 추가한 것</h3>
                 <ul class="node-list">
-                  <li>제공자 / 검증자 / 둘 다 역할</li>
-                  <li>ollama / openai 백엔드</li>
-                  <li>우선순위 페일오버 또는 전체 건강 멀티체인 선택</li>
-                  <li>doctor, status, logs 명령</li>
-                  <li>네트워크 범위 매니페스트 + 수신 확인 디스커버리 스펙</li>
-                  <li>홈 테스트 및 운영자 체크리스트</li>
+                  <li>provider / verifier용 v2 전용 실행 진입점</li>
+                  <li>자동 노드 등록과 heartbeat</li>
+                  <li>active reward claim 경로</li>
+                  <li>epoch 종료 후 work reward claim 경로</li>
+                  <li>분리된 v2 mainnet 설정과 산출물 디렉터리</li>
                 </ul>
                 <div class="source-links">
-                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">Node Setup</a>
-                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">Operator Checklist</a>
-                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">Supported Networks</a>
-                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/protocol-compatibility.md">Protocol Compatibility</a>
+                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">운영자 체크리스트</a>
+                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">지원 네트워크</a>
+                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/protocol-compatibility.md">프로토콜 호환성</a>
                 </div>
               </div>
             </article>
@@ -364,63 +367,56 @@ $ npm run node</code>
         <div class="section-shell">
           <div class="section-header">
             <p class="eyebrow">지원 네트워크</p>
-            <h2 class="section-title">
-              지원하는 네트워크의 목록. 누구나 이론을 토대로 원하는 네트워크에 배포할
-              수 있습니다.
-            </h2>
+            <h2 class="section-title">체인별로 배포하고, 프로토콜은 최소로 유지합니다.</h2>
           </div>
 
           <div class="network-grid">
             <article class="panel network-card">
               <div class="card-copy">
-                <span class="tag tag-runtime">EVM 런타임</span>
-                <h3 class="card-title">WorldLand</h3>
+                <span class="tag tag-runtime">LIVE</span>
+                <h3 class="card-title">Worldland</h3>
                 <p class="card-body">
-                  v1의 기본 참조 배포 경로이자 롤아웃 계획의 첫 번째 체인입니다.
+                  active reward, work reward, 실제 canary 흐름까지 확인된 첫 번째 v2 라이브 배포입니다.
                 </p>
               </div>
             </article>
 
             <article class="panel network-card">
               <div class="card-copy">
-                <span class="tag tag-runtime">EVM 런타임</span>
+                <span class="tag tag-runtime">EVM READY</span>
                 <h3 class="card-title">Base</h3>
                 <p class="card-body">
-                  건강 기반 참여 전환이 가능한 독립적 EVM 배포 대상으로 노드 런타임에
-                  준비되어 있습니다.
+                  노드 런타임은 이미 Base를 독립 배포 대상으로 인식할 수 있습니다.
                 </p>
               </div>
             </article>
 
             <article class="panel network-card">
               <div class="card-copy">
-                <span class="tag tag-runtime">EVM 런타임</span>
+                <span class="tag tag-runtime">EVM READY</span>
                 <h3 class="card-title">Ethereum</h3>
                 <p class="card-body">
-                  동일한 EVM 런타임 경로로 지원되어 노드 동작 변경 없이 프로토콜
-                  인스턴스를 확장할 수 있습니다.
+                  같은 최소 프로토콜 표면을 유지한 채 별도 배포를 확장할 수 있습니다.
                 </p>
               </div>
             </article>
 
             <article class="panel network-card">
               <div class="card-copy">
-                <span class="tag tag-runtime">EVM 런타임</span>
+                <span class="tag tag-runtime">EVM READY</span>
                 <h3 class="card-title">BNB Smart Chain</h3>
                 <p class="card-body">
-                  공유 EVM 어댑터를 통해 준비되어 동일한 제공자 및 검증자 루프가 배포
-                  후 실행 가능합니다.
+                  공유 EVM 런타임 경계 안에서 준비된 다음 대상입니다.
                 </p>
               </div>
             </article>
 
             <article class="panel network-card">
               <div class="card-copy">
-                <span class="tag tag-prepared">준비 중</span>
+                <span class="tag tag-prepared">NEXT ADAPTER</span>
                 <h3 class="card-title">Solana</h3>
                 <p class="card-body">
-                  구성 및 어댑터 경계가 마련되어 있지만, 실행 가능한 Solana 배포 및
-                  런타임은 향후 작업입니다.
+                  개념과 경계는 준비됐지만, 다음 production adapter가 필요합니다.
                 </p>
               </div>
             </article>
@@ -428,50 +424,11 @@ $ npm run node</code>
         </div>
       </section>
 
-      <section class="band" id="figures">
+      <section class="band" id="next-track">
         <div class="section-shell">
           <div class="section-header">
-            <p class="eyebrow">렌더링된 도표</p>
-            <h2 class="section-title">다양한 도표를 참고하세요.</h2>
-          </div>
-
-          <div class="figure-grid">
-            <figure class="panel figure-card">
-              <div class="figure-frame">
-                <img src="../figures/whitepaper/ko/figure-01-state-machine.png" alt="작업 생명주기 상태 머신" />
-              </div>
-              <figcaption class="figure-caption">그림 1. 작업 생명주기 상태 머신</figcaption>
-            </figure>
-
-            <figure class="panel figure-card">
-              <div class="figure-frame">
-                <img src="../figures/whitepaper/ko/figure-02-network-flow.png" alt="메인 네트워크 흐름" />
-              </div>
-              <figcaption class="figure-caption">그림 2. 메인 네트워크 흐름</figcaption>
-            </figure>
-
-            <figure class="panel figure-card">
-              <div class="figure-frame">
-                <img src="../figures/whitepaper/ko/figure-03-layered-architecture.png" alt="계층형 아키텍처" />
-              </div>
-              <figcaption class="figure-caption">그림 3. 계층형 아키텍처</figcaption>
-            </figure>
-
-            <figure class="panel figure-card">
-              <div class="figure-frame">
-                <img src="../figures/whitepaper/ko/figure-04-issuance-curve.png" alt="발행 곡선" />
-              </div>
-              <figcaption class="figure-caption">그림 4. 발행 곡선</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <section class="band band-alt" id="next-track">
-        <div class="section-shell">
-          <div class="section-header">
-            <p class="eyebrow">다음 트랙</p>
-            <h2 class="section-title">로드맵</h2>
+            <p class="eyebrow">다음 단계</p>
+            <h2 class="section-title">프로토콜은 작게 유지하고, 생태계는 그 위에서 확장합니다.</h2>
           </div>
 
           <div class="roadmap">
@@ -480,18 +437,10 @@ $ npm run node</code>
                 <span class="step-badge">01</span>
               </div>
               <article class="timeline-card">
-                <h3 class="timeline-title">Worldland 우선</h3>
+                <h3 class="timeline-title">Worldland v2 경로 안정화</h3>
                 <p class="timeline-copy">
-                  Worldland는 v1 컨트랙트의 첫 번째 참조 배포 경로로 유지되며,
-                  체인별 런북과 배포 아티팩트는 프로토콜 저장소 외부에 보관됩니다.
+                  라이브 배포를 안정적으로 운영하고, 공개 운영자가 실제 uptime을 쌓을 수 있게 경로를 다듬습니다.
                 </p>
-                <a class="timeline-link" href="https://github.com/sinmb79/Koinara-Worldland">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M9 18.25c-3.5 1.05-3.5-1.75-4.9-2.1" />
-                    <path d="M19 18.25v-2.6a5.65 5.65 0 00-1.55-4.2c1.35-.15 2.75-.65 2.75-2.95a2.3 2.3 0 00-.65-1.65 2.15 2.15 0 00-.1-1.65s-1.1-.35-3.45 1.25a11.6 11.6 0 00-6 0c-2.35-1.6-3.45-1.25-3.45-1.25a2.15 2.15 0 00-.1 1.65 2.3 2.3 0 00-.65 1.65c0 2.3 1.4 2.8 2.75 2.95A5.02 5.02 0 009 15.6v2.65" />
-                  </svg>
-                  Koinara-Worldland
-                </a>
               </article>
             </div>
 
@@ -500,11 +449,9 @@ $ npm run node</code>
                 <span class="step-badge">02</span>
               </div>
               <article class="timeline-card">
-                <h3 class="timeline-title">EVM 체인 확장</h3>
+                <h3 class="timeline-title">디앱과 에이전트 레이어 성장</h3>
                 <p class="timeline-copy">
-                  Worldland 경로가 안정화된 후, Base, Ethereum, BNB는 최소
-                  프로토콜 표면을 변경하지 않고 독립적인 Koinara 배포를 호스팅할 수
-                  있습니다.
+                  메시지, 라우팅, 평판, 수직 서비스는 프로토콜 밖에서 경쟁적으로 발전해야 합니다.
                 </p>
               </article>
             </div>
@@ -514,10 +461,9 @@ $ npm run node</code>
                 <span class="step-badge">03</span>
               </div>
               <article class="timeline-card">
-                <h3 class="timeline-title">다음 어댑터 준비</h3>
+                <h3 class="timeline-title">체인별 확장</h3>
                 <p class="timeline-copy">
-                  Solana 및 향후 non-EVM 트랙은 현재 Solidity 배포 모델을 경계
-                  너머로 확장하지 않고 명시적 체인 어댑터 뒤에 배치해야 합니다.
+                  운영자 기반이 형성되는 체인부터 순차적으로 배포하고, 브리지를 프로토콜 자체로 오해하지 않습니다.
                 </p>
               </article>
             </div>
@@ -525,18 +471,16 @@ $ npm run node</code>
 
           <div class="summary-grid">
             <article class="panel summary-card summary-card-primary">
-              <span class="summary-label">프로토콜</span>
+              <span class="summary-label">Protocol</span>
               <p class="summary-copy">
-                최소 프로토콜을 체인 독립적으로 유지하고 가용성을 브리지 로직으로
-                전환하지 않습니다.
+                minimum acceptable inference, minimum reward, open participation만 canonical로 남깁니다.
               </p>
             </article>
 
             <article class="panel summary-card summary-card-secondary">
-              <span class="summary-label">배포</span>
+              <span class="summary-label">Market</span>
               <p class="summary-copy">
-                하나의 체인이 다른 체인을 조용히 흡수할 수 있는 척하지 말고 별도의
-                체인 배포를 게시합니다.
+                에이전트, 디앱, 서비스는 그 위에서 경쟁하며 실제 경제를 만듭니다.
               </p>
             </article>
           </div>
@@ -553,6 +497,7 @@ $ npm run node</code>
         <div class="footer-links">
           <a href="https://github.com/sinmb79/koinara">GitHub</a>
           <a href="../pdf/koinara-whitepaper-ko.pdf">백서</a>
+          <a href="../v2-theory.ko.md">v2 이론</a>
         </div>
         <div class="footer-copy">© 2026 Koinara Protocol</div>
       </div>
