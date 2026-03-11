@@ -23,337 +23,538 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./pages.css" />
   </head>
-  <body>
-    <div class="site-bg"></div>
-    <div class="page-shell">
-      <header class="site-header">
+  <body data-locale="en">
+    <header class="site-header">
+      <div class="header-shell">
         <a class="brand" href="./index.html">
           <span class="brand-mark">K</span>
           <span class="brand-copy">
             <strong>Koinara</strong>
-            <span>A Peer-to-Peer Collective Inference Network</span>
+            <span>Collective Inference Network</span>
           </span>
         </a>
-        <nav class="site-nav">
-          <a href="#whitepaper">Whitepaper</a>
-          <a href="#node">Node</a>
-          <a href="#supported-networks">Networks</a>
-          <a href="#figures">Figures</a>
-          <a href="#next-track">Next Track</a>
-          <a href="https://github.com/sinmb79/koinara">GitHub</a>
+
+        <div class="nav-group">
+          <nav class="site-nav">
+            <a href="#whitepaper">Whitepaper</a>
+            <a href="#node">Node</a>
+            <a href="#supported-networks">Networks</a>
+            <a href="#figures">Figures</a>
+            <a href="#next-track">Roadmap</a>
+            <a href="https://github.com/sinmb79/koinara">GitHub</a>
+          </nav>
           <div class="lang-switch" aria-label="Language switcher">
             <a href="./index.html" aria-current="page">EN</a>
             <a href="./ko/">KO</a>
-            <a href="./zh/">ZH</a>
           </div>
-        </nav>
-      </header>
+        </div>
+      </div>
+    </header>
 
-      <main>
-        <section class="hero section">
+    <main>
+      <section class="hero-band">
+        <div class="section-shell hero-shell">
           <div class="hero-copy">
             <p class="eyebrow">MINIMUM PROTOCOL / OPEN INFERENCE MARKET</p>
-            <h1>The open network<br />for collective inference.</h1>
-            <p class="lede">
+            <h1 class="hero-title">
+              <span>The open network</span>
+              <span class="accent">for collective</span>
+              <span>inference.</span>
+            </h1>
+            <p class="hero-lede">
               Koinara defines only two protocol primitives:
               <code>Minimum Acceptable Inference (MAI)</code> and
-              <code>Minimum Reward</code>. Everything above that floor, from quality
-              and speed to depth and user preference, belongs to the market.
+              <code>Minimum Reward</code>. Everything above that floor belongs to
+              the market.
             </p>
-            <div class="cta-row">
-              <a class="btn btn-primary" href="./pdf/koinara-whitepaper-en.pdf">English Whitepaper</a>
-              <a class="btn btn-secondary" href="./pdf/koinara-whitepaper-ko.pdf">Korean Whitepaper</a>
-              <a class="btn btn-ghost" href="#node">Run a Node</a>
+            <div class="button-row">
+              <a class="btn btn-primary" href="./pdf/koinara-whitepaper-en.pdf">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 3.75h6l4.25 4.25V20.25H8z" />
+                  <path d="M14 3.75v4.5h4.5" />
+                  <path d="M10 10.5h4" />
+                  <path d="M10 14.5h6" />
+                </svg>
+                English Whitepaper
+              </a>
+              <a class="btn btn-secondary" href="./pdf/koinara-whitepaper-ko.pdf">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 3.75h6l4.25 4.25V20.25H8z" />
+                  <path d="M14 3.75v4.5h4.5" />
+                  <path d="M10 10.5h4" />
+                  <path d="M10 14.5h6" />
+                </svg>
+                Korean Whitepaper
+              </a>
+              <a class="btn btn-ghost" href="#node">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 18.25h12" />
+                  <path d="M7.5 6.75L11.75 12l-4.25 5.25" />
+                </svg>
+                Run a Node
+              </a>
             </div>
-            <div class="meta-strip">
-              <span>Fair launch</span>
-              <span>Ownerless direction</span>
-              <span>Chain-independent theory</span>
-              <span>Multichain node runtime</span>
+            <div class="meta-row">
+              <span class="meta-chip">Fair launch</span>
+              <span class="meta-chip">Ownerless direction</span>
+              <span class="meta-chip">Chain-independent theory</span>
+              <span class="meta-chip">Multichain node runtime</span>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="section protocol-floor">
-          <div class="section-heading">
+      <section class="band band-tight">
+        <div class="section-shell">
+          <div class="section-header">
             <p class="eyebrow">PROTOCOL FLOOR</p>
-            <h2>Only the minimum is canonical.</h2>
+            <h2 class="section-title">Only the minimum is canonical.</h2>
           </div>
 
-          <div class="floor-grid">
-            <article class="floor-card">
-              <h3>Minimum Acceptable Inference</h3>
-              <p>
-                MAI is not a best-answer oracle. It is the minimum line of protocol
-                acceptance, defined in v1 by valid job state, deadline compliance,
-                non-empty response, format pass, and verifier approval.
-              </p>
+          <div class="card-grid-3">
+            <article class="panel">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 3.75l6 2.25v5.25c0 4.04-2.43 7.43-6 9-3.57-1.57-6-4.96-6-9V6z" />
+                </svg>
+              </span>
+              <div class="card-copy">
+                <h3 class="card-title">Minimum Acceptable Inference</h3>
+                <p class="card-body">
+                  MAI is not a best-answer oracle. It is the minimum line of
+                  protocol acceptance, defined in v1 by valid job state,
+                  deadline compliance, non-empty response, format pass, and
+                  verifier approval.
+                </p>
+              </div>
             </article>
-            <article class="floor-card">
-              <h3>Minimum Reward</h3>
-              <p>
-                KOIN issuance rewards accepted inference at the protocol floor. Premium
-                rewards stay market-funded and must remain separate from protocol issuance.
-              </p>
+
+            <article class="panel panel-accent">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z" />
+                  <path d="M12 5v2.5" />
+                  <path d="M12 16.5V19" />
+                  <path d="M5 12h2.5" />
+                  <path d="M16.5 12H19" />
+                </svg>
+              </span>
+              <div class="card-copy">
+                <h3 class="card-title">Minimum Reward</h3>
+                <p class="card-body">
+                  KOIN issuance rewards accepted inference at the protocol floor.
+                  Premium rewards stay market-funded and must remain separate
+                  from protocol issuance.
+                </p>
+              </div>
             </article>
-            <article class="floor-card">
-              <h3>Proof of Inference</h3>
-              <p>
-                PoI proves that a submission satisfied the minimum protocol conditions. It
-                does not prove universal truth or market-best quality.
-              </p>
+
+            <article class="panel">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M7 12.5l3 3 7-7" />
+                  <circle cx="12" cy="12" r="8.25" />
+                </svg>
+              </span>
+              <div class="card-copy">
+                <h3 class="card-title">Proof of Inference</h3>
+                <p class="card-body">
+                  PoI proves that a submission satisfied the minimum protocol
+                  conditions. It does not prove universal truth or market-best
+                  quality.
+                </p>
+              </div>
             </article>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="section whitepaper-package" id="whitepaper">
-          <div class="section-heading">
+      <section class="band band-alt" id="whitepaper">
+        <div class="section-shell">
+          <div class="section-header">
             <p class="eyebrow">WHITEPAPER PACKAGE</p>
-            <h2>Main paper plus companion appendices.</h2>
+            <h2 class="section-title">Main paper plus companion appendices.</h2>
           </div>
 
           <div class="paper-grid">
-            <article class="paper-card">
-              <span class="paper-tag">Main</span>
-              <h3>English Whitepaper</h3>
-              <p>The protocol thesis, figures, MAI, PoI, incentives, and minimal architecture.</p>
-              <a href="./pdf/koinara-whitepaper-en.pdf">Download PDF</a>
-            </article>
-            <article class="paper-card">
-              <span class="paper-tag">Main</span>
-              <h3>Korean Whitepaper</h3>
-              <p>The Korean main paper mirrors the current English release.</p>
-              <a href="./pdf/koinara-whitepaper-ko.pdf">Download PDF</a>
-            </article>
-            <article class="paper-card">
-              <span class="paper-tag">Appendix</span>
-              <h3>English Appendices</h3>
-              <p>Deployment profiles, contract mapping, portability notes, and parameter references.</p>
-              <a href="./pdf/koinara-whitepaper-appendices-en.pdf">Download PDF</a>
-            </article>
-            <article class="paper-card">
-              <span class="paper-tag">Appendix</span>
-              <h3>Korean Appendices</h3>
-              <p>The appendix package is published separately so the main paper can stay concise.</p>
-              <a href="./pdf/koinara-whitepaper-appendices-ko.pdf">Download PDF</a>
-            </article>
-          </div>
-        </section>
+            <a class="card-link" href="./pdf/koinara-whitepaper-en.pdf">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4.75v9.5" />
+                  <path d="M8.25 10.75L12 14.5l3.75-3.75" />
+                  <path d="M6.5 18.25h11" />
+                </svg>
+              </span>
+              <span class="paper-card-body">
+                <span class="paper-card-meta">
+                  <span class="tag tag-main">MAIN</span>
+                </span>
+                <span class="card-title">English Whitepaper</span>
+                <span class="card-body">
+                  The protocol thesis, figures, MAI, PoI, incentives, and
+                  minimal architecture.
+                </span>
+              </span>
+            </a>
 
-        <section class="section node-section" id="node">
-          <div class="section-heading">
+            <a class="card-link" href="./pdf/koinara-whitepaper-ko.pdf">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4.75v9.5" />
+                  <path d="M8.25 10.75L12 14.5l3.75-3.75" />
+                  <path d="M6.5 18.25h11" />
+                </svg>
+              </span>
+              <span class="paper-card-body">
+                <span class="paper-card-meta">
+                  <span class="tag tag-main">MAIN</span>
+                </span>
+                <span class="card-title">Korean Whitepaper</span>
+                <span class="card-body">
+                  The Korean main paper mirrors the current English release.
+                </span>
+              </span>
+            </a>
+
+            <a class="card-link" href="./pdf/koinara-whitepaper-appendices-en.pdf">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4.75v9.5" />
+                  <path d="M8.25 10.75L12 14.5l3.75-3.75" />
+                  <path d="M6.5 18.25h11" />
+                </svg>
+              </span>
+              <span class="paper-card-body">
+                <span class="paper-card-meta">
+                  <span class="tag tag-appendix">APPENDIX</span>
+                </span>
+                <span class="card-title">English Appendices</span>
+                <span class="card-body">
+                  Deployment profiles, contract mapping, portability notes, and
+                  parameter references.
+                </span>
+              </span>
+            </a>
+
+            <a class="card-link" href="./pdf/koinara-whitepaper-appendices-ko.pdf">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4.75v9.5" />
+                  <path d="M8.25 10.75L12 14.5l3.75-3.75" />
+                  <path d="M6.5 18.25h11" />
+                </svg>
+              </span>
+              <span class="paper-card-body">
+                <span class="paper-card-meta">
+                  <span class="tag tag-appendix">APPENDIX</span>
+                </span>
+                <span class="card-title">Korean Appendices</span>
+                <span class="card-body">
+                  The appendix package is published separately so the main paper
+                  can stay concise.
+                </span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="node">
+        <div class="section-shell">
+          <div class="section-header">
             <p class="eyebrow">PUBLIC NODE</p>
-            <h2>Read the protocol here.<br />Run the node from its own repo.</h2>
+            <h2 class="section-title">
+              <span>Read the protocol here.</span>
+              <span>Run the node from its own repo.</span>
+            </h2>
           </div>
 
-          <div class="node-grid">
-            <article class="node-card node-card-primary">
-              <span class="network-label">Koinara-node</span>
-              <h3>Provider, verifier, or both</h3>
-              <p>
-                `Koinara-node` is the standalone public background node for the network.
-                It connects directly to deployed Koinara contracts across supported networks,
-                with no hosted API, no business layer, and no UI dependency. The current runtime
-                can fail over across healthy EVM deployments while keeping Solana in prepared-only scope.
-              </p>
-              <div class="cta-row">
-                <a class="btn btn-primary" href="https://github.com/sinmb79/Koinara-node">Open Repo</a>
-                <a class="btn btn-secondary" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/home-test-quickstart.md">Home Test Quickstart</a>
-              </div>
-            </article>
-
-            <article class="node-card">
-              <span class="network-label">Install</span>
-              <h3>Three-step operator path</h3>
-              <pre class="command-block"><code>git clone https://github.com/sinmb79/Koinara-node.git
-cd Koinara-node
-npm install
-npm run setup
-npm run doctor
-npm run node</code></pre>
-            </article>
-
-            <article class="node-card">
-              <span class="network-label">Docs</span>
-              <h3>What the node package includes</h3>
-              <ul class="node-list">
-                <li>provider / verifier / both roles</li>
-                <li>ollama / openai backends</li>
-                <li>OpenClaw can sit above a local node for agent workflow</li>
-                <li>priority failover or all-healthy multichain selection</li>
-                <li>doctor, status, and logs commands</li>
-                <li>network-scoped manifest + receipt discovery spec</li>
-                <li>home-test and operator checklists</li>
-              </ul>
-              <div class="source-links">
-                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">Node Setup</a>
-                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">OpenClaw Integration</a>
-                <a href="./openclaw/">Site Guide</a>
-                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">Operator Checklist</a>
-                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">Supported Networks</a>
-                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/protocol-compatibility.md">Protocol Compatibility</a>
-              </div>
-            </article>
-
-            <article class="node-card quick-card">
-              <span class="network-label">OpenClaw</span>
-              <div class="quick-card-header">
-                <span class="quick-card-mark">O</span>
-                <div class="quick-card-copy">
-                  <strong>OpenClaw</strong>
-                  <span>Agent workflow above a local Koinara node</span>
+          <div class="node-layout">
+            <article class="panel node-primary">
+              <div class="card-stack">
+                <span class="icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="5" y="5.5" width="14" height="5" rx="1.5" />
+                    <rect x="5" y="13.5" width="14" height="5" rx="1.5" />
+                    <path d="M8 8h.01" />
+                    <path d="M8 16h.01" />
+                  </svg>
+                </span>
+                <h3 class="card-title">Provider, verifier, or both</h3>
+                <p class="card-body">
+                  <span class="accent">Koinara-node</span> is the standalone
+                  public background node for the network. It connects directly
+                  to deployed Koinara contracts across supported networks, with
+                  no hosted API, no business layer, and no UI dependency.
+                </p>
+                <div class="button-row">
+                  <a class="btn btn-primary" href="https://github.com/sinmb79/Koinara-node">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M9 18.25c-3.5 1.05-3.5-1.75-4.9-2.1" />
+                      <path d="M19 18.25v-2.6a5.65 5.65 0 00-1.55-4.2c1.35-.15 2.75-.65 2.75-2.95a2.3 2.3 0 00-.65-1.65 2.15 2.15 0 00-.1-1.65s-1.1-.35-3.45 1.25a11.6 11.6 0 00-6 0c-2.35-1.6-3.45-1.25-3.45-1.25a2.15 2.15 0 00-.1 1.65 2.3 2.3 0 00-.65 1.65c0 2.3 1.4 2.8 2.75 2.95A5.02 5.02 0 009 15.6v2.65" />
+                    </svg>
+                    Open Repo
+                  </a>
+                  <a
+                    class="btn btn-ghost"
+                    href="https://github.com/sinmb79/Koinara-node/blob/main/docs/home-test-quickstart.md"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 4.75v14.5" />
+                      <path d="M7 9.75L12 4.75l5 5" />
+                    </svg>
+                    Quickstart
+                  </a>
                 </div>
               </div>
-              <pre class="command-block quick-command"><code># Start OpenClaw
-ollama launch openclaw --model qwen3.5
+            </article>
 
-# Run Koinara-node separately
-npm run node</code></pre>
-              <p>
-                The command above starts OpenClaw only. There is no single built-in command yet
-                that attaches OpenClaw to <code>Koinara-node</code>. Today the agent and the node
-                run as separate processes.
-              </p>
-              <div class="source-links">
-                <a href="./openclaw/">OpenClaw on koinara.xyz</a>
-                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-integration.md">Node-side guide</a>
+            <div>
+              <article class="panel terminal-block">
+                <div class="terminal-head">
+                  <span class="terminal-dot terminal-dot-red"></span>
+                  <span class="terminal-dot terminal-dot-yellow"></span>
+                  <span class="terminal-dot terminal-dot-green"></span>
+                  <span class="terminal-label">terminal</span>
+                </div>
+                <div class="terminal-body">
+                  <code>$ git clone https://github.com/sinmb79/Koinara-node.git
+$ cd Koinara-node
+$ npm install
+$ npm run setup
+$ npm run doctor
+$ npm run node</code>
+                </div>
+              </article>
+              <p class="terminal-note">Three-step operator path — clone, setup, run.</p>
+            </div>
+
+            <article class="panel node-docs">
+              <div class="card-stack">
+                <h3 class="card-title">What the node package includes</h3>
+                <ul class="node-list">
+                  <li>provider / verifier / both roles</li>
+                  <li>ollama / openai backends</li>
+                  <li>priority failover or all-healthy multichain selection</li>
+                  <li>doctor, status, and logs commands</li>
+                  <li>network-scoped manifest + receipt discovery spec</li>
+                  <li>home-test and operator checklists</li>
+                </ul>
+                <div class="source-links">
+                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">Node Setup</a>
+                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">Operator Checklist</a>
+                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">Supported Networks</a>
+                  <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/protocol-compatibility.md">Protocol Compatibility</a>
+                </div>
               </div>
             </article>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="section supported-section" id="supported-networks">
-          <div class="section-heading">
+      <section class="band band-alt" id="supported-networks">
+        <div class="section-shell">
+          <div class="section-header">
             <p class="eyebrow">SUPPORTED NETWORKS</p>
-            <h2>Deploy chain by chain.<br />Keep the node ready for more.</h2>
+            <h2 class="section-title">Deploy chain by chain.</h2>
           </div>
 
-          <div class="supported-grid">
-            <article class="network-card">
-              <span class="network-label">EVM Runtime</span>
-              <h3>Worldland</h3>
-              <p>Primary reference deployment path for v1 and the first chain in the rollout plan.</p>
+          <div class="network-grid">
+            <article class="panel network-card">
+              <div class="card-copy">
+                <span class="tag tag-runtime">EVM RUNTIME</span>
+                <h3 class="card-title">Worldland</h3>
+                <p class="card-body">
+                  Primary reference deployment path for v1 and the first chain
+                  in the rollout plan.
+                </p>
+              </div>
             </article>
 
-            <article class="network-card">
-              <span class="network-label">EVM Runtime</span>
-              <h3>Base</h3>
-              <p>Ready in the node runtime as an independent EVM deployment target with health-based participation switching.</p>
+            <article class="panel network-card">
+              <div class="card-copy">
+                <span class="tag tag-runtime">EVM RUNTIME</span>
+                <h3 class="card-title">Base</h3>
+                <p class="card-body">
+                  Ready in the node runtime as an independent EVM deployment
+                  target with health-based participation switching.
+                </p>
+              </div>
             </article>
 
-            <article class="network-card">
-              <span class="network-label">EVM Runtime</span>
-              <h3>Ethereum</h3>
-              <p>Supported by the same EVM runtime path so protocol instances can expand without changing node behavior.</p>
+            <article class="panel network-card">
+              <div class="card-copy">
+                <span class="tag tag-runtime">EVM RUNTIME</span>
+                <h3 class="card-title">Ethereum</h3>
+                <p class="card-body">
+                  Supported by the same EVM runtime path so protocol instances
+                  can expand without changing node behavior.
+                </p>
+              </div>
             </article>
 
-            <article class="network-card">
-              <span class="network-label">EVM Runtime</span>
-              <h3>BNB Smart Chain</h3>
-              <p>Prepared through the shared EVM adapter so the same provider and verifier loop can run there after deployment.</p>
+            <article class="panel network-card">
+              <div class="card-copy">
+                <span class="tag tag-runtime">EVM RUNTIME</span>
+                <h3 class="card-title">BNB Smart Chain</h3>
+                <p class="card-body">
+                  Prepared through the shared EVM adapter so the same provider
+                  and verifier loop can run there after deployment.
+                </p>
+              </div>
             </article>
 
-            <article class="network-card roadmap-card">
-              <span class="network-label">Prepared Only</span>
-              <h3>Solana</h3>
-              <p>Configuration and adapter boundaries are in place, but the runnable Solana deployment and runtime remain future work.</p>
+            <article class="panel network-card">
+              <div class="card-copy">
+                <span class="tag tag-prepared">PREPARED ONLY</span>
+                <h3 class="card-title">Solana</h3>
+                <p class="card-body">
+                  Configuration and adapter boundaries are in place, but the
+                  runnable Solana deployment and runtime remain future work.
+                </p>
+              </div>
             </article>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="section figures-section" id="figures">
-          <div class="section-heading">
+      <section class="band" id="figures">
+        <div class="section-shell">
+          <div class="section-header">
             <p class="eyebrow">RENDERED FIGURES</p>
-            <h2>Visuals now live in the main body of the paper.</h2>
+            <h2 class="section-title">Visuals from the whitepaper.</h2>
           </div>
 
           <div class="figure-grid">
-            <figure class="figure-tile">
-              <img src="./figures/whitepaper/en/figure-01-state-machine.png" alt="Job lifecycle state machine" />
-              <figcaption>Figure 1. Job lifecycle state machine</figcaption>
+            <figure class="panel figure-card">
+              <div class="figure-frame">
+                <img src="./figures/whitepaper/en/figure-01-state-machine.png" alt="Job lifecycle state machine" />
+              </div>
+              <figcaption class="figure-caption">Figure 1. Job lifecycle state machine</figcaption>
             </figure>
-            <figure class="figure-tile">
-              <img src="./figures/whitepaper/en/figure-02-network-flow.png" alt="Main network flow" />
-              <figcaption>Figure 2. Main network flow</figcaption>
+
+            <figure class="panel figure-card">
+              <div class="figure-frame">
+                <img src="./figures/whitepaper/en/figure-02-network-flow.png" alt="Main network flow" />
+              </div>
+              <figcaption class="figure-caption">Figure 2. Main network flow</figcaption>
             </figure>
-            <figure class="figure-tile">
-              <img src="./figures/whitepaper/en/figure-03-layered-architecture.png" alt="Layered architecture" />
-              <figcaption>Figure 3. Layered architecture</figcaption>
+
+            <figure class="panel figure-card">
+              <div class="figure-frame">
+                <img src="./figures/whitepaper/en/figure-03-layered-architecture.png" alt="Layered architecture" />
+              </div>
+              <figcaption class="figure-caption">Figure 3. Layered architecture</figcaption>
             </figure>
-            <figure class="figure-tile">
-              <img src="./figures/whitepaper/en/figure-04-issuance-curve.png" alt="Issuance curve" />
-              <figcaption>Figure 4. Issuance curve</figcaption>
+
+            <figure class="panel figure-card">
+              <div class="figure-frame">
+                <img src="./figures/whitepaper/en/figure-04-issuance-curve.png" alt="Issuance curve" />
+              </div>
+              <figcaption class="figure-caption">Figure 4. Issuance curve</figcaption>
             </figure>
           </div>
-        </section>
-
-        <section class="section worldland-section" id="next-track">
-          <div class="section-heading">
-            <p class="eyebrow">NEXT TRACK</p>
-            <h2>Deploy the protocol chain by chain, while the node stays multichain-ready.</h2>
-          </div>
-
-          <div class="worldland-grid">
-            <article class="network-card">
-              <span class="network-label">Step 1</span>
-              <h3>Worldland first</h3>
-              <p>
-                Worldland remains the first reference deployment path for the v1 contracts,
-                with chain-specific runbooks and deployment artifacts kept outside the protocol repo.
-              </p>
-            </article>
-
-            <article class="network-card">
-              <span class="network-label">Step 2</span>
-              <h3>Expand across EVM chains</h3>
-              <p>
-                After the Worldland path is stable, Base, Ethereum, and BNB can each host
-                independent Koinara deployments without changing the minimal protocol surface.
-              </p>
-              <a href="https://github.com/sinmb79/Koinara-Worldland">Koinara-Worldland</a>
-            </article>
-
-            <article class="network-card roadmap-card">
-              <span class="network-label">Step 3</span>
-              <h3>Prepare the next adapter</h3>
-              <p>
-                Solana and future non-EVM tracks should land behind explicit chain adapters,
-                not by stretching the current Solidity deployment model beyond its boundary.
-              </p>
-            </article>
-          </div>
-
-          <div class="roadmap-strip">
-            <div>
-              <strong>Protocol</strong>
-              <span>Keep the minimum protocol chain-independent and avoid turning availability into bridge logic.</span>
-            </div>
-            <div>
-              <strong>Deployment</strong>
-              <span>Publish separate chain deployments instead of pretending one chain can silently absorb another.</span>
-            </div>
-            <div>
-              <strong>Node</strong>
-              <span>Let nodes switch participation targets when preferred EVM networks are unhealthy, without moving existing jobs.</span>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer class="site-footer">
-        <p>Koinara is a reference implementation for an owner-light, fair-launch collective inference protocol.</p>
-        <div>
-          <a href="https://github.com/sinmb79/Koinara-node">Koinara-node</a>
-          <a href="./pdf/koinara-whitepaper-en.pdf">Whitepaper</a>
-          <a href="./pdf/koinara-whitepaper-appendices-en.pdf">Appendices</a>
-          <a href="https://github.com/sinmb79/koinara">GitHub</a>
         </div>
-      </footer>
-    </div>
+      </section>
+
+      <section class="band band-alt" id="next-track">
+        <div class="section-shell">
+          <div class="section-header">
+            <p class="eyebrow">NEXT TRACK</p>
+            <h2 class="section-title">
+              Deploy chain by chain, while the node stays multichain-ready.
+            </h2>
+          </div>
+
+          <div class="roadmap">
+            <div class="roadmap-item">
+              <div class="roadmap-marker">
+                <span class="step-badge">01</span>
+              </div>
+              <article class="timeline-card">
+                <h3 class="timeline-title">Worldland first</h3>
+                <p class="timeline-copy">
+                  Worldland remains the first reference deployment path for the
+                  v1 contracts, with chain-specific runbooks and deployment
+                  artifacts kept outside the protocol repo.
+                </p>
+                <a class="timeline-link" href="https://github.com/sinmb79/Koinara-Worldland">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 18.25c-3.5 1.05-3.5-1.75-4.9-2.1" />
+                    <path d="M19 18.25v-2.6a5.65 5.65 0 00-1.55-4.2c1.35-.15 2.75-.65 2.75-2.95a2.3 2.3 0 00-.65-1.65 2.15 2.15 0 00-.1-1.65s-1.1-.35-3.45 1.25a11.6 11.6 0 00-6 0c-2.35-1.6-3.45-1.25-3.45-1.25a2.15 2.15 0 00-.1 1.65 2.3 2.3 0 00-.65 1.65c0 2.3 1.4 2.8 2.75 2.95A5.02 5.02 0 009 15.6v2.65" />
+                  </svg>
+                  Koinara-Worldland
+                </a>
+              </article>
+            </div>
+
+            <div class="roadmap-item">
+              <div class="roadmap-marker">
+                <span class="step-badge">02</span>
+              </div>
+              <article class="timeline-card">
+                <h3 class="timeline-title">Expand across EVM chains</h3>
+                <p class="timeline-copy">
+                  After the Worldland path is stable, Base, Ethereum, and BNB
+                  can each host independent Koinara deployments without changing
+                  the minimal protocol surface.
+                </p>
+              </article>
+            </div>
+
+            <div class="roadmap-item">
+              <div class="roadmap-marker">
+                <span class="step-badge">03</span>
+              </div>
+              <article class="timeline-card">
+                <h3 class="timeline-title">Prepare the next adapter</h3>
+                <p class="timeline-copy">
+                  Solana and future non-EVM tracks should land behind explicit
+                  chain adapters, not by stretching the current Solidity
+                  deployment model beyond its boundary.
+                </p>
+              </article>
+            </div>
+          </div>
+
+          <div class="summary-grid">
+            <article class="panel summary-card summary-card-primary">
+              <span class="summary-label">Protocol</span>
+              <p class="summary-copy">
+                Keep the minimum protocol chain-independent and avoid turning
+                availability into bridge logic.
+              </p>
+            </article>
+
+            <article class="panel summary-card summary-card-secondary">
+              <span class="summary-label">Deployment</span>
+              <p class="summary-copy">
+                Publish separate chain deployments instead of pretending one
+                chain can silently absorb another.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-shell">
+        <a class="footer-brand" href="./index.html">
+          <span class="brand-mark">K</span>
+          <strong>Koinara</strong>
+        </a>
+        <div class="footer-links">
+          <a href="https://github.com/sinmb79/koinara">GitHub</a>
+          <a href="./pdf/koinara-whitepaper-en.pdf">Whitepaper</a>
+        </div>
+        <div class="footer-copy">© 2026 Koinara Protocol</div>
+      </div>
+    </footer>
   </body>
 </html>
