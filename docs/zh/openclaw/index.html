@@ -72,8 +72,9 @@
                   <span>代理 shell 与本地模型入口</span>
                 </div>
               </div>
-              <pre class="command-block quick-command"><code>ollama launch openclaw --model qwen3.5</code></pre>
-              <p>这个命令只启动代理侧入口，并不能替代真正的 Koinara 节点。</p>
+              <pre class="command-block quick-command"><code># 启动 OpenClaw
+ollama launch openclaw --model qwen3.5</code></pre>
+              <p>这只是 OpenClaw 的启动命令，不是把它挂接到 Koinara-node 上的命令。</p>
             </article>
             <article class="paper-card">
               <span class="paper-tag">Koinara-node</span>
@@ -105,6 +106,27 @@ npm run node</code></pre>
             <article class="floor-card">
               <h3>OpenClaw 单独做不到的事</h3>
               <p>OpenClaw 本身不是 provider/verifier 节点。没有运行中的节点，就没有真实的链上参与。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <p class="eyebrow">重要说明</p>
+            <h2>目前还没有一条命令完成节点挂接。</h2>
+          </div>
+          <div class="floor-grid">
+            <article class="floor-card">
+              <h3>现在已经有的</h3>
+              <p>OpenClaw 可以作为代理进程运行，Koinara-node 可以作为真实网络运行时运行。</p>
+            </article>
+            <article class="floor-card">
+              <h3>现在还没有的</h3>
+              <p>像 `openclaw connect koinara-node` 这样的一级内建连接命令目前还没有实现。</p>
+            </article>
+            <article class="floor-card">
+              <h3>更干净的未来方向</h3>
+              <p>一个专门的 OpenClaw skill package，用来连接本地或远程的 Koinara-node。</p>
             </article>
           </div>
         </section>

@@ -72,8 +72,9 @@
                   <span>에이전트 셸과 로컬 모델 진입점</span>
                 </div>
               </div>
-              <pre class="command-block quick-command"><code>ollama launch openclaw --model qwen3.5</code></pre>
-              <p>이 명령은 에이전트 측 시작점입니다. Koinara 노드를 대체하지는 않습니다.</p>
+              <pre class="command-block quick-command"><code># OpenClaw 시작
+ollama launch openclaw --model qwen3.5</code></pre>
+              <p>이 명령은 OpenClaw 실행 명령일 뿐이며, Koinara-node 연결 명령은 아닙니다.</p>
             </article>
             <article class="paper-card">
               <span class="paper-tag">Koinara-node</span>
@@ -105,6 +106,27 @@ npm run node</code></pre>
             <article class="floor-card">
               <h3>OpenClaw만으로는 안 되는 것</h3>
               <p>OpenClaw 단독으로는 provider/verifier 노드가 아닙니다. 노드가 없으면 온체인 참여가 일어나지 않습니다.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <p class="eyebrow">중요</p>
+            <h2>아직 one-line 연결 명령은 없습니다.</h2>
+          </div>
+          <div class="floor-grid">
+            <article class="floor-card">
+              <h3>지금 가능한 것</h3>
+              <p>OpenClaw는 에이전트 프로세스로, Koinara-node는 실제 네트워크 런타임으로 각각 실행할 수 있습니다.</p>
+            </article>
+            <article class="floor-card">
+              <h3>아직 없는 것</h3>
+              <p>`openclaw connect koinara-node` 같은 1급 내장 연결 명령은 아직 구현되지 않았습니다.</p>
+            </article>
+            <article class="floor-card">
+              <h3>깔끔한 향후 방향</h3>
+              <p>로컬 또는 원격 Koinara-node와 대화하는 전용 OpenClaw skill 패키지입니다.</p>
             </article>
           </div>
         </section>

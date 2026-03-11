@@ -158,11 +158,14 @@ npm run node</code></pre>
                   <span>位于本地 Koinara-node 之上的代理工作流层</span>
                 </div>
               </div>
-              <pre class="command-block quick-command"><code>ollama launch openclaw --model qwen3.5</code></pre>
+              <pre class="command-block quick-command"><code># 启动 OpenClaw
+ollama launch openclaw --model qwen3.5
+
+# 单独运行 Koinara-node
+npm run node</code></pre>
               <p>
-                让 OpenClaw 负责提示词编排与操作员 workflow，而让
-                <code>Koinara-node</code> 继续负责钱包签名、hash 提交、
-                verifier 投票与结算参与，这是最稳妥的结构。
+                上面的命令只会启动 OpenClaw。现在还没有把 OpenClaw 挂接到
+                <code>Koinara-node</code> 的单一官方命令，当前做法是分别运行代理与节点。
               </p>
               <div class="source-links">
                 <a href="./openclaw/">koinara.xyz 指南</a>

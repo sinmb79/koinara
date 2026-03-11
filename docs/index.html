@@ -209,11 +209,15 @@ npm run node</code></pre>
                   <span>Agent workflow above a local Koinara node</span>
                 </div>
               </div>
-              <pre class="command-block quick-command"><code>ollama launch openclaw --model qwen3.5</code></pre>
+              <pre class="command-block quick-command"><code># Start OpenClaw
+ollama launch openclaw --model qwen3.5
+
+# Run Koinara-node separately
+npm run node</code></pre>
               <p>
-                Use OpenClaw for prompt orchestration and operator workflow, then let
-                <code>Koinara-node</code> handle wallet signing, hash submission, verifier votes,
-                and settlement participation.
+                The command above starts OpenClaw only. There is no single built-in command yet
+                that attaches OpenClaw to <code>Koinara-node</code>. Today the agent and the node
+                run as separate processes.
               </p>
               <div class="source-links">
                 <a href="./openclaw/">OpenClaw on koinara.xyz</a>

@@ -77,8 +77,9 @@
                   <span>Agent shell and local model entrypoint</span>
                 </div>
               </div>
-              <pre class="command-block quick-command"><code>ollama launch openclaw --model qwen3.5</code></pre>
-              <p>Use this to start the agent side. It does not replace the Koinara node.</p>
+              <pre class="command-block quick-command"><code># Start OpenClaw
+ollama launch openclaw --model qwen3.5</code></pre>
+              <p>Use this to start OpenClaw only. It is not a Koinara-node attach command.</p>
             </article>
             <article class="paper-card">
               <span class="paper-tag">Koinara-node</span>
@@ -110,6 +111,27 @@ npm run node</code></pre>
             <article class="floor-card">
               <h3>OpenClaw alone cannot do</h3>
               <p>OpenClaw by itself is not a provider or verifier node. Without a running node, it does not participate on-chain.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <p class="eyebrow">CURRENT STATE</p>
+            <h2>No one-line attach command yet.</h2>
+          </div>
+          <div class="floor-grid">
+            <article class="floor-card">
+              <h3>What exists now</h3>
+              <p>OpenClaw can run as an agent process, and Koinara-node can run as the real network runtime.</p>
+            </article>
+            <article class="floor-card">
+              <h3>What does not exist yet</h3>
+              <p>A first-class built-in command like `openclaw connect koinara-node` is not implemented yet.</p>
+            </article>
+            <article class="floor-card">
+              <h3>Clean future direction</h3>
+              <p>A dedicated OpenClaw skill package that talks to a local or remote Koinara-node.</p>
             </article>
           </div>
         </section>

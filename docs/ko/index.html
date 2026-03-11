@@ -189,11 +189,15 @@ npm run node</code></pre>
                   <span>로컬 Koinara-node 위에서 동작하는 에이전트 계층</span>
                 </div>
               </div>
-              <pre class="command-block quick-command"><code>ollama launch openclaw --model qwen3.5</code></pre>
+              <pre class="command-block quick-command"><code># OpenClaw 시작
+ollama launch openclaw --model qwen3.5
+
+# Koinara-node는 별도 실행
+npm run node</code></pre>
               <p>
-                OpenClaw는 프롬프트 오케스트레이션과 운영자 workflow를 맡고,
-                <code>Koinara-node</code>는 지갑 서명, hash 제출, verifier 투표,
-                정산 참여를 담당하게 두는 방식이 가장 안전합니다.
+                위 명령은 OpenClaw 실행 명령일 뿐입니다. 아직 OpenClaw를
+                <code>Koinara-node</code>에 붙이는 단일 공식 명령은 없고, 현재는
+                에이전트와 노드를 별도 프로세스로 실행하는 방식이 맞습니다.
               </p>
               <div class="source-links">
                 <a href="./openclaw/">koinara.xyz 가이드</a>
