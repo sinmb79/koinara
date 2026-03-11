@@ -38,6 +38,7 @@
         <nav class="site-nav">
           <a href="#whitepaper">Whitepaper</a>
           <a href="#node">Node</a>
+          <a href="#supported-networks">Networks</a>
           <a href="#figures">Figures</a>
           <a href="#next-track">Next Track</a>
           <a href="https://github.com/sinmb79/koinara">GitHub</a>
@@ -64,7 +65,7 @@
               <span>Fair launch</span>
               <span>Ownerless direction</span>
               <span>Chain-independent theory</span>
-              <span>Worldland-friendly v1</span>
+              <span>Multichain node runtime</span>
             </div>
           </div>
 
@@ -174,8 +175,9 @@
               <h3>Provider, verifier, or both</h3>
               <p>
                 `Koinara-node` is the standalone public background node for the network.
-                It connects directly to Worldland RPC and the Koinara contracts, with no hosted API,
-                no business layer, and no UI dependency.
+                It connects directly to deployed Koinara contracts across supported networks,
+                with no hosted API, no business layer, and no UI dependency. The current runtime
+                can fail over across healthy EVM deployments while keeping Solana in prepared-only scope.
               </p>
               <div class="cta-row">
                 <a class="btn btn-primary" href="https://github.com/sinmb79/Koinara-node">Open Repo</a>
@@ -200,15 +202,56 @@ npm run node</code></pre>
               <ul class="node-list">
                 <li>provider / verifier / both roles</li>
                 <li>ollama / openai backends</li>
+                <li>priority failover or all-healthy multichain selection</li>
                 <li>doctor, status, and logs commands</li>
-                <li>manifest + receipt discovery spec</li>
+                <li>network-scoped manifest + receipt discovery spec</li>
                 <li>home-test and operator checklists</li>
               </ul>
               <div class="source-links">
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">Node Setup</a>
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">Operator Checklist</a>
+                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">Supported Networks</a>
                 <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/protocol-compatibility.md">Protocol Compatibility</a>
               </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section supported-section" id="supported-networks">
+          <div class="section-heading">
+            <p class="eyebrow">SUPPORTED NETWORKS</p>
+            <h2>Deploy chain by chain. Keep the node ready for more.</h2>
+          </div>
+
+          <div class="supported-grid">
+            <article class="network-card">
+              <span class="network-label">EVM Runtime</span>
+              <h3>Worldland</h3>
+              <p>Primary reference deployment path for v1 and the first chain in the rollout plan.</p>
+            </article>
+
+            <article class="network-card">
+              <span class="network-label">EVM Runtime</span>
+              <h3>Base</h3>
+              <p>Ready in the node runtime as an independent EVM deployment target with health-based participation switching.</p>
+            </article>
+
+            <article class="network-card">
+              <span class="network-label">EVM Runtime</span>
+              <h3>Ethereum</h3>
+              <p>Supported by the same EVM runtime path so protocol instances can expand without changing node behavior.</p>
+            </article>
+
+            <article class="network-card">
+              <span class="network-label">EVM Runtime</span>
+              <h3>BNB Smart Chain</h3>
+              <p>Prepared through the shared EVM adapter so the same provider and verifier loop can run there after deployment.</p>
+            </article>
+
+            <article class="network-card roadmap-card">
+              <span class="network-label">Prepared Only</span>
+              <h3>Solana</h3>
+              <p>Configuration and adapter boundaries are in place, but the runnable Solana deployment and runtime remain future work.</p>
             </article>
           </div>
         </section>
@@ -242,37 +285,35 @@ npm run node</code></pre>
         <section class="section worldland-section" id="next-track">
           <div class="section-heading">
             <p class="eyebrow">NEXT TRACK</p>
-            <h2>Review the protocol first, then build the Worldland track in its own repo.</h2>
+            <h2>Deploy the protocol chain by chain, while the node stays multichain-ready.</h2>
           </div>
 
           <div class="worldland-grid">
             <article class="network-card">
               <span class="network-label">Step 1</span>
-              <h3>Protocol review comes first</h3>
+              <h3>Worldland first</h3>
               <p>
-                Before Worldland deployment or operator-node work begins, the current
-                protocol and review feedback should be examined and resolved in this
-                repository.
+                Worldland remains the first reference deployment path for the v1 contracts,
+                with chain-specific runbooks and deployment artifacts kept outside the protocol repo.
               </p>
             </article>
 
             <article class="network-card">
               <span class="network-label">Step 2</span>
-              <h3>Separate Worldland repo</h3>
+              <h3>Expand across EVM chains</h3>
               <p>
-                Worldland deployment work, chain-specific runbooks, and operator-node
-                implementation should live in the dedicated repository below.
+                After the Worldland path is stable, Base, Ethereum, and BNB can each host
+                independent Koinara deployments without changing the minimal protocol surface.
               </p>
               <a href="https://github.com/sinmb79/Koinara-Worldland">Koinara-Worldland</a>
             </article>
 
             <article class="network-card roadmap-card">
               <span class="network-label">Step 3</span>
-              <h3>Operator node after review</h3>
+              <h3>Prepare the next adapter</h3>
               <p>
-                After protocol review closes, the next build should cover Worldland
-                deployment, provider and verifier modes, off-chain payload handling, and
-                reusable operator packaging in the separate deployment repository.
+                Solana and future non-EVM tracks should land behind explicit chain adapters,
+                not by stretching the current Solidity deployment model beyond its boundary.
               </p>
             </article>
           </div>
@@ -280,15 +321,15 @@ npm run node</code></pre>
           <div class="roadmap-strip">
             <div>
               <strong>Protocol</strong>
-              <span>Review feedback, identify design risks, and tighten the protocol surface.</span>
+              <span>Keep the minimum protocol chain-independent and avoid turning availability into bridge logic.</span>
             </div>
             <div>
               <strong>Deployment</strong>
-              <span>Move Worldland-specific deployment artifacts into <code>Koinara-Worldland</code>.</span>
+              <span>Publish separate chain deployments instead of pretending one chain can silently absorb another.</span>
             </div>
             <div>
               <strong>Node</strong>
-              <span>Build provider and verifier operator modes only after the protocol review is stable.</span>
+              <span>Let nodes switch participation targets when preferred EVM networks are unhealthy, without moving existing jobs.</span>
             </div>
           </div>
         </section>

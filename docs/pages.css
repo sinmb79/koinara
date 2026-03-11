@@ -332,6 +332,7 @@ code {
 .paper-grid,
 .figure-grid,
 .worldland-grid,
+.supported-grid,
 .node-grid {
   display: grid;
   gap: 18px;
@@ -351,6 +352,10 @@ code {
 
 .worldland-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.supported-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .node-grid {
@@ -422,6 +427,13 @@ code {
     radial-gradient(circle at top left, rgba(15, 118, 110, 0.11), transparent 30%),
     radial-gradient(circle at bottom right, rgba(217, 119, 6, 0.1), transparent 28%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.94));
+}
+
+.supported-section {
+  background:
+    radial-gradient(circle at top right, rgba(217, 119, 6, 0.08), transparent 32%),
+    radial-gradient(circle at bottom left, rgba(15, 118, 110, 0.1), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.92));
 }
 
 .node-card-primary {
@@ -540,6 +552,7 @@ code {
   .floor-grid,
   .paper-grid,
   .worldland-grid,
+  .supported-grid,
   .node-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -587,6 +600,7 @@ code {
   .paper-grid,
   .figure-grid,
   .worldland-grid,
+  .supported-grid,
   .roadmap-strip,
   .node-grid {
     grid-template-columns: 1fr;
