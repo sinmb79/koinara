@@ -858,6 +858,185 @@ body[data-locale="zh"] .section-title {
   color: var(--amber);
 }
 
+.scan-hero .hero-shell {
+  padding-bottom: 84px;
+}
+
+.scan-card-grid,
+.scan-grid,
+.scan-result-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.scan-card-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 24px;
+}
+
+.scan-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.scan-result-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.scan-panel,
+.scan-stat-card {
+  min-height: 100%;
+}
+
+.scan-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.scan-title {
+  margin: 8px 0 0;
+  font-size: 1.4rem;
+  line-height: 1.1;
+}
+
+.scan-form {
+  display: grid;
+  gap: 10px;
+}
+
+.scan-label {
+  color: var(--muted-strong);
+  font-size: 0.94rem;
+}
+
+.scan-input-row,
+.scan-quick-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.scan-input {
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 240px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(110, 129, 165, 0.28);
+  background: rgba(8, 13, 24, 0.92);
+  color: var(--text);
+  font: 500 0.98rem var(--mono);
+}
+
+.scan-input:focus {
+  outline: 2px solid rgba(51, 226, 214, 0.34);
+  outline-offset: 2px;
+  border-color: var(--border-strong);
+}
+
+.scan-submit,
+.scan-mini-btn {
+  white-space: nowrap;
+}
+
+.scan-submit {
+  flex: 0 0 auto;
+}
+
+.scan-result,
+.scan-inline-note {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(110, 129, 165, 0.18);
+  background: rgba(8, 13, 24, 0.82);
+  color: var(--muted-strong);
+}
+
+.scan-inline-note {
+  margin-top: 16px;
+}
+
+.scan-error {
+  border-color: rgba(243, 171, 44, 0.34);
+  color: #ffd48b;
+}
+
+.scan-kv {
+  min-width: 0;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(110, 129, 165, 0.16);
+  background: rgba(17, 24, 36, 0.72);
+}
+
+.scan-kv-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--aqua);
+  font: 700 0.83rem var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.scan-kv-value {
+  min-width: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.scan-kv-value code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.scan-kv-value a,
+.scan-contract-row a {
+  color: var(--aqua);
+}
+
+.scan-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 8px 8px 0;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font: 600 0.78rem var(--mono);
+  background: rgba(78, 93, 124, 0.2);
+  color: var(--muted-strong);
+}
+
+.scan-pill.ok {
+  background: rgba(51, 226, 214, 0.12);
+  color: var(--aqua);
+}
+
+.scan-contract-list {
+  display: grid;
+  gap: 12px;
+}
+
+.scan-contract-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(17, 24, 36, 0.72);
+  border: 1px solid rgba(110, 129, 165, 0.16);
+}
+
+.scan-contract-row strong {
+  font: 700 0.92rem var(--mono);
+}
+
 .site-footer {
   border-top: 1px solid rgba(63, 77, 104, 0.28);
   background: rgba(4, 8, 15, 0.92);
@@ -917,7 +1096,10 @@ body[data-locale="zh"] .section-title {
   .paper-grid,
   .figure-grid,
   .summary-grid,
-  .node-layout {
+  .node-layout,
+  .scan-card-grid,
+  .scan-grid,
+  .scan-result-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -988,6 +1170,9 @@ body[data-locale="zh"] .section-title {
   .figure-grid,
   .summary-grid,
   .node-layout,
+  .scan-card-grid,
+  .scan-grid,
+  .scan-result-grid,
   .roadmap-item,
   .footer-shell {
     grid-template-columns: 1fr;
@@ -1046,5 +1231,15 @@ body[data-locale="zh"] .section-title {
 
   .footer-links {
     justify-content: flex-start;
+  }
+
+  .scan-panel-header,
+  .scan-input-row,
+  .scan-contract-row {
+    flex-direction: column;
+  }
+
+  .scan-submit {
+    width: 100%;
   }
 }

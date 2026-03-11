@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Koinara Scan | Worldland v2 实时协议视图</title>
+    <meta
+      name="description"
+      content="在 Koinara 官方网站直接查看 Worldland v2 的 epoch 状态、job、节点活动与奖励路径。"
+    />
+    <link rel="icon" href="../../favicon.ico" />
+    <link rel="canonical" href="https://koinara.xyz/zh/scan/" />
+    <link rel="stylesheet" href="../../pages.css" />
+  </head>
+  <body data-locale="zh" data-snapshot="../../live/worldland-v2-snapshot.json">
+    <header class="site-header">
+      <div class="header-shell">
+        <a class="brand" href="../index.html">
+          <span class="brand-mark">K</span>
+          <span class="brand-copy">
+            <strong>Koinara</strong>
+            <span>Worldland v2 Scan</span>
+          </span>
+        </a>
+
+        <div class="nav-group">
+          <nav class="site-nav">
+            <a href="../index.html">首页</a>
+            <a href="../openclaw/">OpenClaw</a>
+            <a href="https://github.com/sinmb79/Koinara-Worldland">Worldland 仓库</a>
+            <a href="https://scan.worldland.foundation/">Worldland 浏览器</a>
+          </nav>
+          <div class="lang-switch" aria-label="语言切换">
+            <a href="../../scan.html">EN</a>
+            <a href="../../ko/scan/">KO</a>
+            <a href="./index.html" aria-current="page">ZH</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-band scan-hero">
+        <div class="section-shell hero-shell scan-shell">
+          <div class="hero-copy">
+            <p class="eyebrow">实时扫描 / WORLDLAND V2</p>
+            <h1 class="hero-title">
+              <span>在官方站点查看</span>
+              <span class="accent">epoch、job、节点与奖励路径</span>
+              <span>的实时状态。</span>
+            </h1>
+            <p class="hero-lede">
+              本页展示从 live chain 生成的最新 Worldland v2 snapshot。
+              你可以不离开 Koinara，就查看 active node 状态、job 结算、当前 epoch 结束时间，
+              以及 claim 前的预计奖励路径。
+            </p>
+            <div class="button-row">
+              <a class="btn btn-primary" href="https://scan.worldland.foundation/">打开 Worldland 浏览器</a>
+              <a class="btn btn-secondary" href="../openclaw/">查看 OpenClaw 集成</a>
+              <a class="btn btn-ghost" href="../index.html#live">返回实时概览</a>
+            </div>
+            <div class="meta-row">
+              <span class="meta-chip">Registry 0x8653...e368</span>
+              <span class="meta-chip">canary job 1 已就绪</span>
+              <span class="meta-chip">live chain snapshot</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band band-tight">
+        <div class="section-shell">
+          <div class="section-header">
+            <p class="eyebrow">网络快照</p>
+            <h2 class="section-title">当前链状态与 epoch 结束时间。</h2>
+          </div>
+
+          <div class="scan-card-grid" id="snapshot-cards">
+            <article class="panel scan-stat-card">
+              <span class="summary-label">网络</span>
+              <strong id="snapshot-network">Loading...</strong>
+              <p class="summary-copy" id="snapshot-rpc">正在连接 Worldland RPC。</p>
+            </article>
+            <article class="panel scan-stat-card">
+              <span class="summary-label">Epoch</span>
+              <strong id="snapshot-epoch">...</strong>
+              <p class="summary-copy" id="snapshot-next-close">正在计算下一次关闭时间。</p>
+            </article>
+            <article class="panel scan-stat-card">
+              <span class="summary-label">活跃节点</span>
+              <strong id="snapshot-active">...</strong>
+              <p class="summary-copy" id="snapshot-active-detail">正在读取当前 epoch 与上个已关闭 epoch。</p>
+            </article>
+            <article class="panel scan-stat-card">
+              <span class="summary-label">Jobs</span>
+              <strong id="snapshot-jobs">...</strong>
+              <p class="summary-copy" id="snapshot-work-pool">正在读取 job 总数与 work pool。</p>
+            </article>
+          </div>
+
+          <div class="scan-inline-note" id="snapshot-note">正在读取最新的 Worldland v2 snapshot。</div>
+        </div>
+      </section>
+
+      <section class="band band-alt">
+        <div class="section-shell">
+          <div class="scan-grid">
+            <article class="panel scan-panel">
+              <div class="scan-panel-header">
+                <div>
+                  <p class="eyebrow">JOB 查询</p>
+                  <h2 class="scan-title">查看一个 job</h2>
+                </div>
+                <button class="btn btn-ghost scan-mini-btn" id="load-canary-job" type="button">载入 canary job #1</button>
+              </div>
+              <form class="scan-form" id="job-form">
+                <label class="scan-label" for="job-id">Job ID</label>
+                <div class="scan-input-row">
+                  <input class="scan-input" id="job-id" name="jobId" type="number" min="1" placeholder="1" value="1" />
+                  <button class="btn btn-primary scan-submit" type="submit">读取</button>
+                </div>
+              </form>
+              <div class="scan-result" id="job-result">输入 job id，或直接载入 canary job。</div>
+            </article>
+
+            <article class="panel scan-panel">
+              <div class="scan-panel-header">
+                <div>
+                  <p class="eyebrow">节点查询</p>
+                  <h2 class="scan-title">查看一个节点</h2>
+                </div>
+                <div class="scan-quick-actions">
+                  <button class="btn btn-ghost scan-mini-btn" id="load-provider" type="button">Provider</button>
+                  <button class="btn btn-ghost scan-mini-btn" id="load-verifier" type="button">Verifier</button>
+                </div>
+              </div>
+              <form class="scan-form" id="node-form">
+                <label class="scan-label" for="node-address">钱包地址</label>
+                <div class="scan-input-row">
+                  <input
+                    class="scan-input"
+                    id="node-address"
+                    name="address"
+                    type="text"
+                    placeholder="0x..."
+                    value="0x59816544dcD2B96fB35e7Eac67BA26510e11B996"
+                  />
+                  <button class="btn btn-primary scan-submit" type="submit">读取</button>
+                </div>
+              </form>
+              <div class="scan-result" id="node-result">输入钱包地址，或载入 provider / verifier 预设地址。</div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="section-shell">
+          <div class="section-header">
+            <p class="eyebrow">实时合约</p>
+            <h2 class="section-title">本页直接引用的 Worldland v2 地址。</h2>
+          </div>
+          <div class="paper-grid">
+            <article class="panel">
+              <div class="scan-contract-list" id="contract-list"></div>
+            </article>
+            <article class="panel">
+              <div class="card-stack">
+                <h3 class="card-title">如何理解本页</h3>
+                <p class="summary-copy">
+                  active reward 会在已关闭 epoch 内，由所有 active node 平均分配。
+                  work reward 按 accepted job 计算，然后按 provider 70%、verifier 集合 30% 拆分。
+                </p>
+                <p class="summary-copy">
+                  如果 epoch 仍然开放，你会看到预计奖励路径，但余额还不会立即变化。
+                  必须等 epoch 关闭后发送 claim 交易，KOIN 才会真正铸造到钱包。
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-shell">
+        <a class="footer-brand" href="../index.html">
+          <span class="brand-mark">K</span>
+          <span class="brand-copy">
+            <strong>Koinara</strong>
+            <span>Collective Inference Network</span>
+          </span>
+        </a>
+
+        <nav class="footer-links">
+          <a href="../index.html">首页</a>
+          <a href="../openclaw/">OpenClaw</a>
+          <a href="https://github.com/sinmb79/Koinara-node">Node 仓库</a>
+          <a href="https://github.com/sinmb79/Koinara-Worldland">Worldland 仓库</a>
+        </nav>
+
+        <p class="footer-copy">&copy; 2026 Koinara Protocol</p>
+      </div>
+    </footer>
+
+    <script src="../../scan.js"></script>
+  </body>
+</html>

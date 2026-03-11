@@ -47,7 +47,9 @@
           <nav class="site-nav">
             <a href="#whitepaper">白皮书</a>
             <a href="#live">Live</a>
+            <a href="/zh/scan/">Scan</a>
             <a href="#node">节点</a>
+            <a href="/zh/openclaw/">OpenClaw</a>
             <a href="#supported-networks">网络</a>
             <a href="#next-track">路线图</a>
             <a href="https://github.com/sinmb79/koinara">GitHub</a>
@@ -315,6 +317,14 @@
                     </svg>
                     节点文档
                   </a>
+                  <a class="btn btn-secondary" href="/zh/openclaw/">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M6 8.5h12" />
+                      <path d="M6 12h12" />
+                      <path d="M6 15.5h8" />
+                    </svg>
+                    OpenClaw 路径
+                  </a>
                 </div>
               </div>
             </article>
@@ -332,11 +342,13 @@
 $ cd Koinara-node
 $ npm install
 $ npm run provider:v2:start
+$ npm run provider:v2:claim
 $ npm run verifier:v2:start</code>
                 </div>
               </article>
               <p class="terminal-note">
-                v2 命令会使用 Worldland 主网 v2 路径与独立的 v2 状态目录。
+                v2 命令会使用 Worldland 主网 v2 路径与独立的 v2 状态目录，
+                epoch 结束后可以再用 claim 专用命令领取 KOIN。
               </p>
             </div>
 
@@ -345,15 +357,18 @@ $ npm run verifier:v2:start</code>
                 <h3 class="card-title">v2 节点路径新增能力</h3>
                 <ul class="node-list">
                   <li>provider / verifier 的 v2 专用入口</li>
+                  <li>epoch 结束后的 claim 专用命令</li>
                   <li>自动节点注册与 heartbeat</li>
                   <li>active reward claim 路径</li>
                   <li>epoch 结束后的 work reward claim 路径</li>
+                  <li>使用本地 OpenClaw CLI 的内建 provider backend</li>
                   <li>独立的 v2 mainnet 配置与产物目录</li>
                 </ul>
                 <div class="source-links">
                   <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">运维清单</a>
                   <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">支持网络</a>
                   <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/protocol-compatibility.md">协议兼容性</a>
+                  <a href="/zh/openclaw/">OpenClaw 集成</a>
                 </div>
               </div>
             </article>

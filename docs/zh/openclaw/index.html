@@ -60,7 +60,7 @@
         <section class="section">
           <div class="section-heading">
             <p class="eyebrow">快速开始</p>
-            <h2>启动代理，并单独运行节点。</h2>
+            <h2>让 OpenClaw 负责 provider 推理，让节点负责执行。</h2>
           </div>
           <div class="paper-grid">
             <article class="paper-card quick-card">
@@ -72,19 +72,25 @@
                   <span>代理 shell 与本地模型入口</span>
                 </div>
               </div>
-              <pre class="command-block quick-command"><code># 启动 OpenClaw
-ollama launch openclaw --model qwen3.5</code></pre>
-              <p>这只是 OpenClaw 的启动命令，不是把它挂接到 Koinara-node 上的命令。</p>
+              <pre class="command-block quick-command"><code># 验证本地 OpenClaw 可响应
+openclaw agent --agent main --local --json --message "Reply with exactly OK"</code></pre>
+              <p>只要这个命令成功，provider backend 就可以通过同一个 OpenClaw CLI 生成推理结果。</p>
             </article>
             <article class="paper-card">
               <span class="paper-tag">Koinara-node</span>
-              <h3>真正参与网络的是节点进程</h3>
-              <pre class="command-block"><code>git clone https://github.com/sinmb79/Koinara-node.git
-cd Koinara-node
-npm install
-npm run setup
-npm run doctor
-npm run node</code></pre>
+              <h3>内建 OpenClaw backend 配置</h3>
+              <pre class="command-block"><code>{
+  "provider": {
+    "backend": "openclaw",
+    "supportedJobTypes": ["Simple"],
+    "openclaw": {
+      "agent": "main",
+      "local": true,
+      "thinking": "low",
+      "timeoutSeconds": 120
+    }
+  }
+}</code></pre>
             </article>
           </div>
         </section>
@@ -113,12 +119,12 @@ npm run node</code></pre>
         <section class="section">
           <div class="section-heading">
             <p class="eyebrow">重要说明</p>
-            <h2>目前还没有一条命令完成节点挂接。</h2>
+            <h2>内建 backend 已有，但 one-line attach 仍然没有。</h2>
           </div>
           <div class="floor-grid">
             <article class="floor-card">
               <h3>现在已经有的</h3>
-              <p>OpenClaw 可以作为代理进程运行，Koinara-node 可以作为真实网络运行时运行。</p>
+              <p>OpenClaw 现在可以直接作为 <code>Koinara-node</code> 内部的 provider backend 使用。</p>
             </article>
             <article class="floor-card">
               <h3>现在还没有的</h3>

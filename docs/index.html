@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -47,7 +47,9 @@
           <nav class="site-nav">
             <a href="#whitepaper">Whitepaper</a>
             <a href="#live">Live</a>
+            <a href="/scan.html">Scan</a>
             <a href="#node">Node</a>
+            <a href="/openclaw/">OpenClaw</a>
             <a href="#supported-networks">Networks</a>
             <a href="#next-track">Roadmap</a>
             <a href="https://github.com/sinmb79/koinara">GitHub</a>
@@ -215,7 +217,7 @@
 
             <article class="panel status-kpi">
               <span class="summary-label">Live Flow</span>
-              <strong>Deploy → Verify → Canary</strong>
+              <strong>Deploy -> Verify -> Canary</strong>
               <p class="summary-copy">
                 A live canary job was created and processed by separate provider
                 and verifier nodes on the deployed v2 contracts.
@@ -272,7 +274,7 @@
                   <li>Separate market premium from protocol issuance</li>
                   <li>Keep protocol minimal; let dApps and agents evolve above it</li>
                 </ul>
-                <p class="mono-note">Epoch duration: 86,400 seconds · Active pool: 20%</p>
+                <p class="mono-note">Epoch duration: 86,400 seconds / Active pool: 20%</p>
               </div>
             </article>
           </div>
@@ -323,6 +325,14 @@
                     </svg>
                     Node Setup
                   </a>
+                  <a class="btn btn-secondary" href="/openclaw/">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M6 8.5h12" />
+                      <path d="M6 12h12" />
+                      <path d="M6 15.5h8" />
+                    </svg>
+                    OpenClaw Path
+                  </a>
                 </div>
               </div>
             </article>
@@ -340,11 +350,20 @@
 $ cd Koinara-node
 $ npm install
 $ npm run provider:v2:start
-$ npm run verifier:v2:start</code>
+$ npm run provider:v2:claim
+$ npm run verifier:v2:start
+$ npm run verifier:v2:claim</code>
                 </div>
               </article>
               <p class="terminal-note">
-                v2 commands target the live Worldland deployment and keep state in separate v2 folders.
+                v2 commands target the live Worldland deployment, keep state in separate v2 folders,
+                and expose dedicated claim commands after each closed epoch.
+              </p>
+              <p class="terminal-note">
+                If you want OpenClaw as the provider brain, keep
+                <code>Koinara-node</code> as the execution boundary. OpenClaw
+                generates the response, while the node keeps heartbeat, submits
+                the hash, participates in verification, and claims rewards.
               </p>
             </div>
 
@@ -353,15 +372,18 @@ $ npm run verifier:v2:start</code>
                 <h3 class="card-title">What the v2 node path adds</h3>
                 <ul class="node-list">
                   <li>provider / verifier role-specific v2 entrypoints</li>
+                  <li>claim-only commands for closed epoch settlement</li>
                   <li>automatic node registration and heartbeat</li>
                   <li>active reward claim path</li>
                   <li>deferred work reward claim path</li>
+                  <li>built-in OpenClaw provider backend via local CLI</li>
                   <li>separate v2 mainnet config and artifact directories</li>
                 </ul>
                 <div class="source-links">
                   <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">Operator Checklist</a>
                   <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">Supported Networks</a>
                   <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/protocol-compatibility.md">Protocol Compatibility</a>
+                  <a href="/openclaw/">OpenClaw Integration</a>
                 </div>
               </div>
             </article>
@@ -516,7 +538,7 @@ $ npm run verifier:v2:start</code>
           <a href="./pdf/koinara-whitepaper-en.pdf">Whitepaper</a>
           <a href="./v2-theory.md">v2 Theory</a>
         </div>
-        <div class="footer-copy">© 2026 Koinara Protocol</div>
+        <div class="footer-copy">짤 2026 Koinara Protocol</div>
       </div>
     </footer>
   </body>

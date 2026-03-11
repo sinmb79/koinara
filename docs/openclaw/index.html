@@ -65,7 +65,7 @@
         <section class="section">
           <div class="section-heading">
             <p class="eyebrow">QUICK START</p>
-            <h2>Launch the agent. Run the node separately.</h2>
+            <h2>Use OpenClaw as the provider brain. Keep the node as execution.</h2>
           </div>
           <div class="paper-grid">
             <article class="paper-card quick-card">
@@ -77,19 +77,25 @@
                   <span>Agent shell and local model entrypoint</span>
                 </div>
               </div>
-              <pre class="command-block quick-command"><code># Start OpenClaw
-ollama launch openclaw --model qwen3.5</code></pre>
-              <p>Use this to start OpenClaw only. It is not a Koinara-node attach command.</p>
+              <pre class="command-block quick-command"><code># Verify the local OpenClaw agent
+openclaw agent --agent main --local --json --message "Reply with exactly OK"</code></pre>
+              <p>This confirms the local OpenClaw CLI can answer prompts, which is what the provider backend now uses.</p>
             </article>
             <article class="paper-card">
               <span class="paper-tag">Koinara-node</span>
-              <h3>Run the real network participant</h3>
-              <pre class="command-block"><code>git clone https://github.com/sinmb79/Koinara-node.git
-cd Koinara-node
-npm install
-npm run setup
-npm run doctor
-npm run node</code></pre>
+              <h3>Use the built-in OpenClaw provider backend</h3>
+              <pre class="command-block"><code>{
+  "provider": {
+    "backend": "openclaw",
+    "supportedJobTypes": ["Simple"],
+    "openclaw": {
+      "agent": "main",
+      "local": true,
+      "thinking": "low",
+      "timeoutSeconds": 120
+    }
+  }
+}</code></pre>
             </article>
           </div>
         </section>
@@ -118,12 +124,12 @@ npm run node</code></pre>
         <section class="section">
           <div class="section-heading">
             <p class="eyebrow">CURRENT STATE</p>
-            <h2>No one-line attach command yet.</h2>
+            <h2>Built-in backend exists. One-line attach still does not.</h2>
           </div>
           <div class="floor-grid">
             <article class="floor-card">
               <h3>What exists now</h3>
-              <p>OpenClaw can run as an agent process, and Koinara-node can run as the real network runtime.</p>
+              <p>OpenClaw can now be used directly as a built-in provider backend inside <code>Koinara-node</code>.</p>
             </article>
             <article class="floor-card">
               <h3>What does not exist yet</h3>
@@ -134,6 +140,31 @@ npm run node</code></pre>
               <p>A dedicated OpenClaw skill package that talks to a local or remote Koinara-node.</p>
             </article>
           </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <p class="eyebrow">REWARD FLOW</p>
+            <h2>How an OpenClaw-backed provider actually earns.</h2>
+          </div>
+          <div class="floor-grid">
+            <article class="floor-card">
+              <h3>1. OpenClaw drafts the response</h3>
+              <p>The node passes the manifest prompt into the local OpenClaw CLI. OpenClaw acts as the response engine, not the chain participant.</p>
+            </article>
+            <article class="floor-card">
+              <h3>2. Koinara-node submits and settles</h3>
+              <p>Koinara-node hashes the response, submits it on-chain, handles verifier participation, and keeps heartbeat plus epoch state.</p>
+            </article>
+            <article class="floor-card">
+              <h3>3. Claim after the epoch closes</h3>
+              <p>Protocol rewards are minted only when the node wallet sends the claim transaction after the current epoch has closed.</p>
+            </article>
+          </div>
+          <pre class="command-block"><code>npm run provider:v2:openclaw:start
+npm run provider:v2:openclaw:claim
+npm run verifier:v2:openclaw:start
+npm run verifier:v2:openclaw:claim</code></pre>
         </section>
 
         <section class="section node-section">
@@ -150,6 +181,11 @@ npm run node</code></pre>
                 <code>Koinara-node</code> keep control of wallet signing, contract interaction,
                 duplicate suppression, crash recovery, and final protocol participation.
               </p>
+            </article>
+            <article class="node-card">
+              <span class="network-label">Provider backend</span>
+              <h3>OpenClaw can now generate provider output</h3>
+              <p>Set <code>provider.backend = "openclaw"</code> and the node will pass each manifest prompt through the local OpenClaw CLI before hashing and submitting the response.</p>
             </article>
             <article class="node-card">
               <span class="network-label">Operator pattern</span>

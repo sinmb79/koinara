@@ -60,7 +60,7 @@
         <section class="section">
           <div class="section-heading">
             <p class="eyebrow">빠른 시작</p>
-            <h2>에이전트를 띄우고, 노드는 별도로 실행합니다.</h2>
+            <h2>OpenClaw를 provider 두뇌로 쓰고, 실행은 노드에 맡기세요.</h2>
           </div>
           <div class="paper-grid">
             <article class="paper-card quick-card">
@@ -72,19 +72,25 @@
                   <span>에이전트 셸과 로컬 모델 진입점</span>
                 </div>
               </div>
-              <pre class="command-block quick-command"><code># OpenClaw 시작
-ollama launch openclaw --model qwen3.5</code></pre>
-              <p>이 명령은 OpenClaw 실행 명령일 뿐이며, Koinara-node 연결 명령은 아닙니다.</p>
+              <pre class="command-block quick-command"><code># 로컬 OpenClaw 응답 확인
+openclaw agent --agent main --local --json --message "Reply with exactly OK"</code></pre>
+              <p>이 명령이 성공하면, Koinara provider backend가 같은 OpenClaw CLI를 통해 응답을 만들 수 있습니다.</p>
             </article>
             <article class="paper-card">
               <span class="paper-tag">Koinara-node</span>
-              <h3>실제 네트워크 참여자는 노드입니다</h3>
-              <pre class="command-block"><code>git clone https://github.com/sinmb79/Koinara-node.git
-cd Koinara-node
-npm install
-npm run setup
-npm run doctor
-npm run node</code></pre>
+              <h3>내장 OpenClaw backend 설정</h3>
+              <pre class="command-block"><code>{
+  "provider": {
+    "backend": "openclaw",
+    "supportedJobTypes": ["Simple"],
+    "openclaw": {
+      "agent": "main",
+      "local": true,
+      "thinking": "low",
+      "timeoutSeconds": 120
+    }
+  }
+}</code></pre>
             </article>
           </div>
         </section>
@@ -113,12 +119,12 @@ npm run node</code></pre>
         <section class="section">
           <div class="section-heading">
             <p class="eyebrow">중요</p>
-            <h2>아직 one-line 연결 명령은 없습니다.</h2>
+            <h2>내장 backend는 있습니다. 다만 one-line attach는 아직 없습니다.</h2>
           </div>
           <div class="floor-grid">
             <article class="floor-card">
               <h3>지금 가능한 것</h3>
-              <p>OpenClaw는 에이전트 프로세스로, Koinara-node는 실제 네트워크 런타임으로 각각 실행할 수 있습니다.</p>
+              <p>OpenClaw는 이제 <code>Koinara-node</code> 내부의 provider backend로 직접 사용할 수 있습니다.</p>
             </article>
             <article class="floor-card">
               <h3>아직 없는 것</h3>
@@ -129,6 +135,31 @@ npm run node</code></pre>
               <p>로컬 또는 원격 Koinara-node와 대화하는 전용 OpenClaw skill 패키지입니다.</p>
             </article>
           </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <p class="eyebrow">보상 흐름</p>
+            <h2>OpenClaw를 붙인 provider가 실제로 보상을 받는 순서</h2>
+          </div>
+          <div class="floor-grid">
+            <article class="floor-card">
+              <h3>1. OpenClaw가 응답 초안을 만듭니다</h3>
+              <p>노드는 manifest prompt를 로컬 OpenClaw CLI로 넘깁니다. OpenClaw는 응답 엔진이고, 온체인 참여자는 아닙니다.</p>
+            </article>
+            <article class="floor-card">
+              <h3>2. Koinara-node가 제출과 정산을 맡습니다</h3>
+              <p>Koinara-node가 응답 해시를 만들고 제출하며, verifier 참여와 heartbeat, epoch 상태까지 계속 관리합니다.</p>
+            </article>
+            <article class="floor-card">
+              <h3>3. epoch가 닫힌 뒤 claim합니다</h3>
+              <p>프로토콜 보상은 현재 epoch가 닫힌 뒤, 노드 지갑이 claim 트랜잭션을 보내야 실제로 민팅됩니다.</p>
+            </article>
+          </div>
+          <pre class="command-block"><code>npm run provider:v2:openclaw:start
+npm run provider:v2:openclaw:claim
+npm run verifier:v2:openclaw:start
+npm run verifier:v2:openclaw:claim</code></pre>
         </section>
       </main>
 

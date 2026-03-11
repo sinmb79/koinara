@@ -1,0 +1,132 @@
+{
+  "generatedAt": "2026-03-11T17:23:07.056Z",
+  "source": {
+    "chainId": 103,
+    "label": "Worldland Seoul Mainnet (Koinara v2)",
+    "protocolVersion": "v2",
+    "rpcUrl": "https://seoul.worldland.foundation/",
+    "explorerBaseUrl": "https://scan.worldland.foundation/"
+  },
+  "contracts": {
+    "registry": "0x865315BE82c432A45BB68C959413026F6202e368",
+    "verifier": "0x3b63deb3632b2484bAb6069281f08642ab112b16",
+    "rewardDistributor": "0x6Db94C2c93af7b0B5345C66535D5dC7cD9225126",
+    "token": "0x7749473E36a8d6E741d9E581106E81CacAb7832a",
+    "nodeRegistry": "0x243fB879fBE521c5c227Da9EF731968413755131"
+  },
+  "summary": {
+    "currentEpoch": 0,
+    "genesisTimestamp": 1773231933,
+    "epochDuration": 86400,
+    "nextCloseTimestamp": 1773318333,
+    "lastClosedEpoch": null,
+    "totalJobs": 1,
+    "totalSupply": "0",
+    "totalSupplyFormatted": "0.0",
+    "currentActiveCount": 2,
+    "lastClosedActiveCount": 0,
+    "currentActiveEmission": "200000000000000000000",
+    "currentActiveEmissionFormatted": "200.0",
+    "currentWorkEmission": "800000000000000000000",
+    "currentWorkEmissionFormatted": "800.0",
+    "lastClosedAcceptedWeight": "0"
+  },
+  "jobs": {
+    "1": {
+      "jobId": 1,
+      "creator": "0xf95232Ae6a716862799C90239028fb590C9bB307",
+      "requestHash": "0x896afd95285911cda9f22f8fb3bcb5b6913a53fd7fb7b7521d9420c924b4befd",
+      "schemaHash": "0x6cf9631b5759f411843917fd3acb630147445c3b18c928528ec496f289192e77",
+      "deadline": 1773318881,
+      "jobType": 0,
+      "premiumReward": "0",
+      "premiumRewardFormatted": "0.0",
+      "state": 6,
+      "submission": {
+        "provider": "0x59816544dcD2B96fB35e7Eac67BA26510e11B996",
+        "responseHash": "0x3da114674765c8391d9cebefac08492844ed0b906fae7f67c101f092e51ae750",
+        "submittedAt": 1773232574,
+        "exists": true
+      },
+      "record": {
+        "provider": "0x59816544dcD2B96fB35e7Eac67BA26510e11B996",
+        "responseHash": "0x3da114674765c8391d9cebefac08492844ed0b906fae7f67c101f092e51ae750",
+        "submittedAt": 1773232574,
+        "approvals": 1,
+        "quorum": 1,
+        "validJob": true,
+        "withinDeadline": true,
+        "formatPass": true,
+        "nonEmptyResponse": true,
+        "verificationPass": true,
+        "rejected": false,
+        "finalized": true,
+        "poiHash": "0x63d62eae89225a798f5a5b308eba28b010935a54d79dd7d8ef0b8bef5146beaa"
+      },
+      "approvedVerifiers": [
+        "0x26ce295f8DD8866C46d6355A7fDDe5CaEB76f3AC"
+      ],
+      "rewardBreakdown": {
+        "totalReward": "800000000000000000000",
+        "totalRewardFormatted": "800.0",
+        "providerReward": "560000000000000000000",
+        "providerRewardFormatted": "560.0",
+        "verifierRewardTotal": "240000000000000000000",
+        "verifierRewardTotalFormatted": "240.0"
+      }
+    }
+  },
+  "nodes": {
+    "0xf95232ae6a716862799c90239028fb590c9bb307": {
+      "address": "0xf95232ae6a716862799c90239028fb590c9bb307",
+      "role": 0,
+      "metadataHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "registeredAt": 0,
+      "lastHeartbeatEpoch": 0,
+      "active": false,
+      "activeCurrent": false,
+      "activePrevious": false,
+      "previousEpoch": null,
+      "nativeBalance": "19814022799999706000",
+      "nativeBalanceFormatted": "19.814022799999706",
+      "tokenBalance": "0",
+      "tokenBalanceFormatted": "0.0",
+      "estimatedClosedEpochShare": "0",
+      "estimatedClosedEpochShareFormatted": "0.0"
+    },
+    "0x59816544dcd2b96fb35e7eac67ba26510e11b996": {
+      "address": "0x59816544dcd2b96fb35e7eac67ba26510e11b996",
+      "role": 0,
+      "metadataHash": "0x01baf871b22df68895c0f12d1ffc484b1d0ae56210124601b9dd360d353af3f2",
+      "registeredAt": 1773232515,
+      "lastHeartbeatEpoch": 0,
+      "active": true,
+      "activeCurrent": true,
+      "activePrevious": false,
+      "previousEpoch": null,
+      "nativeBalance": "9836931999997717048",
+      "nativeBalanceFormatted": "9.836931999997717048",
+      "tokenBalance": "0",
+      "tokenBalanceFormatted": "0.0",
+      "estimatedClosedEpochShare": "0",
+      "estimatedClosedEpochShareFormatted": "0.0"
+    },
+    "0x26ce295f8dd8866c46d6355a7fdde5caeb76f3ac": {
+      "address": "0x26ce295f8dd8866c46d6355a7fdde5caeb76f3ac",
+      "role": 1,
+      "metadataHash": "0x268519217fb40f67d284c1cf78bf8cf92226946f0aa51b8d0c2c668908ced8d7",
+      "registeredAt": 1773232586,
+      "lastHeartbeatEpoch": 0,
+      "active": true,
+      "activeCurrent": true,
+      "activePrevious": false,
+      "previousEpoch": null,
+      "nativeBalance": "9338623999990740736",
+      "nativeBalanceFormatted": "9.338623999990740736",
+      "tokenBalance": "0",
+      "tokenBalanceFormatted": "0.0",
+      "estimatedClosedEpochShare": "0",
+      "estimatedClosedEpochShareFormatted": "0.0"
+    }
+  }
+}

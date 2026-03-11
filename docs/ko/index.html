@@ -47,7 +47,9 @@
           <nav class="site-nav">
             <a href="#whitepaper">백서</a>
             <a href="#live">라이브</a>
+            <a href="/ko/scan/">Scan</a>
             <a href="#node">노드</a>
+            <a href="/ko/openclaw/">OpenClaw</a>
             <a href="#supported-networks">네트워크</a>
             <a href="#next-track">로드맵</a>
             <a href="https://github.com/sinmb79/koinara">GitHub</a>
@@ -317,6 +319,14 @@
                     </svg>
                     노드 설정 문서
                   </a>
+                  <a class="btn btn-secondary" href="/ko/openclaw/">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M6 8.5h12" />
+                      <path d="M6 12h12" />
+                      <path d="M6 15.5h8" />
+                    </svg>
+                    OpenClaw 경로
+                  </a>
                 </div>
               </div>
             </article>
@@ -334,11 +344,13 @@
 $ cd Koinara-node
 $ npm install
 $ npm run provider:v2:start
+$ npm run provider:v2:claim
 $ npm run verifier:v2:start</code>
                 </div>
               </article>
               <p class="terminal-note">
-                v2 명령은 월드랜드 메인넷 v2 경로와 분리된 v2 상태 폴더를 사용합니다.
+                v2 명령은 월드랜드 메인넷 v2 경로와 분리된 v2 상태 폴더를 사용하며,
+                epoch 종료 후에는 claim 전용 명령으로 KOIN을 청구할 수 있습니다.
               </p>
             </div>
 
@@ -347,15 +359,18 @@ $ npm run verifier:v2:start</code>
                 <h3 class="card-title">v2 노드 경로가 추가한 것</h3>
                 <ul class="node-list">
                   <li>provider / verifier용 v2 전용 실행 진입점</li>
+                  <li>epoch 종료 후 claim 전용 실행 명령</li>
                   <li>자동 노드 등록과 heartbeat</li>
                   <li>active reward claim 경로</li>
                   <li>epoch 종료 후 work reward claim 경로</li>
+                  <li>로컬 OpenClaw CLI를 쓰는 내장 provider backend</li>
                   <li>분리된 v2 mainnet 설정과 산출물 디렉터리</li>
                 </ul>
                 <div class="source-links">
                   <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">운영자 체크리스트</a>
                   <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">지원 네트워크</a>
                   <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/protocol-compatibility.md">프로토콜 호환성</a>
+                  <a href="/ko/openclaw/">OpenClaw 연동</a>
                 </div>
               </div>
             </article>
