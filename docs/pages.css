@@ -121,6 +121,7 @@ code {
   display: inline-flex;
   flex-wrap: wrap;
   gap: 14px;
+  align-items: center;
 }
 
 .site-nav a {
@@ -130,6 +131,27 @@ code {
   text-decoration: none;
   background: rgba(255, 255, 255, 0.6);
   border: 1px solid var(--line);
+}
+
+.lang-switch {
+  display: inline-flex;
+  gap: 8px;
+  margin-left: 6px;
+}
+
+.lang-switch a {
+  min-width: 46px;
+  padding: 9px 12px;
+  text-align: center;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+
+.lang-switch a[aria-current="page"] {
+  background: linear-gradient(135deg, var(--accent), #155e75);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 10px 22px rgba(15, 118, 110, 0.22);
 }
 
 .section,
@@ -577,6 +599,14 @@ code {
   .site-footer {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .site-nav {
+    width: 100%;
+  }
+
+  .lang-switch {
+    margin-left: 0;
   }
 
   .hero h1 {

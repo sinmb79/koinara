@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Koinara | 面向集体推理的开放网络</title>
+    <meta
+      name="description"
+      content="Koinara 是一个以 Minimum Acceptable Inference 和 Minimum Reward 为核心的点对点集体推理网络。"
+    />
+    <link rel="canonical" href="https://koinara.xyz/zh/" />
+    <link rel="alternate" hreflang="en" href="https://koinara.xyz/" />
+    <link rel="alternate" hreflang="ko" href="https://koinara.xyz/ko/" />
+    <link rel="alternate" hreflang="zh" href="https://koinara.xyz/zh/" />
+    <link rel="alternate" hreflang="x-default" href="https://koinara.xyz/" />
+    <meta property="og:title" content="Koinara | 面向集体推理的开放网络" />
+    <meta
+      property="og:description"
+      content="Koinara 是一个以 Minimum Acceptable Inference 和 Minimum Reward 为核心的点对点集体推理网络。"
+    />
+    <meta property="og:url" content="https://koinara.xyz/zh/" />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../pages.css" />
+  </head>
+  <body style="font-family: 'Noto Sans SC', 'Space Grotesk', sans-serif">
+    <div class="site-bg"></div>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark">K</span>
+          <span class="brand-copy">
+            <strong>Koinara</strong>
+            <span>A Peer-to-Peer Collective Inference Network</span>
+          </span>
+        </a>
+        <nav class="site-nav">
+          <a href="#whitepaper">白皮书</a>
+          <a href="#node">节点</a>
+          <a href="#supported-networks">网络</a>
+          <a href="#figures">图示</a>
+          <a href="#next-track">下一阶段</a>
+          <a href="https://github.com/sinmb79/koinara">GitHub</a>
+          <div class="lang-switch" aria-label="语言切换">
+            <a href="../index.html">EN</a>
+            <a href="../ko/">KO</a>
+            <a href="./index.html" aria-current="page">ZH</a>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero section">
+          <div class="hero-copy">
+            <p class="eyebrow">最小协议 / 开放推理市场</p>
+            <h1>面向集体推理的开放网络。</h1>
+            <p class="lede">
+              Koinara 只定义两个协议原语：
+              <code>Minimum Acceptable Inference (MAI)</code> 与
+              <code>Minimum Reward</code>。高于这条底线的质量、速度、深度与用户偏好，都属于市场层。
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="../pdf/koinara-whitepaper-en.pdf">英文白皮书</a>
+              <a class="btn btn-secondary" href="../pdf/koinara-whitepaper-ko.pdf">韩文白皮书</a>
+              <a class="btn btn-ghost" href="#node">运行节点</a>
+            </div>
+            <div class="meta-strip">
+              <span>公平启动</span>
+              <span>面向无主化</span>
+              <span>链无关理论</span>
+              <span>多链节点运行时</span>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <article class="figure-card figure-card-large">
+              <div class="figure-card-top">
+                <span>核心图示</span>
+                <span>第 6 节</span>
+              </div>
+              <img src="../figures/whitepaper/en/figure-03-layered-architecture.png" alt="Koinara layered architecture" />
+              <h2>分层架构</h2>
+              <p>需求发布、响应生成、验证与结算被刻意拆分，以保持协议最小化。</p>
+            </article>
+            <article class="figure-card figure-card-small">
+              <div class="figure-card-top">
+                <span>经济图示</span>
+                <span>第 7 节</span>
+              </div>
+              <img src="../figures/whitepaper/en/figure-04-issuance-curve.png" alt="Koinara issuance curve" />
+              <h3>发行递减，市场奖励影响逐步上升</h3>
+            </article>
+          </div>
+        </section>
+
+        <section class="section protocol-floor">
+          <div class="section-heading">
+            <p class="eyebrow">协议底线</p>
+            <h2>被正式定义的只有最低标准。</h2>
+          </div>
+          <div class="floor-grid">
+            <article class="floor-card"><h3>Minimum Acceptable Inference</h3><p>MAI 不是最佳答案预言机，而是协议接受的最低门槛。</p></article>
+            <article class="floor-card"><h3>Minimum Reward</h3><p>KOIN 发行只奖励达到协议底线的推理，premium reward 仍由市场承担。</p></article>
+            <article class="floor-card"><h3>Proof of Inference</h3><p>PoI 证明提交满足最低协议条件，但不证明绝对真理或市场最佳质量。</p></article>
+          </div>
+        </section>
+
+        <section class="section whitepaper-package" id="whitepaper">
+          <div class="section-heading">
+            <p class="eyebrow">白皮书包</p>
+            <h2>主文与配套附录分开发布。</h2>
+          </div>
+          <div class="paper-grid">
+            <article class="paper-card"><span class="paper-tag">Main</span><h3>英文白皮书</h3><p>包含协议论题、图示、MAI、PoI、激励结构与最小架构。</p><a href="../pdf/koinara-whitepaper-en.pdf">下载 PDF</a></article>
+            <article class="paper-card"><span class="paper-tag">Main</span><h3>韩文白皮书</h3><p>当前公开版本的完整韩文主文。</p><a href="../pdf/koinara-whitepaper-ko.pdf">下载 PDF</a></article>
+            <article class="paper-card"><span class="paper-tag">Appendix</span><h3>英文附录</h3><p>部署配置、合约映射、可移植性说明与参数参考。</p><a href="../pdf/koinara-whitepaper-appendices-en.pdf">下载 PDF</a></article>
+            <article class="paper-card"><span class="paper-tag">Appendix</span><h3>韩文附录</h3><p>为了保持主文简洁，附录包被单独发布。</p><a href="../pdf/koinara-whitepaper-appendices-ko.pdf">下载 PDF</a></article>
+          </div>
+        </section>
+
+        <section class="section node-section" id="node">
+          <div class="section-heading">
+            <p class="eyebrow">公开节点</p>
+            <h2>在这里阅读协议，在独立仓库中运行节点。</h2>
+          </div>
+          <div class="node-grid">
+            <article class="node-card node-card-primary">
+              <span class="network-label">Koinara-node</span>
+              <h3>provider、verifier，或两者兼有</h3>
+              <p>`Koinara-node` 是连接已部署 Koinara 合约的独立公开后台节点程序，适用于多链运行时。</p>
+              <div class="cta-row">
+                <a class="btn btn-primary" href="https://github.com/sinmb79/Koinara-node">打开仓库</a>
+                <a class="btn btn-secondary" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/home-test-quickstart.md">家庭测试快速开始</a>
+              </div>
+            </article>
+            <article class="node-card">
+              <span class="network-label">安装</span>
+              <h3>三步操作路径</h3>
+              <pre class="command-block"><code>git clone https://github.com/sinmb79/Koinara-node.git
+cd Koinara-node
+npm install
+npm run setup
+npm run doctor
+npm run node</code></pre>
+            </article>
+            <article class="node-card">
+              <span class="network-label">文档</span>
+              <h3>节点包包含的内容</h3>
+              <ul class="node-list">
+                <li>provider / verifier / both 角色</li>
+                <li>ollama / openai 推理后端</li>
+                <li>priority failover 或 all-healthy 多链选择</li>
+                <li>doctor、status 与 logs 命令</li>
+                <li>manifest + receipt 发现规范</li>
+                <li>家庭测试与操作员检查清单</li>
+              </ul>
+              <div class="source-links">
+                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">节点设置</a>
+                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">操作员清单</a>
+                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">支持的网络</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section supported-section" id="supported-networks">
+          <div class="section-heading">
+            <p class="eyebrow">支持的网络</p>
+            <h2>按链部署，同时让节点为更多网络做好准备。</h2>
+          </div>
+          <div class="supported-grid">
+            <article class="network-card"><span class="network-label">EVM Runtime</span><h3>Worldland</h3><p>v1 的首个参考部署路径。</p></article>
+            <article class="network-card"><span class="network-label">EVM Runtime</span><h3>Base</h3><p>节点运行时已为其准备健康度驱动的参与切换。</p></article>
+            <article class="network-card"><span class="network-label">EVM Runtime</span><h3>Ethereum</h3><p>复用同一条 EVM 运行时路径。</p></article>
+            <article class="network-card"><span class="network-label">EVM Runtime</span><h3>BNB Smart Chain</h3><p>通过共享 EVM adapter 预备完成。</p></article>
+            <article class="network-card roadmap-card"><span class="network-label">Prepared Only</span><h3>Solana</h3><p>真正可运行的部署与运行时仍属于后续工作。</p></article>
+          </div>
+        </section>
+
+        <section class="section figures-section" id="figures">
+          <div class="section-heading">
+            <p class="eyebrow">渲染图示</p>
+            <h2>关键图示已直接进入白皮书正文。</h2>
+          </div>
+          <div class="figure-grid">
+            <figure class="figure-tile"><img src="../figures/whitepaper/en/figure-01-state-machine.png" alt="Job lifecycle state machine" /><figcaption>图 1. Job 生命周期状态机</figcaption></figure>
+            <figure class="figure-tile"><img src="../figures/whitepaper/en/figure-02-network-flow.png" alt="Main network flow" /><figcaption>图 2. 主网络流程</figcaption></figure>
+            <figure class="figure-tile"><img src="../figures/whitepaper/en/figure-03-layered-architecture.png" alt="Layered architecture" /><figcaption>图 3. 分层架构</figcaption></figure>
+            <figure class="figure-tile"><img src="../figures/whitepaper/en/figure-04-issuance-curve.png" alt="Issuance curve" /><figcaption>图 4. 发行曲线</figcaption></figure>
+          </div>
+        </section>
+
+        <section class="section worldland-section" id="next-track">
+          <div class="section-heading">
+            <p class="eyebrow">下一阶段</p>
+            <h2>按链部署协议，同时保持节点具备多链就绪能力。</h2>
+          </div>
+          <div class="worldland-grid">
+            <article class="network-card"><span class="network-label">Step 1</span><h3>先落地 Worldland</h3><p>Worldland 仍然是 v1 合约的首个参考部署路径。</p></article>
+            <article class="network-card"><span class="network-label">Step 2</span><h3>扩展到更多 EVM 链</h3><p>Base、Ethereum 与 BNB 都可以承载独立的 Koinara 部署。</p><a href="https://github.com/sinmb79/Koinara-Worldland">Koinara-Worldland</a></article>
+            <article class="network-card roadmap-card"><span class="network-label">Step 3</span><h3>准备下一种 adapter</h3><p>Solana 与未来的 non-EVM 路线应当落在显式 chain adapter 之后。</p></article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>Koinara 是一个面向 owner-light 与 fair-launch 集体推理协议的参考实现。</p>
+        <div>
+          <a href="https://github.com/sinmb79/Koinara-node">Koinara-node</a>
+          <a href="../pdf/koinara-whitepaper-en.pdf">白皮书</a>
+          <a href="../pdf/koinara-whitepaper-appendices-en.pdf">附录</a>
+          <a href="https://github.com/sinmb79/koinara">GitHub</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

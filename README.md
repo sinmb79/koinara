@@ -10,6 +10,7 @@ This repository is a v1 reference implementation of the minimum viable Koinara p
 
 - Public site: [`https://koinara.xyz`](https://koinara.xyz)
 - GitHub Pages fallback: [`https://sinmb79.github.io/koinara/`](https://sinmb79.github.io/koinara/)
+- Language pages: [`/`](https://koinara.xyz), [`/ko/`](https://koinara.xyz/ko/), [`/zh/`](https://koinara.xyz/zh/)
 - Download page: [`docs/whitepaper-downloads.md`](./docs/whitepaper-downloads.md)
 - English: [`docs/whitepaper.md`](./docs/whitepaper.md)
 - Korean: [`docs/whitepaper.ko.md`](./docs/whitepaper.ko.md)

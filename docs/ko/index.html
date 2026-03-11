@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Koinara | 집단 추론을 위한 오픈 네트워크</title>
+    <meta
+      name="description"
+      content="Koinara는 Minimum Acceptable Inference와 Minimum Reward를 중심에 둔 집단 추론 네트워크입니다."
+    />
+    <link rel="canonical" href="https://koinara.xyz/ko/" />
+    <link rel="alternate" hreflang="en" href="https://koinara.xyz/" />
+    <link rel="alternate" hreflang="ko" href="https://koinara.xyz/ko/" />
+    <link rel="alternate" hreflang="zh" href="https://koinara.xyz/zh/" />
+    <link rel="alternate" hreflang="x-default" href="https://koinara.xyz/" />
+    <meta property="og:title" content="Koinara | 집단 추론을 위한 오픈 네트워크" />
+    <meta
+      property="og:description"
+      content="Koinara는 Minimum Acceptable Inference와 Minimum Reward를 중심에 둔 집단 추론 네트워크입니다."
+    />
+    <meta property="og:url" content="https://koinara.xyz/ko/" />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../pages.css" />
+  </head>
+  <body style="font-family: 'Noto Sans KR', 'Space Grotesk', sans-serif">
+    <div class="site-bg"></div>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark">K</span>
+          <span class="brand-copy">
+            <strong>Koinara</strong>
+            <span>A Peer-to-Peer Collective Inference Network</span>
+          </span>
+        </a>
+        <nav class="site-nav">
+          <a href="#whitepaper">백서</a>
+          <a href="#node">노드</a>
+          <a href="#supported-networks">네트워크</a>
+          <a href="#figures">도식</a>
+          <a href="#next-track">다음 단계</a>
+          <a href="https://github.com/sinmb79/koinara">GitHub</a>
+          <div class="lang-switch" aria-label="언어 전환">
+            <a href="../index.html">EN</a>
+            <a href="./index.html" aria-current="page">KO</a>
+            <a href="../zh/">ZH</a>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero section">
+          <div class="hero-copy">
+            <p class="eyebrow">최소 프로토콜 / 오픈 추론 시장</p>
+            <h1>집단 추론을 위한 오픈 네트워크.</h1>
+            <p class="lede">
+              Koinara는 오직 두 가지 프로토콜 기본값만 정의합니다.
+              <code>Minimum Acceptable Inference (MAI)</code>와
+              <code>Minimum Reward</code>입니다. 그 기준 위에 있는 품질, 속도,
+              깊이, 사용자 선호는 시장의 영역으로 남겨둡니다.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="../pdf/koinara-whitepaper-ko.pdf">국문 백서</a>
+              <a class="btn btn-secondary" href="../pdf/koinara-whitepaper-en.pdf">영문 백서</a>
+              <a class="btn btn-ghost" href="#node">노드 실행하기</a>
+            </div>
+            <div class="meta-strip">
+              <span>페어 런치</span>
+              <span>오너리스 지향</span>
+              <span>체인 독립 이론</span>
+              <span>멀티체인 노드 런타임</span>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <article class="figure-card figure-card-large">
+              <div class="figure-card-top">
+                <span>핵심 도식</span>
+                <span>섹션 6</span>
+              </div>
+              <img
+                src="../figures/whitepaper/ko/figure-03-layered-architecture.png"
+                alt="Koinara 계층형 아키텍처"
+              />
+              <h2>계층형 아키텍처</h2>
+              <p>수요 게시, 응답 생성, 검증, 정산을 의도적으로 분리해 최소 프로토콜을 유지합니다.</p>
+            </article>
+
+            <article class="figure-card figure-card-small">
+              <div class="figure-card-top">
+                <span>경제 도식</span>
+                <span>섹션 7</span>
+              </div>
+              <img
+                src="../figures/whitepaper/ko/figure-04-issuance-curve.png"
+                alt="Koinara 발행 곡선"
+              />
+              <h3>감소하는 발행, 커지는 시장 보상 영향력</h3>
+            </article>
+          </div>
+        </section>
+
+        <section class="section protocol-floor">
+          <div class="section-heading">
+            <p class="eyebrow">프로토콜 바닥선</p>
+            <h2>정식으로 규정되는 것은 최소 기준뿐입니다.</h2>
+          </div>
+
+          <div class="floor-grid">
+            <article class="floor-card">
+              <h3>Minimum Acceptable Inference</h3>
+              <p>MAI는 최고의 정답을 보장하는 오라클이 아니라 최소 수용선을 정의하는 기준입니다.</p>
+            </article>
+            <article class="floor-card">
+              <h3>Minimum Reward</h3>
+              <p>KOIN 발행은 프로토콜 바닥선을 충족한 추론에만 지급되며, premium reward는 시장 회계로 분리됩니다.</p>
+            </article>
+            <article class="floor-card">
+              <h3>Proof of Inference</h3>
+              <p>PoI는 제출물이 최소 프로토콜 조건을 충족했다는 사실을 증명하지만, 절대적 진실을 보증하지는 않습니다.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section whitepaper-package" id="whitepaper">
+          <div class="section-heading">
+            <p class="eyebrow">백서 패키지</p>
+            <h2>본 백서와 별도 부록을 함께 제공합니다.</h2>
+          </div>
+          <div class="paper-grid">
+            <article class="paper-card">
+              <span class="paper-tag">Main</span>
+              <h3>국문 백서</h3>
+              <p>프로토콜 철학, 도식, MAI, PoI, 인센티브, 최소 아키텍처를 한 문서로 묶었습니다.</p>
+              <a href="../pdf/koinara-whitepaper-ko.pdf">PDF 다운로드</a>
+            </article>
+            <article class="paper-card">
+              <span class="paper-tag">Main</span>
+              <h3>영문 백서</h3>
+              <p>현재 공개된 정식 영문본입니다.</p>
+              <a href="../pdf/koinara-whitepaper-en.pdf">PDF 다운로드</a>
+            </article>
+            <article class="paper-card">
+              <span class="paper-tag">Appendix</span>
+              <h3>국문 부록</h3>
+              <p>배포 프로파일, 컨트랙트 매핑, 이식성 메모, 파라미터 참조를 따로 정리했습니다.</p>
+              <a href="../pdf/koinara-whitepaper-appendices-ko.pdf">PDF 다운로드</a>
+            </article>
+            <article class="paper-card">
+              <span class="paper-tag">Appendix</span>
+              <h3>영문 부록</h3>
+              <p>본 백서의 간결함을 유지하기 위해 부록을 별도 패키지로 분리했습니다.</p>
+              <a href="../pdf/koinara-whitepaper-appendices-en.pdf">PDF 다운로드</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="section node-section" id="node">
+          <div class="section-heading">
+            <p class="eyebrow">공개 노드</p>
+            <h2>프로토콜은 여기서 읽고, 노드는 별도 레포에서 실행합니다.</h2>
+          </div>
+          <div class="node-grid">
+            <article class="node-card node-card-primary">
+              <span class="network-label">Koinara-node</span>
+              <h3>provider, verifier, 또는 둘 다</h3>
+              <p>`Koinara-node`는 지원 네트워크에 배포된 Koinara 컨트랙트에 직접 연결되는 독립형 공개 노드입니다.</p>
+              <div class="cta-row">
+                <a class="btn btn-primary" href="https://github.com/sinmb79/Koinara-node">레포 열기</a>
+                <a class="btn btn-secondary" href="https://github.com/sinmb79/Koinara-node/blob/main/docs/home-test-quickstart.md">홈 테스트 빠른 시작</a>
+              </div>
+            </article>
+            <article class="node-card">
+              <span class="network-label">설치</span>
+              <h3>3단계 운영자 경로</h3>
+              <pre class="command-block"><code>git clone https://github.com/sinmb79/Koinara-node.git
+cd Koinara-node
+npm install
+npm run setup
+npm run doctor
+npm run node</code></pre>
+            </article>
+            <article class="node-card">
+              <span class="network-label">문서</span>
+              <h3>노드 패키지에 포함된 내용</h3>
+              <ul class="node-list">
+                <li>provider / verifier / both 역할</li>
+                <li>ollama / openai 백엔드</li>
+                <li>priority failover 또는 all-healthy 멀티체인 선택</li>
+                <li>doctor, status, logs 명령</li>
+                <li>manifest + receipt discovery spec</li>
+                <li>홈 테스트와 운영자 체크리스트</li>
+              </ul>
+              <div class="source-links">
+                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/node-setup.md">노드 설정</a>
+                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/operator-checklist.md">운영자 체크리스트</a>
+                <a href="https://github.com/sinmb79/Koinara-node/blob/main/docs/supported-networks.md">지원 네트워크</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section supported-section" id="supported-networks">
+          <div class="section-heading">
+            <p class="eyebrow">지원 네트워크</p>
+            <h2>체인별로 배포하고, 노드는 더 많은 체인에 대비합니다.</h2>
+          </div>
+          <div class="supported-grid">
+            <article class="network-card"><span class="network-label">EVM Runtime</span><h3>Worldland</h3><p>v1의 첫 번째 참조 배포 경로입니다.</p></article>
+            <article class="network-card"><span class="network-label">EVM Runtime</span><h3>Base</h3><p>건강도 기반 참여 전환을 포함하는 독립 EVM 배포 대상입니다.</p></article>
+            <article class="network-card"><span class="network-label">EVM Runtime</span><h3>Ethereum</h3><p>같은 EVM 런타임 경로를 사용하므로 노드 동작은 유지됩니다.</p></article>
+            <article class="network-card"><span class="network-label">EVM Runtime</span><h3>BNB Smart Chain</h3><p>공유 EVM 어댑터를 통해 준비되어 있습니다.</p></article>
+            <article class="network-card roadmap-card"><span class="network-label">Prepared Only</span><h3>Solana</h3><p>실행 가능한 배포와 런타임은 향후 작업입니다.</p></article>
+          </div>
+        </section>
+
+        <section class="section figures-section" id="figures">
+          <div class="section-heading">
+            <p class="eyebrow">렌더링된 도식</p>
+            <h2>핵심 도식은 이제 백서 본문에 직접 포함됩니다.</h2>
+          </div>
+          <div class="figure-grid">
+            <figure class="figure-tile"><img src="../figures/whitepaper/ko/figure-01-state-machine.png" alt="Job lifecycle state machine" /><figcaption>도식 1. Job 생명주기 상태 기계</figcaption></figure>
+            <figure class="figure-tile"><img src="../figures/whitepaper/ko/figure-02-network-flow.png" alt="Main network flow" /><figcaption>도식 2. 메인 네트워크 흐름</figcaption></figure>
+            <figure class="figure-tile"><img src="../figures/whitepaper/ko/figure-03-layered-architecture.png" alt="Layered architecture" /><figcaption>도식 3. 계층형 아키텍처</figcaption></figure>
+            <figure class="figure-tile"><img src="../figures/whitepaper/ko/figure-04-issuance-curve.png" alt="Issuance curve" /><figcaption>도식 4. 발행 곡선</figcaption></figure>
+          </div>
+        </section>
+
+        <section class="section worldland-section" id="next-track">
+          <div class="section-heading">
+            <p class="eyebrow">다음 단계</p>
+            <h2>프로토콜은 체인별로 배포하고, 노드는 멀티체인 준비 상태를 유지합니다.</h2>
+          </div>
+          <div class="worldland-grid">
+            <article class="network-card"><span class="network-label">Step 1</span><h3>Worldland 먼저</h3><p>v1 컨트랙트의 첫 번째 참조 배포 경로입니다.</p></article>
+            <article class="network-card"><span class="network-label">Step 2</span><h3>EVM 체인으로 확장</h3><p>Base, Ethereum, BNB가 각각 독립 배포를 호스팅할 수 있습니다.</p><a href="https://github.com/sinmb79/Koinara-Worldland">Koinara-Worldland</a></article>
+            <article class="network-card roadmap-card"><span class="network-label">Step 3</span><h3>다음 adapter 준비</h3><p>Solana와 이후 non-EVM 경로는 명시적인 chain adapter 뒤에 배치해야 합니다.</p></article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>Koinara는 오너리스 지향, 페어 런치 집단 추론 프로토콜의 참조 구현입니다.</p>
+        <div>
+          <a href="https://github.com/sinmb79/Koinara-node">Koinara-node</a>
+          <a href="../pdf/koinara-whitepaper-ko.pdf">백서</a>
+          <a href="../pdf/koinara-whitepaper-appendices-ko.pdf">부록</a>
+          <a href="https://github.com/sinmb79/koinara">GitHub</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
