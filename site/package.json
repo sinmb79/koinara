@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "npx vite",
-    "build": "npx vite build",
+    "dev": "node scripts/sync-live-snapshot.mjs && npx vite",
+    "build": "node scripts/sync-live-snapshot.mjs && npx vite build",
     "postbuild": "node scripts/prepare-pages.mjs",
     "preview": "npx vite preview"
   },
