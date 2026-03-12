@@ -1,0 +1,34 @@
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#050810;--bg2:#080d18;--sf:#0c1220;--sf2:#111928;--sf3:#161f32;
+  --b:rgba(0,255,180,.10);--bb:rgba(0,255,180,.30);
+  --a:#00ffb4;--a2:#00c8ff;--a3:#7c3aed;
+  --t:#e8f0ff;--mt:#6b7a99;--dt:#3a4560;
+  --danger:#ff4466;--warn:#ffaa00;
+  --mono:'Share Tech Mono',monospace;
+  --disp:'Syne',sans-serif;
+  --body:'DM Sans',sans-serif;
+  --r:10px;--rl:16px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t);font-family:var(--body);font-weight:300;line-height:1.6;overflow-x:hidden;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(0,255,180,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,255,180,.025) 1px,transparent 1px);
+  background-size:48px 48px}
+#root{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--dt);border-radius:3px}
+h1,h2,h3,h4{font-family:var(--disp);font-weight:700;color:var(--t)}
+a{color:var(--a);text-decoration:none}
+button{cursor:pointer;font-family:var(--body);border:none}
+input,textarea,select{
+  font-family:var(--body);font-size:.9rem;color:var(--t);
+  background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);
+  padding:11px 14px;outline:none;width:100%;
+  transition:border-color .2s,box-shadow .2s;-webkit-appearance:none}
+input:focus,textarea:focus,select:focus{
+  border-color:var(--a);box-shadow:0 0 0 3px rgba(0,255,180,.06)}
+select option{background:var(--sf)}
+textarea{resize:vertical;line-height:1.55}

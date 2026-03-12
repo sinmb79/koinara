@@ -3,3 +3,5 @@ out/
 broadcast/
 .DS_Store
 __pycache__/
+site/node_modules/
+site/dist/
