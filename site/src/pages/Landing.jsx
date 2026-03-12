@@ -332,6 +332,54 @@ content.en.footer = {
   principles: ['NO_PREMINE', 'FAIR_LAUNCH', 'CHAIN_INDEPENDENT'],
 }
 
+content.ko.marketplace.note = '실시간 스냅샷에 기록된 실제 작업만 표시합니다.'
+content.en.marketplace.note = 'Showing only jobs recorded in the live snapshot.'
+content.ko.marketplace.empty = '현재 표시할 라이브 작업이 없습니다.'
+content.en.marketplace.empty = 'No live jobs are available right now.'
+content.ko.marketplace.liveCount = (count) => `라이브 작업 ${count}개`
+content.en.marketplace.liveCount = (count) => `${count} live jobs`
+content.ko.marketplace.statusOpen = '응답 모집 중'
+content.en.marketplace.statusOpen = 'Open for responses'
+content.ko.marketplace.statusVerifying = '검증 중'
+content.en.marketplace.statusVerifying = 'Verifying'
+content.ko.marketplace.statusIssued = 'PoI 발행'
+content.en.marketplace.statusIssued = 'PoI issued'
+content.ko.marketplace.statusExpired = '마감'
+content.en.marketplace.statusExpired = 'Expired'
+content.ko.marketplace.awaiting = '응답 대기'
+content.en.marketplace.awaiting = 'Awaiting response'
+content.ko.marketplace.requester = '요청자'
+content.en.marketplace.requester = 'Requester'
+content.ko.marketplace.provider = '공급자'
+content.en.marketplace.provider = 'Provider'
+content.ko.marketplace.requestHash = '요청'
+content.en.marketplace.requestHash = 'Req'
+content.ko.marketplace.verifierProgress = '검증'
+content.en.marketplace.verifierProgress = 'Quorum'
+
+content.ko.providers.note = '실시간 스냅샷에 기록된 실제 노드만 표시합니다.'
+content.en.providers.note = 'Showing only nodes recorded in the live snapshot.'
+content.ko.providers.empty = '현재 표시할 온체인 노드가 없습니다.'
+content.en.providers.empty = 'No on-chain nodes are available right now.'
+content.ko.providers.liveCount = (count) => `온체인 노드 ${count}개`
+content.en.providers.liveCount = (count) => `${count} on-chain nodes`
+content.ko.providers.stats.certified = '온체인 노드'
+content.en.providers.stats.certified = 'On-chain node'
+content.ko.providers.statusActive = '활성'
+content.en.providers.statusActive = 'Active'
+content.ko.providers.statusInactive = '비활성'
+content.en.providers.statusInactive = 'Inactive'
+content.ko.providers.roleProvider = '공급자'
+content.en.providers.roleProvider = 'Provider'
+content.ko.providers.roleVerifier = '검증자'
+content.en.providers.roleVerifier = 'Verifier'
+content.ko.providers.roleHybrid = '하이브리드'
+content.en.providers.roleHybrid = 'Hybrid'
+content.ko.providers.address = '주소'
+content.en.providers.address = 'Address'
+content.ko.providers.registered = '등록'
+content.en.providers.registered = 'Registered'
+
 const defaultMetrics = {
   completedJobs: 0,
   activeProviders: 0,
@@ -392,6 +440,134 @@ function buildMetrics(snapshot) {
   }
 }
 
+function shortenHash(value, length = 10) {
+  if (!value) return '--'
+  return `${value.slice(0, length)}...`
+}
+
+function timestampBase(snapshot) {
+  const base = snapshot?.generatedAt ? Date.parse(snapshot.generatedAt) : Number.NaN
+  return Number.isNaN(base) ? Date.now() : base
+}
+
+function getJobMeta(jobType) {
+  if (Number(jobType) === 2) return { key: 'collective', label: 'COLLECTIVE', tone: 'purple' }
+  if (Number(jobType) === 1) return { key: 'general', label: 'GENERAL', tone: 'blue' }
+  return { key: 'simple', label: 'SIMPLE', tone: 'green' }
+}
+
+function formatRelativeDeadline(deadline, snapshot, lang) {
+  if (!deadline) return '--'
+  const diffMs = Number(deadline) * 1000 - timestampBase(snapshot)
+  if (diffMs <= 0) return lang === 'ko' ? '마감' : 'Closed'
+
+  const hours = diffMs / (1000 * 60 * 60)
+  if (hours >= 24) {
+    const days = Math.ceil(hours / 24)
+    return lang === 'ko' ? `${days}일` : `${days}d`
+  }
+
+  const roundedHours = Math.max(1, Math.ceil(hours))
+  return lang === 'ko' ? `${roundedHours}시간` : `${roundedHours}h`
+}
+
+function getJobStatus(job, snapshot, lang, copy) {
+  const diffMs = Number(job?.deadline ?? 0) * 1000 - timestampBase(snapshot)
+  if (job?.record?.poiHash) return copy.marketplace.statusIssued
+  if (job?.submission?.exists) return copy.marketplace.statusVerifying
+  if (diffMs <= 0) return copy.marketplace.statusExpired
+  return copy.marketplace.statusOpen
+}
+
+function lower(value) {
+  return String(value ?? '').toLowerCase()
+}
+
+function buildMarketplaceCards(snapshot, lang, copy) {
+  const jobs = Object.values(snapshot?.jobs ?? {}).sort((a, b) => Number(b.jobId ?? 0) - Number(a.jobId ?? 0))
+
+  return jobs.map((job) => {
+    const meta = getJobMeta(job.jobType)
+    const provider = job?.record?.provider || job?.submission?.provider
+    const approvals = Number(job?.record?.approvals ?? 0)
+    const quorum = Number(job?.record?.quorum ?? 0)
+
+    return {
+      type: meta.label,
+      typeKey: meta.key,
+      tone: meta.tone,
+      title: lang === 'ko' ? `${meta.label} 작업 #${job.jobId}` : `${meta.label} Job #${job.jobId}`,
+      description:
+        lang === 'ko'
+          ? `${copy.marketplace.requester} ${shortenAddress(job.creator)} · ${copy.marketplace.requestHash} ${shortenHash(job.requestHash)} · ${provider ? `${copy.marketplace.provider} ${shortenAddress(provider)}` : copy.marketplace.awaiting}`
+          : `${copy.marketplace.requester} ${shortenAddress(job.creator)} · ${copy.marketplace.requestHash} ${shortenHash(job.requestHash)} · ${provider ? `${copy.marketplace.provider} ${shortenAddress(provider)}` : copy.marketplace.awaiting}`,
+      reward: `${formatDecimal(job?.rewardBreakdown?.totalRewardFormatted ?? snapshot?.summary?.currentWorkEmissionFormatted ?? '0', lang, 1)} KOIN`,
+      time: formatRelativeDeadline(job.deadline, snapshot, lang),
+      status: getJobStatus(job, snapshot, lang, copy),
+      responses:
+        quorum > 0
+          ? `${copy.marketplace.verifierProgress} ${formatInteger(approvals, lang)}/${formatInteger(quorum, lang)}`
+          : `${copy.marketplace.verifierProgress} ${formatInteger(job?.submission?.exists ? 1 : 0, lang)}`,
+    }
+  })
+}
+
+function getRoleMeta(role, lang, copy) {
+  if (Number(role) === 1) {
+    return { name: copy.providers.roleVerifier, pill: 'verifier' }
+  }
+  if (Number(role) === 2) {
+    return { name: copy.providers.roleHybrid, pill: 'hybrid' }
+  }
+  return { name: copy.providers.roleProvider, pill: 'provider' }
+}
+
+function formatRegisteredAt(registeredAt, lang, copy) {
+  if (!registeredAt) return '--'
+  return `${copy.providers.registered} ${new Intl.DateTimeFormat(localeFor(lang), { dateStyle: 'medium' }).format(new Date(Number(registeredAt) * 1000))}`
+}
+
+function buildProviderCards(snapshot, lang, copy) {
+  const jobs = Object.values(snapshot?.jobs ?? {})
+  const nodes = Object.values(snapshot?.nodes ?? {})
+
+  const mapped = nodes
+    .map((node) => {
+      const address = lower(node.address)
+      const submitted = jobs.filter((job) => lower(job?.submission?.provider) === address)
+      const accepted = jobs.filter((job) => lower(job?.record?.provider) === address && job?.record?.poiHash)
+      const verified = jobs.filter((job) => (job?.approvedVerifiers ?? []).some((verifier) => lower(verifier) === address))
+      const participation = submitted.length + verified.length
+      const completed = accepted.length + verified.length
+
+      if (!node.registeredAt && !node.active && !node.activeCurrent && !node.activePrevious && participation === 0) {
+        return null
+      }
+
+      const roleMeta = getRoleMeta(node.role, lang, copy)
+      const successRate = participation > 0 ? (completed / participation) * 100 : 0
+
+      return {
+        name: `${roleMeta.name} ${shortenAddress(node.address)}`,
+        role: `${copy.providers.address} ${shortenAddress(node.address)} · ${formatRegisteredAt(node.registeredAt, lang, copy)}`,
+        type: roleMeta.name,
+        tone: roleMeta.pill,
+        poi: formatInteger(completed, lang),
+        rate: `${formatDecimal(successRate, lang, 1)}%`,
+        jobs: formatInteger(participation, lang),
+        status: node.activeCurrent || node.active ? copy.providers.statusActive : copy.providers.statusInactive,
+      }
+    })
+    .filter(Boolean)
+    .sort((left, right) => {
+      const leftActive = left.status === copy.providers.statusActive ? 1 : 0
+      const rightActive = right.status === copy.providers.statusActive ? 1 : 0
+      return rightActive - leftActive
+    })
+
+  return mapped
+}
+
 function SectionHeading({ badge, titleTop, titleBottom, subtitle }) {
   return (
     <div className="landing-section-heading landing-section-heading--center">
@@ -407,7 +583,16 @@ function SectionHeading({ badge, titleTop, titleBottom, subtitle }) {
 }
 
 function MarketCard({ card, rewardLabel, timeLabel }) {
-  const [type, tone, title, description, reward, time, status, responses] = card
+  const { type, tone, title, description, reward, time, status, responses, empty } = card
+
+  if (empty) {
+    return (
+      <article className="landing-market-card landing-market-card--empty">
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </article>
+    )
+  }
 
   return (
     <article className="landing-market-card">
@@ -434,13 +619,22 @@ function MarketCard({ card, rewardLabel, timeLabel }) {
 }
 
 function ProviderCard({ provider, labels }) {
-  const [name, role, type, poi, rate, jobs, status] = provider
+  const { name, role, type, tone, poi, rate, jobs, status, empty } = provider
+
+  if (empty) {
+    return (
+      <article className="landing-provider-card landing-provider-card--empty">
+        <h3>{name}</h3>
+        <p>{role}</p>
+      </article>
+    )
+  }
 
   return (
     <article className="landing-provider-card">
       <div className="landing-provider-card__top">
         <div className="landing-provider-card__avatar">{name.slice(0, 2).toUpperCase()}</div>
-        <div className={`landing-pill landing-pill--${type.toLowerCase()}`}>{type}</div>
+        <div className={`landing-pill landing-pill--${tone}`}>{type}</div>
       </div>
       <h3>{name}</h3>
       <p>{role}</p>
@@ -482,8 +676,11 @@ export default function Landing() {
   const rewardLabel = lang === 'ko' ? '프로토콜 보상' : 'Protocol reward'
   const timeLabel = lang === 'ko' ? '남은 시간' : 'Time left'
   const providerTitleTop = lang === 'ko' ? '추론을 제공하는' : 'Agents Providing'
+  const providerTitleBottom = lang === 'ko' ? '에이전트들' : 'Inference'
   const [metrics, setMetrics] = useState(defaultMetrics)
+  const [snapshotData, setSnapshotData] = useState(null)
   const [isLoadingMetrics, setIsLoadingMetrics] = useState(true)
+  const [selectedMarketFilter, setSelectedMarketFilter] = useState('all')
 
   useEffect(() => {
     let cancelled = false
@@ -497,6 +694,7 @@ export default function Landing() {
 
         const snapshot = await response.json()
         if (!cancelled) {
+          setSnapshotData(snapshot)
           setMetrics(buildMetrics(snapshot))
         }
       } catch (error) {
@@ -536,6 +734,22 @@ export default function Landing() {
     [`${formatDecimal(metrics.currentActiveEmissionFormatted, lang, 1)} KOIN`, copy.token.stats.activeEmission],
     [formatInteger(metrics.registeredNodes, lang), copy.token.stats.registeredNodes],
   ]
+
+  const marketFilterKeys = ['all', 'simple', 'general', 'collective']
+  const marketplaceCardsAll = buildMarketplaceCards(snapshotData, lang, copy)
+  const marketplaceCardsFiltered =
+    selectedMarketFilter === 'all'
+      ? marketplaceCardsAll
+      : marketplaceCardsAll.filter((card) => card.typeKey === selectedMarketFilter)
+  const marketplaceCards = marketplaceCardsFiltered.length
+    ? marketplaceCardsFiltered
+    : [{ empty: true, title: copy.marketplace.empty, description: copy.marketplace.note }]
+  const providerCardsAll = buildProviderCards(snapshotData, lang, copy)
+  const providerCards = providerCardsAll.length
+    ? providerCardsAll
+    : [{ empty: true, name: copy.providers.empty, role: copy.providers.note }]
+  const marketNote = snapshotData ? `${copy.marketplace.liveCount(marketplaceCardsAll.length)} · ${copy.marketplace.note}` : copy.marketplace.note
+  const providerNote = snapshotData ? `${copy.providers.liveCount(providerCardsAll.length)} · ${copy.providers.note}` : copy.providers.note
 
   const footerLinks = [
     {
@@ -658,9 +872,10 @@ export default function Landing() {
             <div className="landing-market-filters">
               {copy.marketplace.filters.map((filter, index) => (
                 <button
-                  className={`landing-market-filter${index === 0 ? ' landing-market-filter--active' : ''}`}
+                  className={`landing-market-filter${marketFilterKeys[index] === selectedMarketFilter ? ' landing-market-filter--active' : ''}`}
                   key={filter}
                   type="button"
+                  onClick={() => setSelectedMarketFilter(marketFilterKeys[index] ?? 'all')}
                 >
                   {filter}
                 </button>
@@ -668,11 +883,11 @@ export default function Landing() {
             </div>
           </div>
           <div className="landing-market-grid">
-            {copy.marketplace.cards.map((card) => (
-              <MarketCard card={card} key={card[2]} rewardLabel={rewardLabel} timeLabel={timeLabel} />
+            {marketplaceCards.map((card) => (
+              <MarketCard card={card} key={card.title} rewardLabel={rewardLabel} timeLabel={timeLabel} />
             ))}
           </div>
-          <p className="landing-section-note">{copy.marketplace.note}</p>
+          <p className="landing-section-note">{marketNote}</p>
           <div className="landing-section-action">
             <Link className="landing-outline-button" to="/marketplace">
               {copy.marketplace.cta}
@@ -755,15 +970,15 @@ export default function Landing() {
           <SectionHeading
             badge={copy.providers.badge}
             subtitle={copy.providers.subtitle}
-            titleBottom={copy.providers.title}
+            titleBottom={providerTitleBottom}
             titleTop={providerTitleTop}
           />
           <div className="landing-provider-grid">
-            {copy.providers.cards.map((provider) => (
-              <ProviderCard key={provider[0]} labels={copy.providers.stats} provider={provider} />
+            {providerCards.map((provider) => (
+              <ProviderCard key={provider.name} labels={copy.providers.stats} provider={provider} />
             ))}
           </div>
-          <p className="landing-section-note">{copy.providers.note}</p>
+          <p className="landing-section-note">{providerNote}</p>
           <div className="landing-section-action">
             <Link className="landing-outline-button" to="/providers">
               {copy.providers.cta}
