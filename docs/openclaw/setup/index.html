@@ -70,6 +70,24 @@
 
         <section class="section">
           <div class="section-heading">
+            <p class="eyebrow">AGENT HANDOFF</p>
+            <h2 class="section-title">Give this page to your OpenClaw agent and let it finish the connection.</h2>
+          </div>
+          <article class="panel">
+            <p class="guide-copy">
+              The operator path is intentionally simple: the human picks the stack, the OpenClaw
+              agent runs the shell steps, and <code>Koinara-node</code> keeps the on-chain
+              execution boundary.
+            </p>
+            <pre class="command-block"><code>Use this guide as the exact OpenClaw connection checklist:
+https://github.com/sinmb79/Koinara-node/blob/main/docs/openclaw-setup.md
+
+From %USERPROFILE%\koinara-node, connect OpenClaw to Koinara-node, switch the Worldland v2 runtime to the local RPC path if that file exists, run provider:v2:openclaw:check, and if healthy run provider:v2:openclaw:start. After each stage, tell me the active RPC, current epoch, next epoch close time, and whether rewards are claimable yet.</code></pre>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
             <p class="eyebrow">FLOW</p>
             <h2 class="section-title">Use OpenClaw for inference. Keep Koinara-node for execution.</h2>
           </div>

@@ -70,6 +70,24 @@
 
         <section class="section">
           <div class="section-heading">
+            <p class="eyebrow">AGENT HANDOFF</p>
+            <h2 class="section-title">You can hand this guide to your OpenClaw agent.</h2>
+          </div>
+          <article class="panel">
+            <p class="guide-copy">
+              The intended early operator path is <code>Worldland + OpenClaw + Koinara</code>.
+              That means you do not need to manually type every shell command yourself. Give the
+              GitHub install document to your OpenClaw agent and let it do the repetitive node work.
+            </p>
+            <pre class="command-block"><code>Use this guide as the exact installation and connection checklist:
+https://github.com/sinmb79/Koinara-node/blob/main/docs/install-windows.md
+
+Install Koinara-node under %USERPROFILE%\koinara-node, run setup, switch the v2 runtime to the local Worldland RPC if available, run openclaw:connect, run provider:v2:openclaw:check, then run provider:v2:openclaw:start. After each stage, tell me what is connected, which RPC is being used, what the current epoch is, and when rewards become claimable.</code></pre>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
             <p class="eyebrow">FLOW</p>
             <h2 class="section-title">Follow the steps in order.</h2>
           </div>
@@ -152,25 +170,25 @@ npm.cmd install</code></pre>
             <article class="panel guide-step-body">
               <div class="guide-step-header">
                 <p class="eyebrow">STEP 3</p>
-                <h2 class="guide-step-title">Run doctor, start the role, then claim after the epoch closes.</h2>
+                <h2 class="guide-step-title">Check, start the OpenClaw-backed provider, then claim after the epoch closes.</h2>
               </div>
-              <pre class="command-block"><code>npm.cmd run provider:v2:doctor
-npm.cmd run provider:v2:start
+              <pre class="command-block"><code>npm.cmd run openclaw:connect
+npm.cmd run provider:v2:openclaw:check
+npm.cmd run provider:v2:openclaw:start
 
 # in another PowerShell window if you also run a verifier
-npm.cmd run verifier:v2:doctor
 npm.cmd run verifier:v2:start
 
 # claim only after the current epoch has closed
-npm.cmd run provider:v2:claim
+npm.cmd run provider:v2:openclaw:claim
 npm.cmd run verifier:v2:claim</code></pre>
               <div class="guide-shot">
-                <img src="../figures/guides/install-step3.svg" alt="Doctor, start, and claim commands for the live Worldland v2 path" />
+                <img src="../figures/guides/install-step3.svg" alt="OpenClaw connect, provider check/start, and claim commands for the live Worldland v2 path" />
               </div>
               <div class="guide-mini-grid">
                 <article class="floor-card">
-                  <h3>Provider only</h3>
-                  <p>Use the provider doctor, start, and claim commands if you only want to submit responses.</p>
+                  <h3>Provider path</h3>
+                  <p>Use the OpenClaw-backed provider commands if you want the local agent to generate the response content.</p>
                 </article>
                 <article class="floor-card">
                   <h3>Provider + verifier</h3>
