@@ -35,6 +35,9 @@ contract NodeRegistryV2 is INodeRegistryV2 {
         if (epochDuration_ == 0) {
             revert Errors.InvalidConfiguration();
         }
+        if (genesisTimestamp_ > block.timestamp) {
+            revert Errors.InvalidConfiguration();
+        }
 
         admin = admin_;
         genesisTimestamp = genesisTimestamp_;

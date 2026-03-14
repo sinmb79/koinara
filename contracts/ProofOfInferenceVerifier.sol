@@ -87,6 +87,9 @@ contract ProofOfInferenceVerifier is IProofOfInferenceVerifier, Events {
 
     function rejectSubmission(uint256 jobId, string calldata reason) external override {
         IProofOfInferenceVerifier.VerificationRecord storage record = _requireActiveRecord(jobId);
+        if (record.verificationPass) {
+            revert Errors.InvalidState();
+        }
         if (msg.sender == record.provider) {
             revert Errors.SelfVerification();
         }

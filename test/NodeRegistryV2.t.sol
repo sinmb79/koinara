@@ -3,6 +3,7 @@ pragma solidity ^0.8.24;
 
 import {NodeRegistryV2} from "../contracts/NodeRegistryV2.sol";
 import {INodeRegistryV2} from "../contracts/interfaces/INodeRegistryV2.sol";
+import {Errors} from "../contracts/libraries/Errors.sol";
 import {KoinaraV2Fixture} from "./helpers/KoinaraV2Fixture.sol";
 
 contract NodeRegistryV2Test is KoinaraV2Fixture {
@@ -41,5 +42,10 @@ contract NodeRegistryV2Test is KoinaraV2Fixture {
 
         assertTrue(nodeRegistry.isNodeActiveAt(provider, 0));
         assertTrue(nodeRegistry.isNodeActiveAt(provider, 1));
+    }
+
+    function testConstructorRejectsFutureGenesisTimestamp() public {
+        vm.expectRevert(abi.encodeWithSelector(Errors.InvalidConfiguration.selector));
+        new NodeRegistryV2(admin, block.timestamp + 1, EPOCH_DURATION);
     }
 }

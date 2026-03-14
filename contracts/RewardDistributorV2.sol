@@ -16,6 +16,7 @@ contract RewardDistributorV2 is IRewardDistributorV2 {
         address provider;
         uint64 epoch;
         uint32 weight;
+        uint32 verifierCount;
         bool exists;
         bool providerClaimed;
     }
@@ -34,6 +35,7 @@ contract RewardDistributorV2 is IRewardDistributorV2 {
     uint256 private _reentrancyLock = 1;
 
     mapping(uint256 => RecordedJob) private _recordedJobs;
+    mapping(uint256 => mapping(address => bool)) private _approvedVerifierAtRecord;
     mapping(uint256 => uint256) public override epochAcceptedWeight;
     mapping(uint256 => mapping(address => bool)) public activeRewardClaimed;
     mapping(uint256 => mapping(address => bool)) public verifierRewardClaimed;
@@ -135,11 +137,20 @@ contract RewardDistributorV2 is IRewardDistributorV2 {
         uint256 epoch = _epochAt(record.submittedAt);
         uint256 weight = job.jobType.weight();
         address[] memory approvedVerifiers = verifier.getApprovedVerifiers(jobId);
+        uint256 verifierCount = approvedVerifiers.length;
+        if (verifierCount > type(uint32).max) {
+            revert Errors.InvalidConfiguration();
+        }
+
+        for (uint256 i = 0; i < verifierCount; ++i) {
+            _approvedVerifierAtRecord[jobId][approvedVerifiers[i]] = true;
+        }
 
         _recordedJobs[jobId] = RecordedJob({
             provider: provider,
             epoch: uint64(epoch),
             weight: uint32(weight),
+            verifierCount: uint32(verifierCount),
             exists: true,
             providerClaimed: false
         });
@@ -148,7 +159,7 @@ contract RewardDistributorV2 is IRewardDistributorV2 {
         uint256 premiumReward = registry.releasePremiumToProvider(jobId, provider);
         registry.settleJob(jobId);
 
-        emit AcceptedJobRecorded(jobId, epoch, provider, weight, approvedVerifiers.length, premiumReward);
+        emit AcceptedJobRecorded(jobId, epoch, provider, weight, verifierCount, premiumReward);
     }
 
     function calculateJobReward(uint256 jobId) public view override returns (uint256) {
@@ -168,13 +179,12 @@ contract RewardDistributorV2 is IRewardDistributorV2 {
         returns (uint256 totalReward, uint256 providerReward, uint256 verifierRewardTotal)
     {
         RecordedJob memory job = _requireRecordedJob(jobId);
-        address[] memory approvedVerifiers = verifier.getApprovedVerifiers(jobId);
 
         totalReward = calculateJobReward(jobId);
         providerReward = (totalReward * 70) / 100;
         verifierRewardTotal = totalReward - providerReward;
 
-        uint256 verifierCount = approvedVerifiers.length;
+        uint256 verifierCount = job.verifierCount;
         if (verifierCount == 0) {
             providerReward = totalReward;
             verifierRewardTotal = 0;
@@ -220,21 +230,11 @@ contract RewardDistributorV2 is IRewardDistributorV2 {
         if (verifierRewardClaimed[jobId][msg.sender]) {
             revert Errors.RewardsAlreadyDistributed();
         }
-
-        address[] memory approvedVerifiers = verifier.getApprovedVerifiers(jobId);
-        uint256 verifierCount = approvedVerifiers.length;
-        bool found;
-        for (uint256 i = 0; i < verifierCount; ++i) {
-            if (approvedVerifiers[i] == msg.sender) {
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
+        if (!_approvedVerifierAtRecord[jobId][msg.sender]) {
             revert Errors.Unauthorized();
         }
 
+        uint256 verifierCount = job.verifierCount;
         (, , uint256 verifierRewardTotal) = getRewardBreakdown(jobId);
         uint256 perVerifierReward = verifierCount == 0 ? 0 : verifierRewardTotal / verifierCount;
 
