@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import useStore from './lib/store.js'
 import Dashboard from './pages/Dashboard.jsx'
@@ -7,6 +7,7 @@ import DApps from './pages/DApps.jsx'
 import JobDetail from './pages/JobDetail.jsx'
 import Landing from './pages/Landing.jsx'
 import Marketplace from './pages/Marketplace.jsx'
+import Proova from './pages/Proova.jsx'
 import Providers from './pages/Providers.jsx'
 import SubmitJob from './pages/SubmitJob.jsx'
 
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/providers" element={<Providers />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dapps" element={<DApps />} />
+          <Route path="/proova" element={<Proova />} />
         </Routes>
       </main>
 
@@ -62,11 +64,16 @@ export default function App() {
             style={{
               display: 'flex',
               gap: 20,
+              alignItems: 'center',
               fontFamily: 'Share Tech Mono',
               fontSize: '0.68rem',
               color: '#3a4560',
+              flexWrap: 'wrap',
             }}
           >
+            <Link style={{ color: '#00ffb4' }} to="/proova">
+              PROOVA
+            </Link>
             <span>NO_PREMINE</span>
             <span>FAIR_LAUNCH</span>
             <span>CHAIN_INDEPENDENT</span>

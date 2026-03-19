@@ -10,6 +10,7 @@ const landingCopy = {
     providers: '공급자',
     submit: '작업 등록',
     koin: 'KOIN',
+    proova: 'Proova',
     providerRegister: '공급자 등록',
     walletConnect: '지갑 연결',
     switchChain: '체인 전환',
@@ -20,6 +21,7 @@ const landingCopy = {
     providers: 'Providers',
     submit: 'Post Job',
     koin: 'KOIN',
+    proova: 'Proova',
     providerRegister: 'Register Provider',
     walletConnect: 'Connect Wallet',
     switchChain: 'Switch Chain',
@@ -68,6 +70,7 @@ export default function Navbar() {
     { label: copy.providers, href: '#providers' },
     { label: copy.submit, href: '#submit' },
     { label: copy.koin, href: '#koin' },
+    { label: copy.proova, to: '/proova' },
   ]
 
   const appLinks = [
@@ -75,6 +78,7 @@ export default function Navbar() {
     { label: t('nav_submit'), to: '/submit' },
     { label: t('nav_providers'), to: '/providers' },
     { label: lang === 'ko' ? '생태계' : 'Ecosystem', to: '/dapps' },
+    { label: copy.proova, to: '/proova' },
     { label: t('nav_dashboard'), to: '/dashboard' },
   ]
 
