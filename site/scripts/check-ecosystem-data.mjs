@@ -1,4 +1,5 @@
 import assert from "node:assert/strict"
+import fs from "node:fs"
 import {
   ECOSYSTEM_PRODUCTS,
   PROTOCOL_RESOURCES,
@@ -15,3 +16,7 @@ assert.equal(ECOSYSTEM_PRODUCTS.some((item) => item.slug === "torqr"), true)
 assert.equal(PROTOCOL_RESOURCES.some((item) => item.slug === "tokenomics"), true)
 assert.equal(PROTOCOL_RESOURCES.some((item) => item.slug === "trade-koin"), true)
 assert.equal(getInternalPartners("market").length > 0, true)
+
+const marketplaceSource = fs.readFileSync(new URL("../src/pages/Marketplace.jsx", import.meta.url), "utf8")
+assert.equal(marketplaceSource.includes("applicable local laws"), true)
+assert.equal(marketplaceSource.includes("Ecosystem Partners"), true)
