@@ -48,7 +48,7 @@ const copy = {
     toolsBadge: "Core Tools",
     toolsTitle: "프로토콜 기능은 아래 레이어로 정리",
     toolsDescription:
-      "Guide, Marketplace, Providers, Dashboard 같은 프로토콜 도구는 여전히 중요하지만, 첫 화면에서는 생태계 브랜드보다 뒤에 배치합니다.",
+      "Submit Job, Marketplace, Providers, Dashboard 같은 프로토콜 도구는 여전히 중요하지만, 첫 화면에서는 생태계 브랜드보다 뒤에 배치합니다.",
     buttonInternal: "Open",
     buttonExternal: "Visit",
     buttonSoon: "Coming Soon",
@@ -105,7 +105,7 @@ const copy = {
     toolsBadge: "Core Tools",
     toolsTitle: "Protocol workflows still exist under the brand layer",
     toolsDescription:
-      "Guide, Marketplace, Providers, and Dashboard remain available, but the homepage should introduce the ecosystem before the operator console.",
+      "Submit Job, Marketplace, Providers, and Dashboard remain available, but the homepage should introduce the ecosystem before the operator console.",
     buttonInternal: "Open",
     buttonExternal: "Visit",
     buttonSoon: "Coming Soon",

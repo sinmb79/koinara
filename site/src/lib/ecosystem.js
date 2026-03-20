@@ -97,9 +97,9 @@ export const PROTOCOL_RESOURCES = [
 
 export const CORE_TOOLS = [
   {
-    slug: "guide",
-    title: "Guide",
-    summary: "Installation, setup, and getting-started flow for users entering the protocol.",
+    slug: "submit-job",
+    title: "Submit Job",
+    summary: "Post a new mission into the live market flow and move directly into the active Mission Board pipeline.",
     href: "/submit",
     accent: "green",
   },
