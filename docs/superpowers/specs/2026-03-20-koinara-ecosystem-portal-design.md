@@ -173,6 +173,13 @@ Design cues to introduce:
 - each product makes its relationship to Koinara explicit
 - each internal page should reinforce that it is part of the Koinara ecosystem
 
+### Legal notice rule
+
+- `Torqr` already has its own legal caution pattern outside this rollout
+- `OpenClaw Agent Market` should add a visible caution notice near the primary action area
+- The notice should communicate that users must comply with applicable local laws and must not access or use the service where such use is prohibited
+- This should be presented as a clear warning block near the relevant CTA, not buried only in footer text
+
 ## Phase Plan
 
 ### Phase 1
@@ -182,6 +189,7 @@ Design cues to introduce:
 - Ensure Proova is represented as an internal product page
 - Add ecosystem product cards with correct internal/external behavior
 - Add partner blocks on internal Koinara product pages
+- Add the legal caution notice to the OpenClaw Agent Market surface inside `koinara.xyz`
 
 ### Phase 2
 
