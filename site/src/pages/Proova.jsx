@@ -1,4 +1,6 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { getInternalPartners, isExternalHref } from '../lib/ecosystem.js'
 import './proova.css'
 
 const SEO = {
@@ -99,8 +101,8 @@ const ECOSYSTEM = [
   },
   {
     tag: 'Protocol #2',
-    title: 'AIL',
-    description: 'Agent Identity Layer. Verifiable credentials, reputation scoring, and capability attestation for AI agents.',
+    title: 'Agent ID CARD',
+    description: 'Identity and authentication layer. This is the credential surface tied to mission claiming, trust, and agent participation.',
   },
   {
     tag: 'Protocol #3 | You are here',
@@ -151,6 +153,15 @@ event VerificationFulfilled(
   string submissionId,
   uint8 verdict
 );`
+
+const PARTNER_COPY = {
+  title: 'Ecosystem Partners',
+  description:
+    'Proova is not a standalone page. It sits inside the Koinara ecosystem and connects directly to the market, identity, and external product surfaces around it.',
+  open: 'Open',
+  visit: 'Visit',
+  comingSoon: 'Coming Soon',
+}
 
 function ensureMeta(selector, attr, value) {
   let node = document.head.querySelector(selector)
@@ -222,8 +233,29 @@ function CodeWindow({ title, code }) {
   )
 }
 
+function PartnerLink({ href, children, className }) {
+  if (href.startsWith('#')) {
+    return <span className={`${className} ${className}--disabled`}>{children}</span>
+  }
+
+  if (isExternalHref(href)) {
+    return (
+      <a className={className} href={href} rel="noreferrer" target="_blank">
+        {children}
+      </a>
+    )
+  }
+
+  return (
+    <Link className={className} to={href}>
+      {children}
+    </Link>
+  )
+}
+
 export default function Proova() {
   usePageMeta()
+  const partners = getInternalPartners('proova')
 
   return (
     <div className="proova-page">
@@ -362,6 +394,36 @@ export default function Proova() {
               <span className="proova-ecosystem-tag">{item.tag}</span>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="proova-shell proova-section" id="partners">
+        <SectionHeader
+          description={PARTNER_COPY.description}
+          label="Navigation"
+          title={PARTNER_COPY.title}
+        />
+        <div className="proova-grid proova-grid--partners">
+          {partners.map((item) => (
+            <article className="proova-card proova-card--partner" key={item.slug}>
+              <div className="proova-card__status">
+                <span className="proova-card__dot" />
+                <span>{item.relation}</span>
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.summary}</p>
+              <div className="proova-partner__footer">
+                <span className="proova-partner__meta">{item.kind === 'external' ? 'External surface' : 'Inside Koinara'}</span>
+                {item.state === 'coming-soon' ? (
+                  <span className="proova-partner__link proova-partner__link--disabled">{PARTNER_COPY.comingSoon}</span>
+                ) : (
+                  <PartnerLink className="proova-partner__link" href={item.href}>
+                    {item.kind === 'external' ? PARTNER_COPY.visit : PARTNER_COPY.open}
+                  </PartnerLink>
+                )}
+              </div>
             </article>
           ))}
         </div>

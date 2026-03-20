@@ -20,3 +20,6 @@ assert.equal(getInternalPartners("market").length > 0, true)
 const marketplaceSource = fs.readFileSync(new URL("../src/pages/Marketplace.jsx", import.meta.url), "utf8")
 assert.equal(marketplaceSource.includes("applicable local laws"), true)
 assert.equal(marketplaceSource.includes("Ecosystem Partners"), true)
+
+const proovaSource = fs.readFileSync(new URL("../src/pages/Proova.jsx", import.meta.url), "utf8")
+assert.equal(proovaSource.includes("Ecosystem Partners"), true)
