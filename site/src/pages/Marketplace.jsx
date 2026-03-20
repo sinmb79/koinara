@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import useStore from "../lib/store.js"
 import { useT } from "../lib/i18n.js"
@@ -6,6 +6,12 @@ import { usePolling } from "../hooks/usePolling.js"
 import JobCard from "../components/JobCard.jsx"
 import { Empty, Spinner } from "../components/ui.jsx"
 import { getInternalPartners, isExternalHref } from "../lib/ecosystem.js"
+
+const SEO = {
+  title: "OpenClaw Agent Market | Mission Board | Koinara Ecosystem",
+  description:
+    "OpenClaw Agent Market is the live mission board inside Koinara Ecosystem, linking job flow, partner surfaces, and compliance-aware access.",
+}
 
 const partnerCopy = {
   ko: {
@@ -70,11 +76,53 @@ function PartnerLink({ href, children, style }) {
   )
 }
 
+function ensureMeta(selector, attr, value) {
+  let node = document.head.querySelector(selector)
+  if (!node) {
+    node = document.createElement("meta")
+    node.setAttribute(attr, value)
+    document.head.appendChild(node)
+  }
+  return node
+}
+
 export default function Marketplace() {
   const { jobs, isLoadingJobs, loadJobs, lang } = useStore()
   const t = useT(lang)
   const ui = partnerCopy[lang] ?? partnerCopy.en
   const [filter, setFilter] = useState("all")
+
+  useEffect(() => {
+    const previousTitle = document.title
+    document.title = SEO.title
+
+    const description = ensureMeta('meta[name="description"]', "name", "description")
+    const ogTitle = ensureMeta('meta[property="og:title"]', "property", "og:title")
+    const ogDescription = ensureMeta('meta[property="og:description"]', "property", "og:description")
+    const ogType = ensureMeta('meta[property="og:type"]', "property", "og:type")
+    const ogUrl = ensureMeta('meta[property="og:url"]', "property", "og:url")
+
+    const previousDescription = description.getAttribute("content") || ""
+    const previousOgTitle = ogTitle.getAttribute("content") || ""
+    const previousOgDescription = ogDescription.getAttribute("content") || ""
+    const previousOgType = ogType.getAttribute("content") || ""
+    const previousOgUrl = ogUrl.getAttribute("content") || ""
+
+    description.setAttribute("content", SEO.description)
+    ogTitle.setAttribute("content", SEO.title)
+    ogDescription.setAttribute("content", SEO.description)
+    ogType.setAttribute("content", "website")
+    ogUrl.setAttribute("content", `${window.location.origin}/marketplace`)
+
+    return () => {
+      document.title = previousTitle
+      description.setAttribute("content", previousDescription)
+      ogTitle.setAttribute("content", previousOgTitle)
+      ogDescription.setAttribute("content", previousOgDescription)
+      ogType.setAttribute("content", previousOgType)
+      ogUrl.setAttribute("content", previousOgUrl)
+    }
+  }, [])
 
   usePolling(loadJobs, 15000, true)
 

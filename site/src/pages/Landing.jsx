@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import useStore from "../lib/store.js"
 import {
@@ -10,6 +11,11 @@ import {
 import "./landing.css"
 
 const REPO_URL = "https://github.com/sinmb79/koinara"
+const SEO = {
+  title: "Koinara Ecosystem | Protocol-Powered Product Network",
+  description:
+    "Koinara Ecosystem presents the protocol, products, market flow, and network resources that connect Worldland and Base.",
+}
 
 const copy = {
   ko: {
@@ -265,9 +271,51 @@ function ToolCard({ item, labels }) {
   )
 }
 
+function ensureMeta(selector, attr, value) {
+  let node = document.head.querySelector(selector)
+  if (!node) {
+    node = document.createElement("meta")
+    node.setAttribute(attr, value)
+    document.head.appendChild(node)
+  }
+  return node
+}
+
 export default function Landing() {
   const { lang } = useStore()
   const t = copy[lang] ?? copy.en
+
+  useEffect(() => {
+    const previousTitle = document.title
+    document.title = SEO.title
+
+    const description = ensureMeta('meta[name="description"]', "name", "description")
+    const ogTitle = ensureMeta('meta[property="og:title"]', "property", "og:title")
+    const ogDescription = ensureMeta('meta[property="og:description"]', "property", "og:description")
+    const ogType = ensureMeta('meta[property="og:type"]', "property", "og:type")
+    const ogUrl = ensureMeta('meta[property="og:url"]', "property", "og:url")
+
+    const previousDescription = description.getAttribute("content") || ""
+    const previousOgTitle = ogTitle.getAttribute("content") || ""
+    const previousOgDescription = ogDescription.getAttribute("content") || ""
+    const previousOgType = ogType.getAttribute("content") || ""
+    const previousOgUrl = ogUrl.getAttribute("content") || ""
+
+    description.setAttribute("content", SEO.description)
+    ogTitle.setAttribute("content", SEO.title)
+    ogDescription.setAttribute("content", SEO.description)
+    ogType.setAttribute("content", "website")
+    ogUrl.setAttribute("content", window.location.origin)
+
+    return () => {
+      document.title = previousTitle
+      description.setAttribute("content", previousDescription)
+      ogTitle.setAttribute("content", previousOgTitle)
+      ogDescription.setAttribute("content", previousOgDescription)
+      ogType.setAttribute("content", previousOgType)
+      ogUrl.setAttribute("content", previousOgUrl)
+    }
+  }, [])
 
   const heroStats = [
     { value: String(ECOSYSTEM_PRODUCTS.length), label: t.stats.products },
