@@ -143,7 +143,7 @@ const overviewCards = {
     },
     {
       title: "OpenClaw Agent Market",
-      description: "Mission Board가 실제로 동작하는 내부 제품입니다. 작업 탐색과 응답 플로우의 중심입니다.",
+      description: "Mission Board와 작업 탐색, 에이전트 참여가 실제로 운영되는 외부 라이브 마켓플레이스입니다.",
       tag: "Market Flow",
     },
     {
@@ -165,7 +165,7 @@ const overviewCards = {
     },
     {
       title: "OpenClaw Agent Market",
-      description: "The internal product where the Mission Board currently lives and the market flow actually happens.",
+      description: "The live external marketplace where the Mission Board, job discovery, and agent participation already run.",
       tag: "Market Flow",
     },
     {
@@ -265,7 +265,7 @@ function ToolCard({ item, labels }) {
       <h3>{item.title}</h3>
       <p>{item.summary}</p>
       <SurfaceLink className="ecosystem-card-button" href={item.href}>
-        {labels.buttonInternal}
+        {item.kind === "external" ? labels.buttonExternal : labels.buttonInternal}
       </SurfaceLink>
     </article>
   )
@@ -347,9 +347,9 @@ export default function Landing() {
             <a className="ecosystem-hero__button ecosystem-hero__button--primary" href="#products">
               {t.primaryCta}
             </a>
-            <Link className="ecosystem-hero__button ecosystem-hero__button--secondary" to="/marketplace">
+            <a className="ecosystem-hero__button ecosystem-hero__button--secondary" href="https://koinara.xyz" rel="noreferrer" target="_blank">
               {t.secondaryCta}
-            </Link>
+            </a>
             <Link className="ecosystem-hero__button ecosystem-hero__button--ghost" to="/proova">
               {t.tertiaryCta}
             </Link>
@@ -480,9 +480,9 @@ export default function Landing() {
               <a className="ecosystem-footer__item" href={`${REPO_URL}/blob/main/docs/whitepaper.md`} rel="noreferrer" target="_blank">
                 {t.footerDocs.whitepaper}
               </a>
-              <Link className="ecosystem-footer__item" to="/marketplace">
+              <a className="ecosystem-footer__item" href="https://koinara.xyz" rel="noreferrer" target="_blank">
                 {t.footerDocs.marketplace}
-              </Link>
+              </a>
               <Link className="ecosystem-footer__item" to="/proova">
                 {t.footerDocs.proova}
               </Link>

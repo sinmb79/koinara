@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { Link, Route, Routes, useLocation } from "react-router-dom"
 import Navbar from "./components/Navbar.jsx"
 import useStore from "./lib/store.js"
-import { NETWORK_BADGES, PROTOCOL_RESOURCES, isExternalHref } from "./lib/ecosystem.js"
+import { ECOSYSTEM_PRODUCTS, NETWORK_BADGES, PROTOCOL_RESOURCES, isExternalHref } from "./lib/ecosystem.js"
 import Dashboard from "./pages/Dashboard.jsx"
 import DApps from "./pages/DApps.jsx"
 import JobDetail from "./pages/JobDetail.jsx"
@@ -28,6 +28,7 @@ export default function App() {
   const location = useLocation()
   const { initReadOnly, loadJobs } = useStore()
   const isLanding = location.pathname === "/"
+  const marketSurface = ECOSYSTEM_PRODUCTS.find((item) => item.slug === "market")
 
   useEffect(() => {
     if (isLanding) return undefined
@@ -101,9 +102,9 @@ export default function App() {
             <Link style={{ color: "#00ffb4" }} to="/proova">
               PROOVA
             </Link>
-            <Link style={{ color: "#00ffb4" }} to="/marketplace">
-              MARKET
-            </Link>
+            <FooterLink href={marketSurface?.href ?? "https://koinara.xyz"}>
+              <span style={{ color: "#00ffb4" }}>MARKET</span>
+            </FooterLink>
             {PROTOCOL_RESOURCES.map((item) => (
               <FooterLink href={item.href} key={item.slug}>
                 <span style={{ color: "#00ffb4" }}>{item.title.toUpperCase()}</span>

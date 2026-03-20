@@ -7,18 +7,15 @@ const copy = {
   ko: {
     landingLinks: [
       { label: "Products", href: "#products" },
-      { label: "Resources", href: "#resources" },
-      { label: "Core Tools", href: "#core-tools" },
+      { label: "Protocol Resources", href: "#resources" },
       { label: "Proova", to: "/proova" },
     ],
     appLinks: [
       { label: "Ecosystem", to: "/" },
-      { label: "Market", to: "/marketplace" },
-      { label: "Providers", to: "/providers" },
+      { label: "Products", href: "/#products" },
+      { label: "Protocol Resources", href: "/#resources" },
       { label: "Proova", to: "/proova" },
-      { label: "Dashboard", to: "/dashboard" },
     ],
-    providerRegister: "Open Providers",
     walletConnect: "Connect Wallet",
     switchChain: "Switch Chain",
     switched: "Switched to Worldland network.",
@@ -29,18 +26,15 @@ const copy = {
   en: {
     landingLinks: [
       { label: "Products", href: "#products" },
-      { label: "Resources", href: "#resources" },
-      { label: "Core Tools", href: "#core-tools" },
+      { label: "Protocol Resources", href: "#resources" },
       { label: "Proova", to: "/proova" },
     ],
     appLinks: [
       { label: "Ecosystem", to: "/" },
-      { label: "Market", to: "/marketplace" },
-      { label: "Providers", to: "/providers" },
+      { label: "Products", href: "/#products" },
+      { label: "Protocol Resources", href: "/#resources" },
       { label: "Proova", to: "/proova" },
-      { label: "Dashboard", to: "/dashboard" },
     ],
-    providerRegister: "Open Providers",
     walletConnect: "Connect Wallet",
     switchChain: "Switch Chain",
     switched: "Switched to Worldland network.",
@@ -128,32 +122,27 @@ export default function Navbar() {
         </div>
 
         {isLanding ? (
-          <>
-            <Link className="site-nav__button site-nav__button--ghost" to="/providers">
-              {ui.providerRegister}
-            </Link>
-            {address ? (
-              !isCorrectChain ? (
-                <button className="site-nav__button site-nav__button--primary" onClick={handleSwitch} type="button">
-                  {ui.switchChain}
-                </button>
-              ) : (
-                <button className="site-nav__button site-nav__button--wallet" onClick={disconnect} type="button">
-                  <PulseDot color="green" />
-                  <span>{shortAddress}</span>
-                </button>
-              )
-            ) : (
-              <button
-                className="site-nav__button site-nav__button--primary"
-                disabled={isConnecting}
-                onClick={handleConnect}
-                type="button"
-              >
-                {isConnecting ? ui.connecting : ui.walletConnect}
+          address ? (
+            !isCorrectChain ? (
+              <button className="site-nav__button site-nav__button--primary" onClick={handleSwitch} type="button">
+                {ui.switchChain}
               </button>
-            )}
-          </>
+            ) : (
+              <button className="site-nav__button site-nav__button--wallet" onClick={disconnect} type="button">
+                <PulseDot color="green" />
+                <span>{shortAddress}</span>
+              </button>
+            )
+          ) : (
+            <button
+              className="site-nav__button site-nav__button--primary"
+              disabled={isConnecting}
+              onClick={handleConnect}
+              type="button"
+            >
+              {isConnecting ? ui.connecting : ui.walletConnect}
+            </button>
+          )
         ) : address ? (
           <>
             {!isCorrectChain ? (
