@@ -23,6 +23,7 @@ Initial portal scope includes only first-party products controlled by the team.
 
 - OpenClaw Agent Market
   - Represents the existing marketplace and mission-flow functionality already inside `koinara.xyz`
+  - Includes the currently active Mission Board flow as its core in-site experience
 - Proova
   - Should have a dedicated page inside `koinara.xyz`
 - Torqr
@@ -34,10 +35,20 @@ Initial portal scope includes only first-party products controlled by the team.
 
 - Agent ID CARD
   - External URL: `https://www.agentidcard.org/`
+  - Represents the identity/authentication layer connected to agent participation
 - The 4 Path
   - External URL: `https://the4path-deploy.vercel.app/`
 - Name-WorldLand
   - External URL: `https://name-worldland.vercel.app`
+
+### Protocol resources
+
+- Tokenomics
+  - Already implemented in a separate Koinara surface
+  - Should be exposed from the ecosystem portal as a protocol resource, not as a featured product
+- Trade KOIN / Uniswap
+  - Should be exposed as a token-access resource
+  - This is a protocol utility/resource, not a standalone ecosystem product
 
 ## Core Positioning
 
@@ -54,6 +65,7 @@ The homepage should communicate this order:
 1. The ecosystem exists
 2. The products inside it are real and active
 3. Koinara Protocol powers the system underneath
+4. The ecosystem operates across the currently relevant network surfaces
 
 The homepage should no longer feel like a protocol operations console with a few product links attached. It should feel like a curated ecosystem front door.
 
@@ -77,6 +89,7 @@ Why this approach:
    - Subline: ecosystem-first description
    - Support line: `Powered by Koinara Protocol`
    - CTA area should prioritize product discovery over protocol operations
+   - Include visible network context such as `Worldland` and `Base` badges
 
 2. Featured Products
    - OpenClaw Agent Market
@@ -89,8 +102,18 @@ Why this approach:
 3. Ecosystem Overview
    - Short explanation of how the products relate to the shared Koinara foundation
    - This can be a visual map, layered card system, or network diagram
+   - Explicitly show the relationship between:
+     - Koinara Protocol
+     - OpenClaw Agent Market / Mission Board
+     - Agent ID CARD as identity/auth layer
+     - Proova as verification layer
 
-4. Core Tools
+4. Protocol Resources
+   - Tokenomics
+   - Trade KOIN / Uniswap
+   - Network context and supporting protocol links
+
+5. Core Tools
    - Existing protocol-facing routes such as:
      - Guide
      - Jobs / Market flow
@@ -98,8 +121,9 @@ Why this approach:
      - Dashboard
    - These remain available, but should appear after the ecosystem/product layer
 
-5. Footer / cross-navigation
+6. Footer / cross-navigation
    - Preserve direct access to core docs and protocol utility links
+   - Preserve dual-chain visibility where appropriate
 
 ## Link Behavior Rules
 
@@ -112,11 +136,14 @@ Why this approach:
 ### Initial routing expectations
 
 - OpenClaw Agent Market -> existing internal Koinara market flow
+  - Mission Board is treated as the primary workflow inside this product, not as a separate featured product card in Phase 1
 - Proova -> internal page on `koinara.xyz`
 - Agent ID CARD -> external site
 - The 4 Path -> external site
 - Name-WorldLand -> external site
 - Torqr -> internal teaser or coming-soon destination
+- Tokenomics -> protocol resource link
+- Trade KOIN / Uniswap -> protocol resource link
 
 ## Product Page Rules
 
@@ -172,6 +199,19 @@ Design cues to introduce:
 - each product gets a one-line purpose
 - each product makes its relationship to Koinara explicit
 - each internal page should reinforce that it is part of the Koinara ecosystem
+- Agent ID CARD should be described not only as a partner product, but as the identity/authentication layer tied to mission participation
+
+### Network information rule
+
+- The portal should acknowledge the current dual-surface context of `Worldland` and `Base`
+- This should appear at the homepage level, not only inside low-level protocol pages
+- Network context should help users understand where protocol functions, token resources, and market/trade surfaces live
+
+### Token and trade resource rule
+
+- `Tokenomics` and `Trade KOIN / Uniswap` belong in protocol-resource presentation, not in the featured products list
+- They should be visible from the portal homepage, but visually separated from ecosystem products
+- Their placement should support discovery without confusing token utilities with product brands
 
 ### Legal notice rule
 
@@ -190,6 +230,10 @@ Design cues to introduce:
 - Add ecosystem product cards with correct internal/external behavior
 - Add partner blocks on internal Koinara product pages
 - Add the legal caution notice to the OpenClaw Agent Market surface inside `koinara.xyz`
+- Add homepage-level network badges/context for `Worldland` and `Base`
+- Add protocol-resource access for `Tokenomics` and `Trade KOIN / Uniswap`
+- Clarify Mission Board as the active workflow inside OpenClaw Agent Market
+- Clarify Agent ID CARD as the identity/authentication layer connected to mission claiming
 
 ### Phase 2
 
@@ -202,7 +246,9 @@ Design cues to introduce:
 - Only first-party products are included in the initial portal
 - External/community products are intentionally excluded for now
 - `OpenClaw Agent Market` refers to the existing marketplace functionality already inside `koinara.xyz`
+- `Mission Board` is treated as the flagship workflow inside OpenClaw Agent Market rather than a separate first-screen product card
 - `Torqr` is not launch-ready and should be represented as in development
+- `Tokenomics` remains a protocol resource rather than a featured ecosystem product
 
 ## Success Criteria
 
@@ -211,3 +257,6 @@ Design cues to introduce:
 - Existing protocol tools remain accessible but no longer dominate the first impression
 - Internal product pages create cross-navigation between ecosystem products
 - External products are reachable in one click from the Koinara portal
+- Mission Board is still discoverable through the OpenClaw Agent Market path
+- Worldland/Base context is visible at the portal level
+- Tokenomics and Trade KOIN are reachable as protocol resources without being confused for products
