@@ -1,31 +1,46 @@
-import { toast } from 'react-hot-toast'
-import { Link, NavLink, useLocation } from 'react-router-dom'
-import useStore from '../lib/store.js'
-import { useT } from '../lib/i18n.js'
-import { Btn, PulseDot } from './ui.jsx'
+import { toast } from "react-hot-toast"
+import { Link, NavLink, useLocation } from "react-router-dom"
+import useStore from "../lib/store.js"
+import { Btn, PulseDot } from "./ui.jsx"
 
-const landingCopy = {
+const copy = {
   ko: {
-    marketplace: '마켓플레이스',
-    providers: '공급자',
-    submit: '작업 등록',
-    koin: 'KOIN',
-    proova: 'Proova',
-    providerRegister: '공급자 등록',
-    walletConnect: '지갑 연결',
-    switchChain: '체인 전환',
-    switched: 'Worldland 네트워크로 전환했습니다.',
+    landingLinks: [
+      { label: "Products", href: "#products" },
+      { label: "Protocol Resources", href: "#resources" },
+      { label: "Proova", to: "/proova" },
+    ],
+    appLinks: [
+      { label: "Ecosystem", to: "/" },
+      { label: "Products", href: "/#products" },
+      { label: "Protocol Resources", href: "/#resources" },
+      { label: "Proova", to: "/proova" },
+    ],
+    walletConnect: "Connect Wallet",
+    switchChain: "Switch Chain",
+    switched: "Switched to Worldland network.",
+    connect: "Connect",
+    connecting: "Connecting",
+    disconnect: "Disconnect",
   },
   en: {
-    marketplace: 'Marketplace',
-    providers: 'Providers',
-    submit: 'Post Job',
-    koin: 'KOIN',
-    proova: 'Proova',
-    providerRegister: 'Register Provider',
-    walletConnect: 'Connect Wallet',
-    switchChain: 'Switch Chain',
-    switched: 'Switched to Worldland network.',
+    landingLinks: [
+      { label: "Products", href: "#products" },
+      { label: "Protocol Resources", href: "#resources" },
+      { label: "Proova", to: "/proova" },
+    ],
+    appLinks: [
+      { label: "Ecosystem", to: "/" },
+      { label: "Products", href: "/#products" },
+      { label: "Protocol Resources", href: "/#resources" },
+      { label: "Proova", to: "/proova" },
+    ],
+    walletConnect: "Connect Wallet",
+    switchChain: "Switch Chain",
+    switched: "Switched to Worldland network.",
+    connect: "Connect",
+    connecting: "Connecting",
+    disconnect: "Disconnect",
   },
 }
 
@@ -42,9 +57,10 @@ export default function Navbar() {
     setLang,
     switchChain,
   } = useStore()
-  const t = useT(lang)
-  const copy = landingCopy[lang] ?? landingCopy.ko
-  const isLanding = location.pathname === '/'
+
+  const ui = copy[lang] ?? copy.en
+  const isLanding = location.pathname === "/"
+  const shortAddress = address ? `${address.slice(0, 6)}...${address.slice(-4)}` : null
 
   const handleConnect = async () => {
     try {
@@ -57,33 +73,14 @@ export default function Navbar() {
   const handleSwitch = async () => {
     try {
       await switchChain()
-      toast.success(copy.switched)
+      toast.success(ui.switched)
     } catch (error) {
       toast.error(error.message)
     }
   }
 
-  const shortAddress = address ? `${address.slice(0, 6)}...${address.slice(-4)}` : null
-
-  const landingLinks = [
-    { label: copy.marketplace, href: '#marketplace' },
-    { label: copy.providers, href: '#providers' },
-    { label: copy.submit, href: '#submit' },
-    { label: copy.koin, href: '#koin' },
-    { label: copy.proova, to: '/proova' },
-  ]
-
-  const appLinks = [
-    { label: t('nav_marketplace'), to: '/marketplace' },
-    { label: t('nav_submit'), to: '/submit' },
-    { label: t('nav_providers'), to: '/providers' },
-    { label: lang === 'ko' ? '생태계' : 'Ecosystem', to: '/dapps' },
-    { label: copy.proova, to: '/proova' },
-    { label: t('nav_dashboard'), to: '/dashboard' },
-  ]
-
   return (
-    <nav className={`site-nav${isLanding ? ' site-nav--landing' : ''}`}>
+    <nav className={`site-nav${isLanding ? " site-nav--landing" : ""}`}>
       <Link className="site-nav__brand" to="/">
         <div className="site-nav__brand-mark">
           <div className="site-nav__brand-core" />
@@ -92,15 +89,15 @@ export default function Navbar() {
       </Link>
 
       <ul className="site-nav__links">
-        {(isLanding ? landingLinks : appLinks).map((item) => (
+        {(isLanding ? ui.landingLinks : ui.appLinks).map((item) => (
           <li key={item.label}>
-            {'href' in item ? (
+            {"href" in item ? (
               <a className="site-nav__link" href={item.href}>
                 {item.label}
               </a>
             ) : (
               <NavLink
-                className={({ isActive }) => `site-nav__link${isActive ? ' site-nav__link--active' : ''}`}
+                className={({ isActive }) => `site-nav__link${isActive ? " site-nav__link--active" : ""}`}
                 to={item.to}
               >
                 {item.label}
@@ -112,50 +109,45 @@ export default function Navbar() {
 
       <div className="site-nav__actions">
         <div className="site-nav__lang">
-          {['ko', 'en'].map((value) => (
+          {["ko", "en"].map((value) => (
             <button
-              className={`site-nav__lang-button${lang === value ? ' site-nav__lang-button--active' : ''}`}
+              className={`site-nav__lang-button${lang === value ? " site-nav__lang-button--active" : ""}`}
               key={value}
               onClick={() => setLang(value)}
               type="button"
             >
-              {value === 'ko' ? 'KR' : 'US'}
+              {value === "ko" ? "KR" : "US"}
             </button>
           ))}
         </div>
 
         {isLanding ? (
-          <>
-            <a className="site-nav__button site-nav__button--ghost" href="#providers">
-              {copy.providerRegister}
-            </a>
-            {address ? (
-              !isCorrectChain ? (
-                <button className="site-nav__button site-nav__button--primary" onClick={handleSwitch} type="button">
-                  {copy.switchChain}
-                </button>
-              ) : (
-                <button className="site-nav__button site-nav__button--wallet" onClick={disconnect} type="button">
-                  <PulseDot color="green" />
-                  <span>{shortAddress}</span>
-                </button>
-              )
-            ) : (
-              <button
-                className="site-nav__button site-nav__button--primary"
-                disabled={isConnecting}
-                onClick={handleConnect}
-                type="button"
-              >
-                {isConnecting ? t('nav_connecting') : copy.walletConnect}
+          address ? (
+            !isCorrectChain ? (
+              <button className="site-nav__button site-nav__button--primary" onClick={handleSwitch} type="button">
+                {ui.switchChain}
               </button>
-            )}
-          </>
+            ) : (
+              <button className="site-nav__button site-nav__button--wallet" onClick={disconnect} type="button">
+                <PulseDot color="green" />
+                <span>{shortAddress}</span>
+              </button>
+            )
+          ) : (
+            <button
+              className="site-nav__button site-nav__button--primary"
+              disabled={isConnecting}
+              onClick={handleConnect}
+              type="button"
+            >
+              {isConnecting ? ui.connecting : ui.walletConnect}
+            </button>
+          )
         ) : address ? (
           <>
             {!isCorrectChain ? (
               <Btn size="sm" variant="danger" onClick={handleSwitch}>
-                {t('nav_switch_chain')}
+                {ui.switchChain}
               </Btn>
             ) : (
               <div className="site-nav__wallet-pill">
@@ -166,12 +158,12 @@ export default function Navbar() {
               </div>
             )}
             <Btn size="sm" variant="ghost" onClick={disconnect}>
-              {t('nav_disconnect')}
+              {ui.disconnect}
             </Btn>
           </>
         ) : (
           <Btn size="sm" onClick={handleConnect}>
-            {isConnecting ? t('nav_connecting') : t('nav_connect')}
+            {isConnecting ? ui.connecting : ui.connect}
           </Btn>
         )}
       </div>
