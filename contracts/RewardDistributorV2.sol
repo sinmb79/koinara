@@ -71,10 +71,7 @@ contract RewardDistributorV2 is IRewardDistributorV2 {
         uint256 initialEpochEmission_,
         uint256 activePoolBps_
     ) {
-        if (
-            token_ == address(0) || registry_ == address(0) || verifier_ == address(0)
-                || nodeRegistry_ == address(0)
-        ) {
+        if (token_ == address(0) || registry_ == address(0) || verifier_ == address(0) || nodeRegistry_ == address(0)) {
             revert Errors.ZeroAddress();
         }
         if (epochDuration_ == 0 || halvingInterval_ == 0 || initialEpochEmission_ == 0) {
@@ -235,7 +232,7 @@ contract RewardDistributorV2 is IRewardDistributorV2 {
         }
 
         uint256 verifierCount = job.verifierCount;
-        (, , uint256 verifierRewardTotal) = getRewardBreakdown(jobId);
+        (,, uint256 verifierRewardTotal) = getRewardBreakdown(jobId);
         uint256 perVerifierReward = verifierCount == 0 ? 0 : verifierRewardTotal / verifierCount;
 
         verifierRewardClaimed[jobId][msg.sender] = true;
